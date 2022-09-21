@@ -1,7 +1,10 @@
 const express = require('express');
 
-const app = express();
+const loginRoute = require('../routes/login.route');
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+const app = express();
+app.use(express.json());
+
+app.post('/login', loginRoute);
 
 module.exports = app;
