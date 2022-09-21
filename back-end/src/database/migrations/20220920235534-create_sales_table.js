@@ -1,10 +1,10 @@
 'use strict';
 
-const attributes = require('./saleAttributes')
+const attributes = require('../attributes/saleAttributes');
 
 module.exports = {
   async up (queryInterface) {
-    await queryInterface.createTabel('sales', attributes)
+    await queryInterface.createTable('sales', attributes)
   },
 
   async down (queryInterface) {

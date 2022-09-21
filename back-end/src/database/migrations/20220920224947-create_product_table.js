@@ -1,5 +1,5 @@
 'use strict';
-const attributes = require('./productAttributes');
+const attributes = require('../attributes/productAttributes');
 
 module.exports = {
   async up (queryInterface) {

@@ -11,7 +11,7 @@ module.exports = {
     allowNull: false,
     references: {
       model: 'users',
-      key: 'id,'
+      key: 'id',
     },
   },
   seller_id: {
@@ -19,7 +19,7 @@ module.exports = {
     allowNull: false,
     references: {
       model: 'users',
-      key: 'id,'
+      key: 'id',
     }
   },
   total_price: {

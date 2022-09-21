@@ -1,6 +1,6 @@
 'use strict';
 
-const attributes = require('./userAttributes');
+const attributes = require('../attributes/userAttributes');
 
 module.exports = {
   async up (queryInterface) {

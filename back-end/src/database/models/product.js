@@ -1,4 +1,4 @@
-const attributes = require('../migrations/productAttributes');
+const attributes = require('../attributes/productAttributes');
 
 module.exports = (sequelize) => {
   const Product = sequelize.define(
