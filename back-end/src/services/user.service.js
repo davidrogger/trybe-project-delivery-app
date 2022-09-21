@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const model = require('../database/models');
 
 const userService = {
@@ -6,12 +7,12 @@ const userService = {
     if (user === 0) throw new Error('NotFound');
   },
   async checkPassword(login) {
-    const userData = await model.User.findOne({ email: login.mail });
+    const userData = await model.User.findOne({ where: { email: login.email } });
+    const passHashed = md5(login.password);
     
-    // cripto test
-    // if ( ) throw new Error('InvalidPassword');
+    if (passHashed !== userData.password) throw new Error('InvalidPassword');
 
-    const { password, ...user } = userData;
+    const { password, ...user } = userData; //
     return user;
   },
 };
