@@ -1,14 +1,18 @@
 import React from 'react';
 import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import MyProvider from './context/MyProvider';
 import Login from './pages/Login';
-import Rout from './Routes/Routes';
 
 function App() {
   return (
-    <div className="App">
-      <Rout />
-      <Login />
-    </div>
+    <MyProvider>
+      <Switch>
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/"><Redirect to="/login" /></Route>
+
+      </Switch>
+    </MyProvider>
   );
 }
 
