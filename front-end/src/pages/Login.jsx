@@ -1,29 +1,8 @@
 import React from 'react';
+import Login from '../Components/Login';
 
-function Login() {
-  return (
-    <div className="App">
-      <form>
-        <label htmlFor="login">
-          Login
-          <input type="text" id="login" />
-        </label>
-        <label htmlFor="senha">
-          Senha
-          <input type="text" id="senha" />
-        </label>
-
-        <button type="button">
-          LOGIN
-        </button>
-        <button type="button">
-          Ainda não tenho conta
-        </button>
-
-      </form>
-
-    </div>
-  );
+function LoginPage() {
+  return (<Login />);
 }
 
-export default Login;
+export default LoginPage;
