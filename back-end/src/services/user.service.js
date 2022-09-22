@@ -7,7 +7,13 @@ const userService = {
     if (user === 0) throw new Error('NotFound');
   },
   async checkPassword(login) {
-    const userData = await model.User.findOne({ where: { email: login.email } });
+    const userData = await model.User
+      .findOne({
+        where: { email: login.email },
+        raw: true,
+        attributes: { exclude: ['id'] },
+      });
+
     const passHashed = md5(login.password);
     
     if (passHashed !== userData.password) throw new Error('InvalidPassword');

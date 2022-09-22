@@ -9,7 +9,7 @@ const userController = {
     await userService.emailExists(email);
     const user = await userService.checkPassword(login);
     const token = jwtService.generate(user);
-    res.status(200).json(token);
+    res.status(200).json({ ...user, token });
   },
 };
 
