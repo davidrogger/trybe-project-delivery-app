@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from './styles';
 
-const MAX_PASS = 6;
+const MIN_PASS = 6;
 
 const schema = yup.object({
   email: yup.string().email().required(),
-  senha: yup.string().max(MAX_PASS).required(),
+  senha: yup.string().min(MIN_PASS).required(),
 }).required();
 
 function Login() {
-  const [isDisable, setDisable] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, formState } = useForm({
     defaultValues: { email: '', senha: '' },
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
 
-  const onSubmit = (data) => {
-    if (errors.senha && errors.email) {
-      setDisable(true);
-    } else {
-      setDisable(false);
-    }
-    console.log(isDisable);
-    console.log(data);
+  const onSubmit = () => {
+    console.log('logando!');
   };
 
   return (
@@ -60,7 +53,7 @@ function Login() {
         <Button
           data-testid="common_login__button-login"
           type="submit"
-          disable={ isDisable }
+          disabled={ !formState.isValid }
         >
           LOGIN
         </Button>
@@ -76,3 +69,5 @@ function Login() {
 }
 
 export default Login;
+
+// tip usando useForm: https://github.com/react-hook-form/react-hook-form/issues/77#issuecomment-596346814
