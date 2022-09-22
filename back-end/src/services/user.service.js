@@ -4,7 +4,11 @@ const model = require('../database/models');
 const userService = {
   async emailExists(email) {
     const user = await model.User.count({ where: { email } });
-    if (user === 0) throw new Error('NotFound');
+    if (user !== 0) throw new Error('Conflict');
+  },
+  async nameExists(name) {
+    const user = await model.User.count({ where: { name } });
+    if (user !== 0) throw new Error('Conflict');
   },
   async checkData(login) {
     const password = md5(login.password);
@@ -18,6 +22,11 @@ const userService = {
     if (!user) throw new Error('Unauthorized');
 
     return user;
+  },
+  async create(newUser) {
+    const { role } = await model.User.create({ ...newUser });
+    const { password, ...user } = newUser;
+    return { ...user, role };
   },
 };
 
