@@ -13,9 +13,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post('/login', loginRoute);
-app.post('/users', userRoute);
-app.get('/products', [productRoute]);
+app.use('/login', loginRoute);
+app.use('/users', userRoute);
+app.use('/products', [productRoute]);
 
 app.use(errorHandler);
 
