@@ -5,7 +5,7 @@ const catalogErrors = {
   },
   NotFound: {
     status: 404,
-    message: 'Name or email not found'
+    message: 'Name or email not found',
   },
   Conflict: {
     status: 409,
