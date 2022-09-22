@@ -4,9 +4,10 @@ import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from '../Login/styles';
 
 const MIN_PASS = 6;
+const MIN_NAME = 12;
 
 const schema = yup.object({
-  name: yup.string().min().required(),
+  name: yup.string().min(MIN_NAME).required(),
   email: yup.string().email().required(),
   senha: yup.string().min(MIN_PASS).required(),
 }).required();
@@ -28,55 +29,47 @@ function Register() {
         <Label htmlFor="name">
           Nome
           <Input
-            data-testid="common_login__input-email"
+            data-testid="common_register__input-name"
             id="name"
             type="text"
             { ...register('name') }
           />
-
         </Label>
 
         <Label htmlFor="login">
           Email
           <Input
-            data-testid="common_login__input-email"
+            data-testid="common_register__input-email"
             id="login"
             type="email"
             { ...register('email') }
           />
-          <Error
-            data-testids="common_login__element-invalid-email"
-          >
-            {errors.email?.message}
-
-          </Error>
         </Label>
 
         <Label htmlFor="senha">
           Senha
           <Input
-            data-testid="common_login__input-password"
+            data-testid="common_register__input-password"
             id="senha"
             type="text"
             { ...register('senha') }
           />
-          <Error>{errors.senha?.message}</Error>
         </Label>
 
         <Button
-          data-testid="common_login__button-login"
+          data-testid="common_register__button-register"
           type="submit"
           disabled={ !formState.isValid }
         >
           CADASTRAR
         </Button>
-      </Form>
-      <Error
-        data-testids="common_login__element-invalid-email"
-      >
-        {errors.email?.message}
 
-      </Error>
+        <Error
+          data-testids="common_register__element-invalid_register"
+        >
+          {errors.email?.message}
+        </Error>
+      </Form>
     </div>
   );
 }

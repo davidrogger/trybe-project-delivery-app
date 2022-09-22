@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from './styles';
@@ -11,6 +12,7 @@ const schema = yup.object({
 }).required();
 
 function Login() {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, formState } = useForm({
     defaultValues: { email: '', senha: '' },
     resolver: yupResolver(schema),
@@ -60,6 +62,7 @@ function Login() {
         <Button
           data-testid="common_login__button-register"
           type="button"
+          onClick={ () => navigate('/register') }
         >
           Ainda não tenho conta
         </Button>
