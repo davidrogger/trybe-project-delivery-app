@@ -1,5 +1,9 @@
-// Apenas para não quebrar a aplicação inicialmente.
+const catalogErrors = require('../errors/errorsCatalog');
+
 module.exports = (err, _req, res, _next) => {
-  const { message } = err;
-  res.status(500).json({ message });
+  const { message: errorMessage } = err;
+
+  const { status, message } = catalogErrors[errorMessage] || { status: 500, message: errorMessage };
+
+  res.status(status).json({ message });
 };

@@ -15,7 +15,7 @@ const userService = {
         attributes: { exclude: ['id', 'password'] },
       });
     
-    if (!user) throw new Error('InvalidPassword');
+    if (!user) throw new Error('Unauthorized');
 
     return user;
   },
