@@ -24,7 +24,8 @@ const userService = {
     return user;
   },
   async create(newUser) {
-    const { role } = await model.User.create({ ...newUser });
+    const passwordHash = md5(newUser.password);
+    const { role } = await model.User.create({ ...newUser, password: passwordHash });
     const { password, ...user } = newUser;
     return { ...user, role };
   },
