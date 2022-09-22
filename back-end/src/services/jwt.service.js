@@ -4,7 +4,7 @@ require('dotenv').config();
 const { JWT_SECRET } = process.env;
 
 const jwtService = {
-  generate(user) {
+  generateToken(user) {
     return jwt.sign(user, JWT_SECRET);
   },
 };
