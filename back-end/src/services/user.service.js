@@ -6,19 +6,17 @@ const userService = {
     const user = await model.User.count({ where: { email } });
     if (user === 0) throw new Error('NotFound');
   },
-  async checkPassword(login) {
-    const userData = await model.User
+  async checkData(login) {
+    const password = md5(login.password);
+    const user = await model.User
       .findOne({
-        where: { email: login.email },
+        where: { email: login.email, password },
         raw: true,
-        attributes: { exclude: ['id'] },
+        attributes: { exclude: ['id', 'password'] },
       });
-
-    const passHashed = md5(login.password);
     
-    if (passHashed !== userData.password) throw new Error('InvalidPassword');
+    if (!user) throw new Error('InvalidPassword');
 
-    const { password, ...user } = userData; //
     return user;
   },
 };
