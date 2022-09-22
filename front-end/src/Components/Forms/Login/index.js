@@ -28,10 +28,10 @@ function Login() {
       const login = await axios.post('http://localhost:3001/login', { email, password });
       console.log(login);
       localStorage.setItem('user', JSON.stringify(login.data));
-      // navigate('/products');
-    } catch (error) {
+      navigate(`/${login.data.role}/products`);
+    } catch (e) {
       setHasError(true);
-      console.log(error);
+      console.log(e);
     }
   };
 
@@ -76,7 +76,7 @@ function Login() {
 
         {hasError && (
           <Error
-            data-testids="common_login__element-invalid-email"
+            data-testid="common_login__element-invalid-email"
           >
             Usuário ou senha incorretos
           </Error>
