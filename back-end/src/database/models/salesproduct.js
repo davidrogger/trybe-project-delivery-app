@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
     );
 
   SalesProduct.associate = (models) => {
-    models.Sale.belongosToMany(models.Product, {
+    models.Sale.belongsToMany(models.Product, {
       as: 'sales',
       through: SalesProduct,
       foreignKey: 'sale_id',
