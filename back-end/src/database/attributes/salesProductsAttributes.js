@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = {
-  sale_id: {
+  saleId: {
+    field: 'sale_id',
     primaryKey: true,
     type: DataTypes.INTEGER,
     references: {
@@ -9,7 +10,8 @@ module.exports = {
       key: 'id',
     }
   },
-  product_id: {
+  productId: {
+    field: 'product_id',
     primaryKey: true,
     type: DataTypes.INTEGER,
     references: {
