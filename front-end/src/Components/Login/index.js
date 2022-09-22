@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -12,12 +12,20 @@ const schema = yup.object({
 }).required();
 
 function Login() {
+  const [isDisable, setDisable] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: { email: '', senha: '' },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    if (errors.email && errors.senha) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+    console.log(data);
+  };
 
   return (
     <div className="App">
@@ -25,7 +33,7 @@ function Login() {
         <Label htmlFor="login">
           Login
           <Input
-            data-testids="common_login__input-email"
+            data-testid="common_login__input-email"
             id="login"
             type="email"
             { ...register('email') }
@@ -40,7 +48,7 @@ function Login() {
         <Label htmlFor="senha">
           Senha
           <Input
-            data-testids="common_login__input-password"
+            data-testid="common_login__input-password"
             id="senha"
             type="text"
             { ...register('senha') }
@@ -49,13 +57,14 @@ function Login() {
         </Label>
 
         <Button
-          data-testids="common_login__button-login"
+          data-testid="common_login__button-login"
           type="submit"
+          disable={ isDisable }
         >
           LOGIN
         </Button>
         <Button
-          data-testids="common_login__button-register"
+          data-testid="common_login__button-register"
           type="button"
         >
           Ainda não tenho conta
