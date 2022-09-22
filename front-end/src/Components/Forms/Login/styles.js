@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GREY, RED } from '../../Styles/Color';
+import { GREY, RED } from '../../../Styles/Color';
 
 export const Form = styled.form`
   display:flex;

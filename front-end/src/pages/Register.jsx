@@ -1,8 +1,8 @@
 import React from 'react';
-import Login from '../Components/Forms/Login';
+import Register from '../Components/Forms/Register';
 
 function LoginPage() {
-  return (<Login />);
+  return (<Register />);
 }
 
 export default LoginPage;

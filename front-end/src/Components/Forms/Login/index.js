@@ -47,7 +47,7 @@ function Login() {
             type="text"
             { ...register('senha') }
           />
-          {/* <Error>{errors.senha?.message}</Error> */}
+
         </Label>
 
         <Button
