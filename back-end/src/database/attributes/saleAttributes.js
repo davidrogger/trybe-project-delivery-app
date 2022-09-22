@@ -46,5 +46,6 @@ module.exports = {
   status: {
     type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: 'PREPARANDO',
   },
 }
