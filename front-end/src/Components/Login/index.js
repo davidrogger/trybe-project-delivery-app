@@ -19,11 +19,12 @@ function Login() {
   });
 
   const onSubmit = (data) => {
-    if (errors.email && errors.senha) {
+    if (errors.senha && errors.email) {
       setDisable(true);
     } else {
       setDisable(false);
     }
+    console.log(isDisable);
     console.log(data);
   };
 
@@ -53,7 +54,7 @@ function Login() {
             type="text"
             { ...register('senha') }
           />
-          <Error>{errors.senha?.message}</Error>
+          {/* <Error>{errors.senha?.message}</Error> */}
         </Label>
 
         <Button
