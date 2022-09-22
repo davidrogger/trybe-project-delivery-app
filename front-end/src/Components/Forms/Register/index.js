@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from '../Login/styles';
@@ -9,18 +11,27 @@ const MIN_NAME = 12;
 const schema = yup.object({
   name: yup.string().min(MIN_NAME).required(),
   email: yup.string().email().required(),
-  senha: yup.string().min(MIN_PASS).required(),
+  password: yup.string().min(MIN_PASS).required(),
 }).required();
 
 function Register() {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, formState } = useForm({
     defaultValues: { name: '', email: '', senha: '' },
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
-  const onSubmit = () => {
-    console.log('logando!');
+  const onSubmit = async (data) => {
+    try {
+      const { name, email, password } = data;
+      const login = await axios.post('http://localhost:3001/users', { name, email, password });
+      console.log(login);
+      localStorage.setItem('user', JSON.stringify(login.data));
+      navigate(`/${login.data.role}/products`);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -52,7 +63,7 @@ function Register() {
             data-testid="common_register__input-password"
             id="senha"
             type="text"
-            { ...register('senha') }
+            { ...register('password') }
           />
         </Label>
 
