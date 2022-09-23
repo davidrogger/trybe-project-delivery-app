@@ -23,3 +23,7 @@ export async function registerUser(newUser) {
 
   return response;
 }
+
+export async function getProducts() {
+  return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
+}
