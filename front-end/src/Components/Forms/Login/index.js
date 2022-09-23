@@ -1,26 +1,41 @@
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from './styles';
+import { login } from '../../../services/api';
+import routes from '../../../utils/routesPath';
+import status from '../../../utils/httpStatus';
 
 const MIN_PASS = 6;
 
 const schema = yup.object({
   email: yup.string().email().required(),
-  senha: yup.string().min(MIN_PASS).required(),
+  password: yup.string().min(MIN_PASS).required(),
 }).required();
 
 function Login() {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors }, formState } = useForm({
-    defaultValues: { email: '', senha: '' },
+  const [hasError, setHasError] = useState(false);
+  const { register, handleSubmit, formState } = useForm({
+    defaultValues: { email: '', password: '' },
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
-  const onSubmit = () => {
-    console.log('logando!');
+  const onSubmit = async (payload) => {
+    const response = await login(payload);
+
+    if (status[response.status] === 'OK') {
+      localStorage.setItem('user', JSON.stringify(response.data));
+      const { role } = response.data;
+      navigate(`/${routes[role]}`);
+    } else {
+      const waitTime = 3000;
+      setHasError(true);
+      setTimeout(() => setHasError(false), waitTime);
+    }
   };
 
   return (
@@ -34,12 +49,7 @@ function Login() {
             type="email"
             { ...register('email') }
           />
-          <Error
-            data-testids="common_login__element-invalid-email"
-          >
-            {errors.email?.message}
 
-          </Error>
         </Label>
         <Label htmlFor="senha">
           Senha
@@ -47,7 +57,7 @@ function Login() {
             data-testid="common_login__input-password"
             id="senha"
             type="text"
-            { ...register('senha') }
+            { ...register('password') }
           />
 
         </Label>
@@ -66,6 +76,14 @@ function Login() {
         >
           Ainda não tenho conta
         </Button>
+
+        {hasError && (
+          <Error
+            data-testid="common_login__element-invalid-email"
+          >
+            Usuário ou senha incorretos
+          </Error>
+        )}
       </Form>
     </div>
   );
