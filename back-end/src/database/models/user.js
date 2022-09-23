@@ -6,7 +6,6 @@ module.exports = (sequelize) => {
     attributes,
     {
       timestamps: false,
-      underscore: true,
       tableName: 'users',
     }
     );
