@@ -17,7 +17,7 @@ const schema = yup.object({
 function Register() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, formState } = useForm({
-    defaultValues: { name: '', email: '', senha: '' },
+    defaultValues: { name: '', email: '', password: '' },
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
@@ -57,11 +57,11 @@ function Register() {
           />
         </Label>
 
-        <Label htmlFor="senha">
+        <Label htmlFor="password">
           Senha
           <Input
             data-testid="common_register__input-password"
-            id="senha"
+            id="password"
             type="text"
             { ...register('password') }
           />
