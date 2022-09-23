@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useState } from 'react';
 import { Form, Label, Input, Button, Error } from '../Login/styles';
 
 const MIN_PASS = 6;
@@ -16,7 +17,8 @@ const schema = yup.object({
 
 function Register() {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors }, formState } = useForm({
+  const [hasError, setHasError] = useState(false);
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: { name: '', email: '', password: '' },
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -30,6 +32,9 @@ function Register() {
       localStorage.setItem('user', JSON.stringify(login.data));
       navigate(`/${login.data.role}/products`);
     } catch (e) {
+      const waitTime = 3000;
+      setHasError(true);
+      setTimeout(() => setHasError(false), waitTime);
       console.log(e);
     }
   };
@@ -75,11 +80,13 @@ function Register() {
           CADASTRAR
         </Button>
 
-        <Error
-          data-testids="common_register__element-invalid_register"
-        >
-          {errors.email?.message}
-        </Error>
+        {hasError && (
+          <Error
+            data-testid="common_register__element-invalid_register"
+          >
+            Nome ou email já em uso.
+          </Error>
+        )}
       </Form>
     </div>
   );
