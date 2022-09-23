@@ -6,7 +6,8 @@ module.exports = {
     type: DataTypes.INTEGER,
     autoIncrement: true,
   },
-  user_id: {
+  userId: {
+    field: 'user_id',
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -14,7 +15,8 @@ module.exports = {
       key: 'id',
     },
   },
-  seller_id: {
+  sellerId: {
+    field: 'seller_id',
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -22,23 +24,28 @@ module.exports = {
       key: 'id',
     }
   },
-  total_price: {
+  totalPrice: {
+    field: 'total_price',
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  delivery_address: {
+  deliveryAddress: {
+    field: 'delivery_address',
     type: DataTypes.STRING,
   },
-  delivery_number: {
+  deliveryNumber: {
+    field: 'delivery_number',
     type: DataTypes.STRING,
     allowNull: false,
   },
-  sale_data: {
+  saleData: {
+    field: 'sale_data',
     type: DataTypes.DATE,
     defaultValue: fn('now'),
   },
   status: {
     type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: 'PREPARANDO',
   },
 }
