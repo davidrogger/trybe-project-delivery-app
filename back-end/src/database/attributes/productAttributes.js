@@ -7,15 +7,15 @@ module.exports = {
     autoIncrement: true,
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   price: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL(4, 2),
     allowNull: false,
   },
   urlImage: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(200),
     allowNull: false,
     field: 'url_image'
   }

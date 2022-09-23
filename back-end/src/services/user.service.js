@@ -19,7 +19,7 @@ const userService = {
         attributes: { exclude: ['id', 'password'] },
       });
     
-    if (!user) throw new Error('Unauthorized');
+    if (!user) throw new Error('NotFound');
 
     return user;
   },
