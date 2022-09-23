@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types';
 import { CardBody, TitleDiv } from './styles';
 
-function ProductCard({ name }) {
+function ProductCard({ product }) {
   return (
     <CardBody>
       <TitleDiv>
-        { name }
+        { product.name }
       </TitleDiv>
     </CardBody>
   );
 }
 
 ProductCard.propTypes = {
-  name: PropTypes.string,
-}.isRequired;
+  product: PropTypes.shape({
+    name: PropTypes.string,
+    urlImage: PropTypes.string,
+  }).isRequired,
+};
 
 export default ProductCard;

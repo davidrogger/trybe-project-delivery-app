@@ -14,7 +14,8 @@ module.exports = {
     type: DataTypes.DECIMAL(4, 2),
     allowNull: false,
   },
-  url_image: {
+  urlImage: {
+    field: 'url_image',
     type: DataTypes.STRING(200),
     allowNull: false,
   }

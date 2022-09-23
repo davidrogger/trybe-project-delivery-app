@@ -9,6 +9,7 @@ function ProductsDisplay() {
   useEffect(() => {
     async function requestProducts() {
       const response = await getProducts();
+      console.log(response.data);
       setProducts(response.data);
     }
     requestProducts();
@@ -16,10 +17,10 @@ function ProductsDisplay() {
 
   return (
     <MainContainer>
-      { products.map(({ id, name }) => (
+      { products.map((product) => (
         <ProductCard
-          key={ id }
-          name={ name }
+          key={ product.id }
+          product={ product }
         />
       )) }
     </MainContainer>
