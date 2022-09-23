@@ -17,9 +17,9 @@ function ProductsDisplay() {
 
   return (
     <MainContainer>
-      { products.map((product) => (
+      { products.map((product, index) => (
         <ProductCard
-          key={ product.id }
+          key={ index }
           product={ product }
         />
       )) }
