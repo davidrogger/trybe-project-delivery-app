@@ -1,7 +1,9 @@
+import Navbar from '../Components/Navbar';
+
 function Products() {
   return (
     <div>
-      <h1>Products</h1>
+      <Navbar />
     </div>
   );
 }
