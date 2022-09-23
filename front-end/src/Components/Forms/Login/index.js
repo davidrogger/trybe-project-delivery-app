@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from './styles';
+import { login } from '../../../services/api';
+import routes from '../../../utils/routesPath';
+import status from '../../../utils/httpStatus';
 
 const MIN_PASS = 6;
 
@@ -22,16 +24,17 @@ function Login() {
     mode: 'onChange',
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const { email, password } = data;
-      const login = await axios.post('http://localhost:3001/login', { email, password });
-      console.log(login);
-      localStorage.setItem('user', JSON.stringify(login.data));
-      navigate(`/${login.data.role}/products`);
-    } catch (e) {
+  const onSubmit = async (payload) => {
+    const response = await login(payload);
+
+    if (status[response.status] === 'OK') {
+      localStorage.setItem('user', JSON.stringify(response.data));
+      const { role } = response.data;
+      navigate(`/${routes[role]}`);
+    } else {
+      const waitTime = 3000;
       setHasError(true);
-      console.log(e);
+      setTimeout(() => setHasError(false), waitTime);
     }
   };
 

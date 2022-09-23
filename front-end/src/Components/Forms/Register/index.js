@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState } from 'react';
 import { Form, Label, Input, Button, Error } from '../Login/styles';
+import { registerUser } from '../../../services/api';
+import status from '../../../utils/httpStatus';
 
 const MIN_PASS = 6;
 const MIN_NAME = 12;
@@ -24,18 +25,16 @@ function Register() {
     mode: 'onChange',
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const { name, email, password } = data;
-      const login = await axios.post('http://localhost:3001/users', { name, email, password });
-      console.log(login);
-      localStorage.setItem('user', JSON.stringify(login.data));
-      navigate(`/${login.data.role}/products`);
-    } catch (e) {
+  const onSubmit = async (payload) => {
+    const response = await registerUser(payload);
+    console.log(response);
+    if (status[response.status] === 'CREATED') {
+      localStorage.setItem('user', JSON.stringify(response.data));
+      navigate('/customer/products'); // todos usuários criados aqui serão customers
+    } else {
       const waitTime = 3000;
       setHasError(true);
       setTimeout(() => setHasError(false), waitTime);
-      console.log(e);
     }
   };
 
