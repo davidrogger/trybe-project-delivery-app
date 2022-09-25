@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/App.css';
+import './App.css';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import MyProvider from './context/MyProvider';
 import LoginPage from './pages/Login';
