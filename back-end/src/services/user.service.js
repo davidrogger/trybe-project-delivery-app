@@ -14,7 +14,7 @@ const userService = {
       .findOne({
         where: { email: login.email, password },
         raw: true,
-        attributes: { exclude: ['id', 'password'] },
+        attributes: { exclude: ['password'] },
       });
     
     if (!user) throw new Error('NotFound');
