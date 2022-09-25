@@ -1,51 +1,63 @@
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { CardBody, TitleDiv, Title, ImageDiv, Img, PriceDiv, Price } from './styles';
+import MyContext from '../../context/MyContext';
 
-function ProductCard({ product }) {
+import {
+  Card,
+  Up,
+  PriceContainer,
+  Price,
+  Img,
+  Down,
+  Title,
+  Counter,
+  Btn,
+  Display,
+} from './styles';
+
+function ProductCard({ product: { id, name, price, urlImage } }) {
+  const { counter, setCounter } = useContext(MyContext);
+
+  const productPrice = () => {
+    const test = `customer_products__element-card-price-${id}`;
+    return (<Price data-testid={ test }>{ `R$ ${price}` }</Price>);
+  };
+
+  const img = () => {
+    const test = `customer_products__img-card-bg-image-${id}`;
+    return (<Img data-testid={ test } src={ urlImage } alt="Product" />);
+  };
+
+  const btn = (p) => {
+    const test = `customer_products__button-card-${p === '-' ? 'rm' : 'add'}-item-${id}`;
+    const click = () => setCounter(p === '-' ? counter - 1 : counter + 1);
+    return (<Btn onClick={ click } data-testid={ test } type="button">{ p }</Btn>);
+  };
+
+  const display = () => {
+    const test = `customer_products__input-card-quantity-${id}`;
+    return (<Display data-testid={ test } type="text" value={ counter } />);
+  };
+
   return (
-    <CardBody>
-      <TitleDiv>
-        <Title
-          data-testid={ `customer_products__element-card-title-${product.id}` }
-        >
-          { product.name }
-
+    <Card>
+      <Up>
+        <PriceContainer>
+          { productPrice() }
+        </PriceContainer>
+        { img() }
+      </Up>
+      <Down>
+        <Title data-testid={ `customer_products__element-card-title-${id}` }>
+          <h4>{ name }</h4>
         </Title>
-      </TitleDiv>
-      <PriceDiv>
-        <Price
-          data-testid={ `customer_products__element-card-price-${product.id}` }
-        >
-          { product.price }
-
-        </Price>
-      </PriceDiv>
-      <ImageDiv>
-        <Img
-          data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-          src={ product.urlImage }
-          alt="imagem do produto"
-        />
-      </ImageDiv>
-      <button
-        data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-        type="button"
-      >
-        -
-
-      </button>
-      <input
-        data-testid={ `customer_products__input-card-quantity-${product.id}` }
-        type="text"
-      />
-      <button
-        data-testid={ `customer_products__button-card-add-item-${product.id}` }
-        type="button"
-      >
-        +
-
-      </button>
-    </CardBody>
+        <Counter>
+          { btn('-') }
+          { display() }
+          { btn('+') }
+        </Counter>
+      </Down>
+    </Card>
   );
 }
 

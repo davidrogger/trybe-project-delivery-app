@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './css/App.css';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import MyProvider from './context/MyProvider';
 import LoginPage from './pages/Login';
@@ -14,7 +14,6 @@ function App() {
         <Route exact path="/login" element={ <LoginPage /> } />
         <Route exact path="/register" element={ <RegisterPage /> } />
         <Route exact path="/customer/products" element={ <ProductsPage /> } />
-
       </Routes>
     </MyProvider>
   );

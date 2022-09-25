@@ -4,10 +4,11 @@ import MyContext from './MyContext';
 
 function MyProvider({ children }) {
   const [user, setUser] = useState({});
+  const [counter, setCounter] = useState(0);
 
   const session = useMemo(() => ({
-    user, setUser,
-  }), [user]);
+    user, setUser, counter, setCounter,
+  }), [user, counter]);
 
   return (
     <MyContext.Provider value={ session }>
