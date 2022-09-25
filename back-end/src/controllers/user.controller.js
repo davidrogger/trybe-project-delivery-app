@@ -28,12 +28,12 @@ const userController = {
 
     res.status(201).json({ ...user, token });
   },
-  async verify(req, res, next) {
+  async verify(req, _res, next) {
     const { authorization } = req.headers;
     const user = jwtService.verify(authorization);
     const emailExist = await userService.emailExists(user.email);
     if (emailExist === 0) throw Error('Unauthorized');
-    res.locals = user;
+    req.session = { user };
     next();
   },
 };
