@@ -7,12 +7,11 @@ function ProductsDisplay() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function requestProducts() {
+    async function requestedProducts() {
       const response = await getProducts();
-      console.log(response.data);
       setProducts(response.data);
     }
-    requestProducts();
+    requestedProducts();
   }, []);
 
   return (
@@ -20,7 +19,7 @@ function ProductsDisplay() {
       { products.map((product, index) => (
         <ProductCard
           key={ index }
-          product={ product }
+          { ...product }
         />
       )) }
     </MainContainer>
