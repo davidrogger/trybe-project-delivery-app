@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import MyContext from '../../context/MyContext';
 import { getProducts } from '../../services/api';
 import ProductCard from '../ProductsCard';
 import { MainContainer } from './styles';
 
 function ProductsDisplay() {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useContext(MyContext);
 
   useEffect(() => {
     async function requestedProducts() {
@@ -12,7 +13,7 @@ function ProductsDisplay() {
       setProducts(response.data);
     }
     requestedProducts();
-  }, []);
+  }, [setProducts]);
 
   return (
     <MainContainer>

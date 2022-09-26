@@ -5,6 +5,7 @@ import MyContext from './MyContext';
 function MyProvider({ children }) {
   // const [user, setUser] = useState({});
   const [cartProducts, setCartProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const session = useMemo(() => ({
     getProductQuantity(id) {
@@ -30,7 +31,9 @@ function MyProvider({ children }) {
     },
     cartProducts,
     setCartProducts,
-  }), [cartProducts, setCartProducts]);
+    products,
+    setProducts,
+  }), [cartProducts, products]);
 
   return (
     <MyContext.Provider value={ session }>
