@@ -1,11 +1,19 @@
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import api from '../services/api';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
   // const [user, setUser] = useState({});
   const [cartProducts, setCartProducts] = useState([]);
   const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const userSession = JSON.parse(localStorage.getItem('user') || '{}');
+    if (userSession.token) {
+      api.defaults.headers.Authorization = userSession.token;
+    }
+  }, []);
 
   const session = useMemo(() => ({
     getProductQuantity(id) {
