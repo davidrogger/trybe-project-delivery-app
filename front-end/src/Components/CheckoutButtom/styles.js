@@ -10,7 +10,7 @@ export const CartButtom = styled.div`
   height: 50px;
   width: 250px;
   padding: 10px 20px;
-  bottom: 10px;
+  bottom: 20px;
   right: 25px;
   border-radius: 10px;
   color: white;

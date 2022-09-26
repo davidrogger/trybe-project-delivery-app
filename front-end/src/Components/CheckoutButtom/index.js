@@ -1,12 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import MyContext from '../../context/MyContext';
 import { CartButtom } from './styles';
 
 function CheckoutButtom() {
+  const { products, cartProducts } = useContext(MyContext);
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    setCartTotal(0); // Desenvolvendo logica para calculo de total;
-  }, []);
+    const cartTotalPrice = cartProducts
+      .map((targetProduct) => { // Percorrer por todos itens no carrinho
+        const productFound = products
+          .find((product) => targetProduct.id === product.id); // Encontrando o produto para usar o preço para o calculo
+        return (targetProduct.quantity * (Number(productFound.price) * 100)) / 100; // Para evitar float number multiplicando por 100
+      })
+      .reduce((total, productTotal) => total + productTotal, 0) // soma todos produtos do carrinho ja multiplicados por seu preço
+      .toFixed(2) // para garantir que só serão exibidos 2 digitos após o ponto "."
+      .replace('.', ','); // teste espera encontrar virgula.
+
+    setCartTotal(cartTotalPrice);
+  }, [products, cartProducts]);
 
   return (
     <CartButtom>
