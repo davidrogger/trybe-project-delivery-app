@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from '../../context/MyContext';
 
@@ -15,8 +15,18 @@ import {
   Display,
 } from './styles';
 
-function ProductCard({ product: { id, name, price, urlImage } }) {
-  const { counter, setCounter } = useContext(MyContext);
+function ProductCard({ id, name, price, urlImage }) {
+  const {
+    getProductQuantity,
+    cartProducts,
+    handlerCartProducts,
+  } = useContext(MyContext);
+
+  const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    setQuantity(getProductQuantity(id));
+  }, [getProductQuantity, cartProducts, id]);
 
   const productPrice = () => {
     const test = `customer_products__element-card-price-${id}`;
@@ -37,13 +47,34 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
 
   const btn = (p) => {
     const test = `customer_products__button-card-${p === '-' ? 'rm' : 'add'}-item-${id}`;
-    const click = () => setCounter(p === '-' ? counter - 1 : counter + 1);
+    const click = () => {
+      let quantityUpdate;
+      if (p === '-') {
+        quantityUpdate = quantity !== 0 ? quantity - 1 : 0;
+      } else {
+        quantityUpdate = quantity + 1;
+      }
+
+      setQuantity(quantityUpdate);
+      handlerCartProducts(id, quantityUpdate);
+    };
     return (<Btn onClick={ click } data-testid={ test } type="button">{ p }</Btn>);
   };
 
-  const display = () => {
+  const productQuantityDisplay = () => {
     const test = `customer_products__input-card-quantity-${id}`;
-    return (<Display data-testid={ test } type="text" value={ counter } />);
+    const change = ({ target }) => {
+      setQuantity(target.value < 1 ? 0 : target.value);
+      handlerCartProducts(id, Number(target.value));
+    };
+    return (
+      <Display
+        data-testid={ test }
+        onChange={ change }
+        type="text"
+        value={ quantity }
+      />
+    );
   };
 
   return (
@@ -60,7 +91,7 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
         </Title>
         <Counter>
           { btn('-') }
-          { display() }
+          { productQuantityDisplay() }
           { btn('+') }
         </Counter>
       </Down>
@@ -69,12 +100,10 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
 }
 
 ProductCard.propTypes = {
-  product: PropTypes.shape({
-    name: PropTypes.string,
-    price: PropTypes.string,
-    urlImage: PropTypes.string,
-    id: PropTypes.number,
-  }).isRequired,
-};
+  name: PropTypes.string,
+  price: PropTypes.string,
+  urlImage: PropTypes.string,
+  id: PropTypes.number,
+}.isRequired;
 
 export default ProductCard;
