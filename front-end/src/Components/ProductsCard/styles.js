@@ -28,6 +28,8 @@ export const Up = styled.div`
 export const Img = styled.img`
   height: 100%;
   width: inherit;
+  object-fit: contain;
+  background: white;
 `;
 
 export const PriceContainer = styled.div`
