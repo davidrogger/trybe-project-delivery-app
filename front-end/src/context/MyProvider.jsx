@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
-import api, { getProducts } from '../services/api';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
@@ -10,12 +9,6 @@ function MyProvider({ children }) {
   const [cartTotalValue, setcartTotalValue] = useState(0);
 
   useEffect(() => {
-    const userSession = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log(userSession);
-    if (userSession.token) {
-      api.defaults.headers.Authorization = userSession.token;
-    }
-
     async function requestedProducts() {
       const response = await getProducts();
       setProducts(response.data);

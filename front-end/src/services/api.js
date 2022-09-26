@@ -6,7 +6,7 @@ async function login(user) {
   let response;
   try {
     response = await url.post('/login', user);
-    url.defaults.headers.Authorization = response.data.token;
+    // url.defaults.headers.Authorization = response.data.token;
   } catch (error) {
     response = error.response;
   }
@@ -18,7 +18,7 @@ async function registerUser(newUser) {
   let response;
   try {
     response = await url.post('/users', newUser);
-    url.defaults.headers.Authorization = response.data.token;
+    // url.defaults.headers.Authorization = response.data.token;
   } catch (error) {
     response = error.response;
   }
