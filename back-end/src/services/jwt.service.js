@@ -10,7 +10,7 @@ const jwtService = {
   },
   verify(token) {
     if (!token) throw new Error('Unauthorized');
-    return jwt.verify(token, JWT_SECRET);
+    return jwt.verify(token, SECRET_FILE);
   },
 };
 
