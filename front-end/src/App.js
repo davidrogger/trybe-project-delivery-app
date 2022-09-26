@@ -14,7 +14,6 @@ function App() {
         <Route exact path="/login" element={ <LoginPage /> } />
         <Route exact path="/register" element={ <RegisterPage /> } />
         <Route exact path="/customer/products" element={ <ProductsPage /> } />
-
       </Routes>
     </MyProvider>
   );

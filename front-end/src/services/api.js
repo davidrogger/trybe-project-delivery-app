@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const url = axios.create({ baseURL: 'http://localhost:3001' });
 
-export async function login(user) {
+async function login(user) {
   let response;
   try {
     response = await url.post('/login', user);
@@ -13,7 +13,7 @@ export async function login(user) {
   return response;
 }
 
-export async function registerUser(newUser) {
+async function registerUser(newUser) {
   let response;
   try {
     response = await url.post('/users', newUser);
@@ -23,3 +23,9 @@ export async function registerUser(newUser) {
 
   return response;
 }
+
+async function getProducts() {
+  return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
+}
+
+export { login, registerUser, getProducts };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PRIMARY_COLOR, SECOND_COLOR } from '../../Styles/Color';
 
 export const NavBody = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ const NavDefaultButtom = styled.div`
 
 export const NavOrdersButtom = styled(NavDefaultButtom)`
   flex-grow: 10;
-  background: #036b52;
+  background: ${PRIMARY_COLOR};
   padding-left: 25px;
   justify-content: left;
 `;
@@ -25,7 +26,7 @@ export const NavOrdersButtom = styled(NavDefaultButtom)`
 export const NavProductsButtom = styled(NavDefaultButtom)`
   flex-grow: 2;
   align-items: center;
-  background: #2fc18c;
+  background: ${SECOND_COLOR};
   color: black;
 `;
 

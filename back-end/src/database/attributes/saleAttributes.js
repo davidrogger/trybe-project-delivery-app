@@ -26,16 +26,16 @@ module.exports = {
   },
   totalPrice: {
     field: 'total_price',
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL(9, 2),
     allowNull: false,
   },
   deliveryAddress: {
     field: 'delivery_address',
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
   },
   deliveryNumber: {
     field: 'delivery_number',
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   saleData: {
@@ -44,7 +44,7 @@ module.exports = {
     defaultValue: fn('now'),
   },
   status: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(50),
     allowNull: false,
     defaultValue: 'PREPARANDO',
   },

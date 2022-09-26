@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   NavBody,
   NavLeaveButtom,
@@ -8,7 +9,13 @@ import {
 } from './styles';
 
 function Navbar() {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState('');
+
+  const handleClick = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user'));
@@ -37,6 +44,7 @@ function Navbar() {
 
       <NavLeaveButtom
         data-testid="customer_products__element-navbar-link-logout"
+        onClick={ () => handleClick() }
       >
         Sair
       </NavLeaveButtom>
