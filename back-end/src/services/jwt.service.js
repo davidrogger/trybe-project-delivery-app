@@ -8,6 +8,10 @@ const jwtService = {
   generateToken(user) {
     return jwt.sign(user, SECRET_FILE);
   },
+  verify(token) {
+    if (!token) throw new Error('Unauthorized');
+    return jwt.verify(token, JWT_SECRET);
+  },
 };
 
 module.exports = jwtService;

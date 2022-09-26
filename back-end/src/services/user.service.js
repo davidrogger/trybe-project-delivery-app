@@ -3,12 +3,10 @@ const model = require('../database/models');
 
 const userService = {
   async emailExists(email) {
-    const user = await model.User.count({ where: { email } });
-    if (user !== 0) throw new Error('Conflict');
+    return model.User.count({ where: { email } });
   },
   async nameExists(name) {
-    const user = await model.User.count({ where: { name } });
-    if (user !== 0) throw new Error('Conflict');
+    return model.User.count({ where: { name } });
   },
   async checkData(login) {
     const password = md5(login.password);
@@ -16,7 +14,7 @@ const userService = {
       .findOne({
         where: { email: login.email, password },
         raw: true,
-        attributes: { exclude: ['id', 'password'] },
+        attributes: { exclude: ['password'] },
       });
     
     if (!user) throw new Error('NotFound');
