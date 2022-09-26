@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
+import { getProducts } from '../services/api';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
