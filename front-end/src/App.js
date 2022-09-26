@@ -5,6 +5,7 @@ import MyProvider from './context/MyProvider';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import ProductsPage from './pages/Products';
+import CheckoutPage from './pages/Checkout';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/login" element={ <LoginPage /> } />
         <Route exact path="/register" element={ <RegisterPage /> } />
         <Route exact path="/customer/products" element={ <ProductsPage /> } />
+        <Route exact path="/customer/checkout" element={ <CheckoutPage /> } />
       </Routes>
     </MyProvider>
   );
