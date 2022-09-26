@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import { CartButtom } from './styles';
 
 function CheckoutButtom() {
+  const navigate = useNavigate();
   const { products, cartProducts } = useContext(MyContext);
   const [cartTotal, setCartTotal] = useState(0);
 
@@ -21,7 +23,11 @@ function CheckoutButtom() {
   }, [products, cartProducts]);
 
   return (
-    <CartButtom>
+    <CartButtom
+      data-testid="customer_products__button-cart"
+      disabled={ cartProducts.length === 0 }
+      onClick={ () => navigate('/customer/checkout') }
+    >
       Ver Carrinho: R$:
       <span data-testid="customer_products__checkout-bottom-value">
         { cartTotal }

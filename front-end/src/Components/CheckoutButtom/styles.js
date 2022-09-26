@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { PRIMARY_COLOR } from '../../Styles/Color';
 
-export const CartButtom = styled.div`
+export const CartButtom = styled.button`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -14,6 +14,7 @@ export const CartButtom = styled.div`
   right: 25px;
   border-radius: 10px;
   color: white;
+  border: none;
 `;
 
 export const anything = '';
