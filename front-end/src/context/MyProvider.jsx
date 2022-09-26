@@ -7,6 +7,7 @@ function MyProvider({ children }) {
   // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [cartTotalValue, setcartTotalValue] = useState(0);
 
   useEffect(() => {
     const userSession = JSON.parse(localStorage.getItem('user') || '{}');
@@ -48,7 +49,9 @@ function MyProvider({ children }) {
     setCartProducts,
     products,
     setProducts,
-  }), [cartProducts, products]);
+    cartTotalValue,
+    setcartTotalValue,
+  }), [cartProducts, products, cartTotalValue]);
 
   return (
     <MyContext.Provider value={ session }>

@@ -1,12 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import { CartButtom } from './styles';
 
 function CheckoutButtom() {
   const navigate = useNavigate();
-  const { products, cartProducts } = useContext(MyContext);
-  const [cartTotal, setCartTotal] = useState(0);
+  const {
+    products,
+    cartProducts,
+    cartTotalValue,
+    setcartTotalValue } = useContext(MyContext);
 
   useEffect(() => {
     const cartTotalPrice = cartProducts
@@ -19,8 +22,8 @@ function CheckoutButtom() {
       .toFixed(2) // para garantir que só serão exibidos 2 digitos após o ponto "."
       .replace('.', ','); // teste espera encontrar virgula.
 
-    setCartTotal(cartTotalPrice);
-  }, [products, cartProducts]);
+    setcartTotalValue(cartTotalPrice);
+  }, [products, cartProducts, setcartTotalValue]);
 
   return (
     <CartButtom
@@ -30,7 +33,7 @@ function CheckoutButtom() {
     >
       Ver Carrinho: R$:
       <span data-testid="customer_products__checkout-bottom-value">
-        { cartTotal }
+        { cartTotalValue }
       </span>
     </CartButtom>
   );
