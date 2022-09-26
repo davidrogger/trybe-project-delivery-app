@@ -20,12 +20,19 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
 
   const productPrice = () => {
     const test = `customer_products__element-card-price-${id}`;
-    return (<Price data-testid={ test }>{ `R$ ${price}` }</Price>);
+    return (
+      <Price>
+        R$
+        <span data-testid={ test }>
+          {price.replace('.', ',')}
+        </span>
+      </Price>
+    );
   };
 
   const img = () => {
     const test = `customer_products__img-card-bg-image-${id}`;
-    return (<Img data-testid={ test } src={ urlImage } alt="Product" />);
+    return (<Img data-testid={ test } src={ urlImage } alt={ `Imagem ${name}` } />);
   };
 
   const btn = (p) => {
