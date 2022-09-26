@@ -1,18 +1,25 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
-import api from '../services/api';
+import api, { getProducts } from '../services/api';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
-  // const [user, setUser] = useState({});
+  // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const userSession = JSON.parse(localStorage.getItem('user') || '{}');
+    console.log(userSession);
     if (userSession.token) {
       api.defaults.headers.Authorization = userSession.token;
     }
+
+    async function requestedProducts() {
+      const response = await getProducts();
+      setProducts(response.data);
+    }
+    requestedProducts();
   }, []);
 
   const session = useMemo(() => ({
