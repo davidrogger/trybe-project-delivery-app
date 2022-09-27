@@ -22,6 +22,21 @@ const saleService = {
     await model.SalesProduct.bulkCreate(productsWithSaleId);
     return sale;
   },
+
+  async getSalesByOrderId(id) {
+    return model.Sale.findOne({
+      where: { id },
+      include: [
+        {
+          model: model.Product,
+          as: 'products',
+          attributes: { exclude: [] },
+          through: { attributes: ['quantity'] },
+        },
+      ],
+      attributes: { exclude: ['seller_id', 'user_id'] },
+    });
+  }
 };
 
 module.exports = saleService;

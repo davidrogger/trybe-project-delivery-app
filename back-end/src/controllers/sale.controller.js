@@ -14,6 +14,12 @@ const saleController = {
     const sale = await saleService.create(payload);
     res.status(201).json(sale);
   },
+
+  async getSalesByOrderId(req, res) {
+    const { id } = req.params;
+    const sale = await saleService.getSalesByOrderId(Number(id));
+    res.status(200).json(sale);
+  }
 };
 
 module.exports = saleController;
