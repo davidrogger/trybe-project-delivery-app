@@ -8,7 +8,11 @@ const tableHeads = [
   'Item', 'Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total', 'Remover Item'];
 
 function OrderList() {
-  const { cartProducts, products, cartSubTotalProductPrice } = useContext(MyContext);
+  const {
+    cartProducts,
+    products,
+    cartSubTotalProductPrice,
+    handlerCartProducts } = useContext(MyContext);
 
   return (
     <style.OrderTable>
@@ -53,10 +57,10 @@ function OrderList() {
               >
                 {formatPrice(cartSubTotalProductPrice[cartProductIndex])}
               </style.RowItem>
-              <style.RowItem
-                data-testid={ `${testName}-remove-${cartProductIndex}` }
-              >
+              <style.RowItem>
                 <button
+                  data-testid={ `${testName}-remove-${cartProductIndex}` }
+                  onClick={ () => handlerCartProducts(cartProduct.id, 0) }
                   type="button"
                 >
                   Remover
