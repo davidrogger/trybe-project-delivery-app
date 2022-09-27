@@ -1,19 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import MyContext from '../../context/MyContext';
-import { getProducts } from '../../services/api';
 import ProductCard from '../ProductsCard';
 import { MainContainer } from './styles';
 
 function ProductsDisplay() {
-  const { products, setProducts } = useContext(MyContext);
-
-  useEffect(() => {
-    async function requestedProducts() {
-      const response = await getProducts();
-      setProducts(response.data);
-    }
-    requestedProducts();
-  }, [setProducts]);
+  const { products } = useContext(MyContext);
 
   return (
     <MainContainer>

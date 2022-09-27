@@ -4,8 +4,7 @@ const userController = require('../controllers/user.controller');
 
 const route = Router();
 
-route.use(userController.verify);
-route.get('/', saleController.getSalesByUser);
-route.post('/', saleController.create);
+route.get('/:userId', saleController.getSalesByUser);
+route.post('/:userId', userController.verify, saleController.create);
 
 module.exports = route;

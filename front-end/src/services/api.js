@@ -6,6 +6,7 @@ async function login(user) {
   let response;
   try {
     response = await url.post('/login', user);
+    // url.defaults.headers.Authorization = response.data.token;
   } catch (error) {
     response = error.response;
   }
@@ -17,6 +18,7 @@ async function registerUser(newUser) {
   let response;
   try {
     response = await url.post('/users', newUser);
+    // url.defaults.headers.Authorization = response.data.token;
   } catch (error) {
     response = error.response;
   }
@@ -28,4 +30,24 @@ async function getProducts() {
   return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
 }
 
-export { login, registerUser, getProducts };
+async function getAllSellers() {
+  return url.get('/users/sellers');
+}
+
+async function createOrders(userId, newOrders, token) {
+  let response;
+  try {
+    response = await url.post(`/sales/${userId}`, newOrders, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
+export { login, registerUser, getProducts, getAllSellers, createOrders };
+
+export default url;

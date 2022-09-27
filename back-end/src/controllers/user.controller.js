@@ -36,6 +36,10 @@ const userController = {
     req.session = { user };
     next();
   },
+  async getAllSellers(_req, res) {
+    const sellers = await userService.getAllSellers();
+    res.status(200).json(sellers);
+  },
 };
 
 module.exports = userController;

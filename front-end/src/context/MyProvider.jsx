@@ -1,11 +1,36 @@
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { getProducts } from '../services/api';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
-  // const [user, setUser] = useState({});
+  // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
+  const [cartSubTotalProductPrice, setSubTotalProductPrice] = useState([]);
   const [products, setProducts] = useState([]);
+  const [cartTotalValue, setCartTotalValue] = useState(0);
+
+  useEffect(() => {
+    async function requestedProducts() {
+      const response = await getProducts();
+      setProducts(response.data);
+    }
+    requestedProducts();
+  }, []);
+
+  useEffect(() => {
+    const subTotal = cartProducts
+      .map((targetProduct) => { // Percorrer por todos itens no carrinho
+        const productFound = products
+          .find((product) => targetProduct.id === product.id); // Encontrando o produto para usar o preço para o calculo
+        return (targetProduct.quantity * (Number(productFound.price) * 100)) / 100; // Para evitar float number multiplicando por 100
+      });
+    setSubTotalProductPrice(subTotal);
+    const cartTotalPrice = subTotal
+      .reduce((total, productTotal) => total + productTotal, 0); // soma todos produtos do carrinho ja multiplicados por seu preço
+
+    setCartTotalValue(cartTotalPrice);
+  }, [products, cartProducts, setCartTotalValue, setSubTotalProductPrice]);
 
   const session = useMemo(() => ({
     getProductQuantity(id) {
@@ -33,7 +58,11 @@ function MyProvider({ children }) {
     setCartProducts,
     products,
     setProducts,
-  }), [cartProducts, products]);
+    cartTotalValue,
+    setCartTotalValue,
+    cartSubTotalProductPrice,
+    setSubTotalProductPrice,
+  }), [cartProducts, products, cartTotalValue, cartSubTotalProductPrice]);
 
   return (
     <MyContext.Provider value={ session }>

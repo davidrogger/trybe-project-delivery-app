@@ -14,6 +14,7 @@ import {
   Btn,
   Display,
 } from './styles';
+import formatPrice from '../../utils/formatPrice';
 
 function ProductCard({ id, name, price, urlImage }) {
   const {
@@ -34,7 +35,7 @@ function ProductCard({ id, name, price, urlImage }) {
       <Price>
         R$
         <span data-testid={ test }>
-          {price.replace('.', ',')}
+          {formatPrice(Number(price))}
         </span>
       </Price>
     );

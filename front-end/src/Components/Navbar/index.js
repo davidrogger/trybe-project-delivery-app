@@ -26,6 +26,7 @@ function Navbar() {
     <NavBody>
       <NavProductsButtom
         data-testid="customer_products__element-navbar-link-products"
+        onClick={ () => navigate('/customer/products') }
       >
         PRODUTOS
       </NavProductsButtom>
