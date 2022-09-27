@@ -1,6 +1,18 @@
+import { useState, useEffect } from 'react';
+import { getAllSellers } from '../../services/api';
 import * as style from './styles';
 
 function AddressForm() {
+  const [sellers, setSellers] = useState([]);
+
+  useEffect(() => {
+    async function requestSellers() {
+      const response = await getAllSellers();
+      setSellers(response.data);
+    }
+    requestSellers();
+  }, []);
+
   return (
     <style.AddressForm>
       <style.FormLineDiv>
@@ -11,7 +23,14 @@ function AddressForm() {
             id="seller_name"
             data-testid="customer_checkout__select-seller"
           >
-            <option value="Fulana">Fulana Pereira</option>
+            {sellers.map((seller) => (
+              <option
+                key={ seller.id }
+                value={ seller.id }
+              >
+                {seller.name}
+              </option>
+            ))}
           </select>
 
         </style.FormInputDiv>

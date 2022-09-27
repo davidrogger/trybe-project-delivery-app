@@ -30,6 +30,10 @@ async function getProducts() {
   return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
 }
 
-export { login, registerUser, getProducts };
+async function getAllSellers() {
+  return url.get('/users/sellers');
+}
+
+export { login, registerUser, getProducts, getAllSellers };
 
 export default url;
