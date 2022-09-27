@@ -19,7 +19,7 @@ const saleController = {
     const { id } = req.params;
     const sale = await saleService.getSalesByOrderId(Number(id));
     res.status(200).json(sale);
-  }
+  },
 };
 
 module.exports = saleController;

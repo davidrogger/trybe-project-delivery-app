@@ -36,7 +36,7 @@ const saleService = {
       ],
       attributes: { exclude: ['seller_id', 'user_id'] },
     });
-  }
+  },
 };
 
 module.exports = saleService;
