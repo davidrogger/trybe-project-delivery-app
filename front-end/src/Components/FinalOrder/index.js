@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import MyContext from '../../context/MyContext';
+import OrderList from '../OrderList';
 
 import * as style from './styles';
 
@@ -11,7 +12,7 @@ function FinalOrder() {
     <style.FinalOrderDiv>
       <style.Title>Finalizar Pedido</style.Title>
       <style.ContentDiv>
-
+        <OrderList />
         <style.TotalValueField>
           Total: R$:
           {' '}
