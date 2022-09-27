@@ -27,6 +27,9 @@ const userService = {
     const { password, ...user } = newUser;
     return { ...user, role };
   },
+  async getAllSellers() {
+    return model.User.findAll({ where: { role: 'seller' } });
+  },
 };
 
 module.exports = userService;
