@@ -11,11 +11,11 @@ export const TableHeader = styled.th`
   flex-grow: 1;
 `;
 
-export const TableRow = styled.th`
+export const TableRow = styled.tr`
   display: flex;
   width: 100%
 `;
 
 export const RowItem = styled.td`
-
+  flex-grow: 1;
 `;
