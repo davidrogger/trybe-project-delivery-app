@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 import { getProducts } from '../services/api';
-import formatPrice from '../utils/formatPrice';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
@@ -30,7 +29,7 @@ function MyProvider({ children }) {
     const cartTotalPrice = subTotal
       .reduce((total, productTotal) => total + productTotal, 0); // soma todos produtos do carrinho ja multiplicados por seu preço
 
-    setCartTotalValue(formatPrice(cartTotalPrice));
+    setCartTotalValue(cartTotalPrice);
   }, [products, cartProducts, setCartTotalValue, setSubTotalProductPrice]);
 
   const session = useMemo(() => ({

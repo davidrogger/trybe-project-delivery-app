@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import MyContext from '../../context/MyContext';
 import OrderList from '../OrderList';
+import formatPrice from '../../utils/formatPrice';
 
 import * as style from './styles';
 
@@ -19,7 +20,7 @@ function FinalOrder() {
           <span
             data-testid="customer_checkout__element-order-total-price"
           >
-            {cartTotalValue}
+            {formatPrice(cartTotalValue)}
           </span>
         </style.TotalValueField>
       </style.ContentDiv>
