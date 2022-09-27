@@ -9,20 +9,23 @@ function CheckoutButtom() {
   const {
     products,
     cartProducts,
+    setSubTotalProductPrice,
     cartTotalValue,
-    setcartTotalValue } = useContext(MyContext);
+    setCartTotalValue } = useContext(MyContext);
 
   useEffect(() => {
-    const cartTotalPrice = cartProducts
+    const subTotal = cartProducts
       .map((targetProduct) => { // Percorrer por todos itens no carrinho
         const productFound = products
           .find((product) => targetProduct.id === product.id); // Encontrando o produto para usar o preço para o calculo
         return (targetProduct.quantity * (Number(productFound.price) * 100)) / 100; // Para evitar float number multiplicando por 100
-      })
+      });
+    setSubTotalProductPrice(subTotal);
+    const cartTotalPrice = subTotal
       .reduce((total, productTotal) => total + productTotal, 0); // soma todos produtos do carrinho ja multiplicados por seu preço
 
-    setcartTotalValue(formatPrice(cartTotalPrice));
-  }, [products, cartProducts, setcartTotalValue]);
+    setCartTotalValue(formatPrice(cartTotalPrice));
+  }, [products, cartProducts, setCartTotalValue, setSubTotalProductPrice]);
 
   return (
     <CartButtom

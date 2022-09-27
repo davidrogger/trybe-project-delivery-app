@@ -6,8 +6,9 @@ import MyContext from './MyContext';
 function MyProvider({ children }) {
   // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
+  const [cartSubTotalProductPrice, setSubTotalProductPrice] = useState([]);
   const [products, setProducts] = useState([]);
-  const [cartTotalValue, setcartTotalValue] = useState(0);
+  const [cartTotalValue, setCartTotalValue] = useState(0);
 
   useEffect(() => {
     async function requestedProducts() {
@@ -44,8 +45,10 @@ function MyProvider({ children }) {
     products,
     setProducts,
     cartTotalValue,
-    setcartTotalValue,
-  }), [cartProducts, products, cartTotalValue]);
+    setCartTotalValue,
+    cartSubTotalProductPrice,
+    setSubTotalProductPrice,
+  }), [cartProducts, products, cartTotalValue, cartSubTotalProductPrice]);
 
   return (
     <MyContext.Provider value={ session }>
