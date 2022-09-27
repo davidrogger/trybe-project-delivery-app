@@ -1,7 +1,7 @@
 const routes = {
   customer: 'customer/products',
   seller: '',
-  administrator: '',
+  administrator: 'admin/manage',
 };
 
 export default routes;
