@@ -34,6 +34,20 @@ async function getAllSellers() {
   return url.get('/users/sellers');
 }
 
-export { login, registerUser, getProducts, getAllSellers };
+async function createOrders(userId, newOrders, token) {
+  let response;
+  try {
+    response = await url.post(`/sales/${userId}`, newOrders, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
+export { login, registerUser, getProducts, getAllSellers, createOrders };
 
 export default url;
