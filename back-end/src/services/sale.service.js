@@ -24,24 +24,25 @@ const saleService = {
   },
 
   async getSalesByOrderId(id) {
-    return model.Sale.findOne({
+    const sale = await model.Sale.findOne({
       where: { id },
-      include: [
-        {
-          model: model.Product,
-          as: 'products',
-          attributes: { exclude: [] },
-          through: { attributes: ['quantity'] },
-        },
-      ],
       attributes: { exclude: ['seller_id', 'user_id'] },
+      raw: true,
     });
+    const productsResponse = await model.SalesProduct.findAll({
+      where: { saleId: id },
+      attributes: { exclude: ['saleId'] },
+      raw: true,
+    });
+    const products = productsResponse
+    .map(({ productId, quantity }) => ({ id: productId, quantity }));
+    return { ...sale, products };
   },
 
   async changeOrderStatus(payload, id) {
     await model.Sale.update(
-     { status: payload },      
-     { where: { id } },
+      { status: payload },
+      { where: { id } },
     );
   },
 };
