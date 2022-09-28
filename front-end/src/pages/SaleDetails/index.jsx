@@ -34,7 +34,7 @@ function SaleDetails() {
             <OrderList
               removeBtn={ false }
               testType={ testType }
-              productsList={ orderData.products } // lista vazia
+              productsList={ orderData.products }
             />
             <TotalValueDisplay
               testType={ testType }
