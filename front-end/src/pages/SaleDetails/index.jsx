@@ -16,7 +16,6 @@ function SaleDetails() {
     async function requestOrder() {
       const orderFound = await getOrderById(order.id);
       setOrderData(orderFound.data);
-      console.log(orderFound.data);
       setsaleDetailsLoading(false);
     }
     requestOrder();
@@ -30,16 +29,24 @@ function SaleDetails() {
         ? <Loading />
         : (
           <>
-            <OrderDetails />
-            <OrderList
-              removeBtn={ false }
-              testType={ testType }
-              productsList={ orderData.products }
-            />
-            <TotalValueDisplay
-              testType={ testType }
-              value={ formatPrice(Number(orderData.totalPrice)) }
-            />
+            Detalhe do Pedido
+            <div>
+              <OrderDetails
+                saleId={ orderData.id }
+                date={ orderData.saleDate }
+                status={ orderData.status }
+                sellerName="Fulana"
+              />
+              <OrderList
+                removeBtn={ false }
+                testType={ testType }
+                productsList={ orderData.products }
+              />
+              <TotalValueDisplay
+                testType={ testType }
+                value={ formatPrice(Number(orderData.totalPrice)) }
+              />
+            </div>
           </>
         ) }
     </>
