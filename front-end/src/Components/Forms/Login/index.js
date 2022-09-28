@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from './styles';
 import { login } from '../../../services/api';
-import routes from '../../../utils/routesPath';
 import status from '../../../utils/httpStatus';
+import MyContext from '../../../context/MyContext';
 
 const MIN_PASS = 6;
 
@@ -18,6 +18,7 @@ const schema = yup.object({
 function Login() {
   const navigate = useNavigate();
   const [hasError, setHasError] = useState(false);
+  const { setLogin } = useContext(MyContext);
   const { register, handleSubmit, formState } = useForm({
     defaultValues: { email: '', password: '' },
     resolver: yupResolver(schema),
@@ -29,8 +30,7 @@ function Login() {
 
     if (status[response.status] === 'OK') {
       localStorage.setItem('user', JSON.stringify(response.data));
-      const { role } = response.data;
-      navigate(`/${routes[role]}`);
+      setLogin(!!response.data);
     } else {
       const waitTime = 3000;
       setHasError(true);

@@ -4,7 +4,7 @@ import { getProducts } from '../services/api';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
-  // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
+  const [logged, setLogin] = useState(false); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
   const [productsLoading, setProductsLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -55,6 +55,8 @@ function MyProvider({ children }) {
         });
       });
     },
+    logged,
+    setLogin,
     cartProducts,
     setCartProducts,
     products,
@@ -63,7 +65,7 @@ function MyProvider({ children }) {
     setCartTotalValue,
     productsLoading,
   }), [
-    cartProducts, products, cartTotalValue, productsLoading,
+    cartProducts, products, cartTotalValue, productsLoading, logged, setLogin,
   ]);
 
   return (
