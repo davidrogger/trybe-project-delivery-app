@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import formatPrice from '../../utils/formatPrice';
+
 function OrderCard({ id, status, date, totalPrice }) {
   const order = (num) => {
     const test = `customer_orders__element-order-id-${id}`;
@@ -27,7 +29,7 @@ function OrderCard({ id, status, date, totalPrice }) {
 
   const prices = (p) => {
     const test = `customer_orders__element-card-price-${id}`;
-    return (<div data-testid={ test }>{p}</div>);
+    return (<div data-testid={ test }>{formatPrice(Number(p))}</div>);
   };
 
   return (
