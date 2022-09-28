@@ -33,6 +33,13 @@ const userService = {
       attributes: ['id', 'name', 'email'],
     });
   },
+
+  async getUserById(id) {
+    return model.User.findOne({
+      where: { id },
+      attributes: ['id', 'name', 'email'],
+    });
+  },
 };
 
 module.exports = userService;
