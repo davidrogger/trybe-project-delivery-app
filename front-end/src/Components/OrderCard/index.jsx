@@ -14,10 +14,15 @@ function OrderCard({ id, status, date, totalPrice }) {
   const dateDisplay = (d) => {
     const formatDate = new Date(d);
     const today = [
-      formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear(),
+      formatDate.getDate(),
+      formatDate.getMonth() + 1, formatDate.getFullYear(),
     ];
     const test = `customer_orders__element-order-date-${id}`;
-    return (<div data-testid={ test }>{`${today[0]}/${today[1]}/${today[2]}`}</div>);
+    return (
+      <div data-testid={ test }>
+        {`${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}`}
+      </div>
+    );
   };
 
   const prices = (p) => {
