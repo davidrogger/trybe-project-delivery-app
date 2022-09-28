@@ -5,17 +5,20 @@ import Navbar from '../../Components/Navbar';
 import OrderDetails from '../../Components/OrderDetails';
 import OrderList from '../../Components/OrderList';
 import TotalValueDisplay from '../../Components/TotalValueDisplay';
-import { getOrderById } from '../../services/api';
+import { getOrderById, getUserById } from '../../services/api';
 import formatPrice from '../../utils/formatPrice';
 
 function SaleDetails() {
   const [orderData, setOrderData] = useState();
   const [saleDetailsLoading, setsaleDetailsLoading] = useState(true);
+  const [seller, setSeller] = useState();
   const order = useParams();
   useEffect(() => {
     async function requestOrder() {
       const orderFound = await getOrderById(order.id);
       setOrderData(orderFound.data);
+      const sellerData = await getUserById(orderFound.data.sellerId);
+      setSeller(sellerData.data);
       setsaleDetailsLoading(false);
     }
     requestOrder();
@@ -35,7 +38,7 @@ function SaleDetails() {
                 saleId={ orderData.id }
                 date={ orderData.saleDate }
                 status={ orderData.status }
-                sellerName="Fulana"
+                sellerName={ seller.name }
               />
               <OrderList
                 removeBtn={ false }
