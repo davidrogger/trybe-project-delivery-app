@@ -7,13 +7,16 @@ function MyProvider({ children }) {
   // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
   const [cartSubTotalProductPrice, setSubTotalProductPrice] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [cartTotalValue, setCartTotalValue] = useState(0);
 
   useEffect(() => {
     async function requestedProducts() {
+      setProductsLoading(true);
       const response = await getProducts();
       setProducts(response.data);
+      setProductsLoading(false);
     }
     requestedProducts();
   }, []);
@@ -62,7 +65,10 @@ function MyProvider({ children }) {
     setCartTotalValue,
     cartSubTotalProductPrice,
     setSubTotalProductPrice,
-  }), [cartProducts, products, cartTotalValue, cartSubTotalProductPrice]);
+    productsLoading,
+  }), [
+    cartProducts, products, cartTotalValue, cartSubTotalProductPrice, productsLoading,
+  ]);
 
   return (
     <MyContext.Provider value={ session }>

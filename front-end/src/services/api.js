@@ -48,6 +48,17 @@ async function createOrders(userId, newOrders, token) {
   return response;
 }
 
-export { login, registerUser, getProducts, getAllSellers, createOrders };
+async function getOrderById(id) {
+  let response;
+  try {
+    response = await url.get(`/sales/order/${id}`);
+  } catch (error) {
+    response = error.response;
+  }
+
+  return response;
+}
+
+export { login, registerUser, getProducts, getAllSellers, createOrders, getOrderById };
 
 export default url;

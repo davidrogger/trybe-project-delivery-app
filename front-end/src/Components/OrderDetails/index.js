@@ -1,11 +1,6 @@
-import { useContext } from 'react';
-import MyContext from '../../context/MyContext';
-
-import { Up, Down } from './styles';
+import { Up } from './styles';
 
 function OrderDetails() {
-  const { cartTotalValue } = useContext(MyContext);
-
   const pedido = (pessoa, num) => {
     const t = 'customer_order_details__element-order-details-label-seller-name';
     return (<div data-testid={ t }>{`PEDIDO ${num}; P.Vend: ${pessoa}`}</div>);
@@ -29,11 +24,6 @@ function OrderDetails() {
     return (<button onClick={ () => f } data-testid={ t } type="button">{ txt }</button>);
   };
 
-  const total = () => {
-    const t = 'customer_order_details__element-order-total-price';
-    return (<div data-testid={ t }>{ cartTotalValue }</div>);
-  };
-
   return (
     <div>
       <div>
@@ -47,26 +37,7 @@ function OrderDetails() {
           { status('Entregue') }
           { btnEntregue() }
         </Up>
-
-        <Down>
-          { total() }
-        </Down>
       </div>
-
-      {/* tabela
-      header
-      itens
-      <div data-testid="customer_order_details__element-order-total-price">
-        Total:
-        { cartTotalValue }
-      </div>
-
-      <div>
-        Select de Vendedores
-        input endereço
-        input número
-        botão para finalizar o pedido
-      </div> */}
     </div>
   );
 }
