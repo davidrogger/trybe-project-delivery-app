@@ -10,6 +10,7 @@ const userController = {
     const token = jwtService.generateToken(user);
     res.status(200).json({ ...user, token });
   },
+
   async create(req, res) {
     const { name, email, password } = req.body;
     const newUser = { name, email, password };
@@ -28,6 +29,7 @@ const userController = {
 
     res.status(201).json({ ...user, token });
   },
+
   async verify(req, _res, next) {
     const { authorization } = req.headers;
     const user = jwtService.verify(authorization);
@@ -36,9 +38,16 @@ const userController = {
     req.session = { user };
     next();
   },
+
   async getAllSellers(_req, res) {
     const sellers = await userService.getAllSellers();
     res.status(200).json(sellers);
+  },
+
+  async getUserById(req, res) {
+    const { id } = req.params;
+    const user = await userService.getUserById(Number(id));
+    res.status(200).json(user);
   },
 };
 
