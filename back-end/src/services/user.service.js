@@ -28,7 +28,10 @@ const userService = {
     return { ...user, role };
   },
   async getAllSellers() {
-    return model.User.findAll({ where: { role: 'seller' } });
+    return model.User.findAll({
+      where: { role: 'seller' },
+      attributes: ['id', 'name', 'email'],
+    });
   },
 };
 
