@@ -6,7 +6,6 @@ import MyContext from './MyContext';
 function MyProvider({ children }) {
   // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
-  const [cartSubTotalProductPrice, setSubTotalProductPrice] = useState([]);
   const [productsLoading, setProductsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [cartTotalValue, setCartTotalValue] = useState(0);
@@ -28,12 +27,11 @@ function MyProvider({ children }) {
           .find((product) => targetProduct.id === product.id); // Encontrando o produto para usar o preço para o calculo
         return (targetProduct.quantity * (Number(productFound.price) * 100)) / 100; // Para evitar float number multiplicando por 100
       });
-    setSubTotalProductPrice(subTotal);
     const cartTotalPrice = subTotal
       .reduce((total, productTotal) => total + productTotal, 0); // soma todos produtos do carrinho ja multiplicados por seu preço
 
     setCartTotalValue(cartTotalPrice);
-  }, [products, cartProducts, setCartTotalValue, setSubTotalProductPrice]);
+  }, [products, cartProducts, setCartTotalValue]);
 
   const session = useMemo(() => ({
     getProductQuantity(id) {
@@ -63,11 +61,9 @@ function MyProvider({ children }) {
     setProducts,
     cartTotalValue,
     setCartTotalValue,
-    cartSubTotalProductPrice,
-    setSubTotalProductPrice,
     productsLoading,
   }), [
-    cartProducts, products, cartTotalValue, cartSubTotalProductPrice, productsLoading,
+    cartProducts, products, cartTotalValue, productsLoading,
   ]);
 
   return (
