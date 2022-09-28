@@ -37,6 +37,13 @@ const saleService = {
       attributes: { exclude: ['seller_id', 'user_id'] },
     });
   },
+
+  async changeOrderStatus(payload, id) {
+    await model.Sale.update(
+     { status: payload },      
+     { where: { id } },
+    );
+  },
 };
 
 module.exports = saleService;
