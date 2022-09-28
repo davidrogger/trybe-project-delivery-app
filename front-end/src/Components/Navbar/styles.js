@@ -17,6 +17,9 @@ const NavDefaultButtom = styled.div`
 `;
 
 export const NavOrdersButtom = styled(NavDefaultButtom)`
+   &:hover {
+    cursor: pointer;
+  }
   flex-grow: 10;
   background: ${PRIMARY_COLOR};
   padding-left: 25px;
@@ -24,6 +27,9 @@ export const NavOrdersButtom = styled(NavDefaultButtom)`
 `;
 
 export const NavProductsButtom = styled(NavDefaultButtom)`
+    &:hover {
+    cursor: pointer;
+  }
   flex-grow: 2;
   align-items: center;
   background: ${SECOND_COLOR};
@@ -38,6 +44,9 @@ export const NavUserNameButtom = styled(NavProductsButtom)`
 `;
 
 export const NavLeaveButtom = styled(NavDefaultButtom)`
+    &:hover {
+    cursor: pointer;
+  }
   flex-grow: 1;
   background: #056cf9;
 `;
