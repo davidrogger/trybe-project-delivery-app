@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as style from './styles';
 
 function AddNewUser() {
+  const [disableButton, setDisableButton] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,8 +15,8 @@ function AddNewUser() {
     if (id === 'user-password') setPassword(value);
     if (id === 'select-role') setRole(value);
   };
-  const createUser = async () => {
-    const result = await createNewUserByAdmin({ name, email, password, role, token });
+  const registerUser = async () => {
+    const result = await register({ name, email, password, role, token });
     if (result) {
       setName('');
       setEmail('');
@@ -23,6 +24,19 @@ function AddNewUser() {
       setRole('');
     }
   };
+  useEffect(() => {
+    const validate = () => {
+      const charactersName = 12;
+      const charactersPassword = 6;
+      const regexEmail = /^[a-z0-9-_.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/ig;
+      const checkEmail = regexEmail.test(email);
+      const checkName = name.length >= charactersName;
+      const checkPassword = password.length >= charactersPassword;
+      const checkRole = role !== '';
+      return (checkEmail && checkName && checkPassword && checkRole);
+    };
+    setDisableButton(validate());
+  }, [name, email, password, role]);
 
   return (
     <main>
@@ -80,7 +94,8 @@ function AddNewUser() {
           type="button"
           id="register-button"
           data-testid="admin_manage__button-register"
-          onClick={ createUser }
+          onClick={ registerUser }
+          disabled={ !disableButton }
         >
           CADASTRAR
         </button>
