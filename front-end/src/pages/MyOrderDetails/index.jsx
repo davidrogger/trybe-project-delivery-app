@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/index';
 import OrderCard from '../../Components/OrderCard';
 import Loading from '../../Components/Loading';
 import { getSalesByUser } from '../../services/api';
-import MyOrdersDiv from './styles';
+import { MyOrdersDiv, RedirectDiv } from './styles';
 
 function MyOrderDetails() {
+  const navigate = useNavigate();
   const [myOrdersLoading, setMyOrdersLoading] = useState(true);
   const [orderData, setOrderData] = useState([]);
   useEffect(() => {
@@ -26,14 +28,17 @@ function MyOrderDetails() {
             <MyOrdersDiv>
               {
                 orderData?.map((el, index) => (
-                  <div key={ index }>
+                  <RedirectDiv
+                    key={ index }
+                    onClick={ () => navigate(`/customer/orders/${el.id}`) }
+                  >
                     <OrderCard
                       id={ el.id }
                       status={ el.status }
                       date={ el.saleDate }
                       totalPrice={ el.totalPrice }
                     />
-                  </div>
+                  </RedirectDiv>
                 ))
               }
             </MyOrdersDiv>
