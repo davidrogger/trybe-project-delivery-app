@@ -2,13 +2,22 @@ import PropTypes from 'prop-types';
 import { SaleDetailsDiv } from './styles';
 
 function OrderDetails({ sellerName, saleId, date, status }) {
+  const testName = 'customer_order_details__';
   const pedido = (pessoa, num) => {
-    const t = 'customer_order_details__element-order-details-label-seller-name';
-    return (<div data-testid={ t }>{`PEDIDO ${num}; P.Vend: ${pessoa}`}</div>);
+    const sellerNameTest = `${testName}element-order-details-label-seller-name`;
+    const orderTest = `${testName}element-order-details-label-order-id`;
+    return (
+      <div>
+        PEDIDO:
+        <span data-testid={ sellerNameTest }>{num}</span>
+        P.Vend:
+        <span data-testid={ orderTest }>{pessoa}</span>
+      </div>
+    );
   };
 
   const dateDisplay = (d) => {
-    const t = 'customer_order_details__element-order-details-label-order-date';
+    const t = `${testName}element-order-details-label-order-date`;
     const formatDate = new Date(d);
     const today = [
       formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
@@ -16,12 +25,12 @@ function OrderDetails({ sellerName, saleId, date, status }) {
   };
 
   const statusDisplay = (p) => {
-    const t = `customer_order_details__element-order-details-label-delivery-status${p}`;
+    const t = `${testName}element-order-details-label-delivery-status`;
     return (<div data-testid={ t }>{ p }</div>);
   };
 
   const btnEntregue = (f) => {
-    const t = 'customer_order_details__button-delivery-check';
+    const t = `${testName}button-delivery-check`;
     const txt = 'MARCAR COMO ENTREGUE';
     return (<button onClick={ () => f } data-testid={ t } type="button">{ txt }</button>);
   };
