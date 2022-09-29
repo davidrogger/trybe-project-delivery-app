@@ -2,12 +2,14 @@ import PropTypes from 'prop-types';
 import { changeOrderStatus } from '../../services/api';
 import { SaleDetailsDiv } from './styles';
 import Status from '../../utils/httpStatus';
+import deliveryStatusCatalog from '../../utils/deliveryStatus';
+// import routes from '../../utils/routesPath';
 
 function OrderDetails({
   sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
   userType }) {
-  async function handleClick() {
-    const data = await changeOrderStatus(saleId, { status: 'Entregue' });
+  async function handleClick(statusUpdate) {
+    const data = await changeOrderStatus(saleId, { status: statusUpdate });
     if (Status[data.status] === 'OK') {
       setsaleDetailsLoading(true);
       setReloading(!reloading);
@@ -52,19 +54,25 @@ function OrderDetails({
   };
 
   const btnEntregue = () => {
+    const btnDisabled = () => true;
     const t = `${testName}button-delivery-check`;
-    const txt = 'MARCAR COMO ENTREGUE';
-    return (
-      <button
-        onClick={ handleClick }
-        data-testid={ t }
-        type="button"
-        disabled
-      >
-        { txt }
+    return deliveryStatusCatalog.map((delivery) => {
+      if (delivery.userType === userType) {
+        return (
+          <button
+            key={ delivery.id }
+            onClick={ () => handleClick(delivery.statusUpdate) }
+            data-testid={ t }
+            type="button"
+            disabled={ btnDisabled() }
+          >
+            { delivery.btnText }
 
-      </button>
-    );
+          </button>
+        );
+      }
+      return null;
+    });
   };
 
   return (
