@@ -65,14 +65,14 @@ function OrderDetails({
       }
       return trigger === 'Pendente' || trigger === 'Preparando' || trigger === 'Entregue';
     };
-    const t = `${testName}button-delivery-check`;
     return deliveryStatusCatalog.map((delivery) => {
+      const btnTestName = `${testName}button-${delivery.testTag}-check`;
       if (delivery.userType === userType) {
         return (
           <button
             key={ delivery.id }
             onClick={ () => handleClick(delivery.statusUpdate) }
-            data-testid={ t }
+            data-testid={ btnTestName }
             type="button"
             disabled={ btnDisabled(status, delivery.statusUpdate) }
           >
