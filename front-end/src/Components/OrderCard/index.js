@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import * as style from './styles';
 import formatPrice from '../../utils/formatPrice';
 
-function OrderCard({ id, status, date, totalPrice, testType = 'customer' }) {
-  const testName = `${testType}_orders__`;
+function OrderCard(
+  { id, status, saleDate, totalPrice, type, deliveryAddress, deliveryNumber },
+) {
+  const navigate = useNavigate();
+  const testName = `${type}_orders__`;
   const order = (num) => {
     const test = `${testName}element-order-id-${id}`;
     const DIGIT_NUMBER = 4;
@@ -19,7 +23,9 @@ function OrderCard({ id, status, date, totalPrice, testType = 'customer' }) {
 
   const statusDisplay = (s) => {
     const test = `${testName}element-delivery-status-${id}`;
-    return (<div data-testid={ test }>{s}</div>);
+    return (
+      <style.OrderSubInfo1 data-testid={ test }>{s}</style.OrderSubInfo1>
+    );
   };
 
   const dateDisplay = (d) => {
@@ -30,26 +36,44 @@ function OrderCard({ id, status, date, totalPrice, testType = 'customer' }) {
     ];
     const test = `${testName}element-order-date-${id}`;
     return (
-      <div data-testid={ test }>
+      <style.HighlightInfo data-testid={ test }>
         {`${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}`}
-      </div>
+      </style.HighlightInfo>
     );
   };
 
   const prices = (p) => {
     const test = `${testName}element-card-price-${id}`;
-    return (<div data-testid={ test }>{formatPrice(Number(p))}</div>);
+    return (
+      <style.HighlightInfo data-testid={ test }>
+        {formatPrice(Number(p))}
+      </style.HighlightInfo>
+    );
+  };
+
+  const addressData = (street, number) => {
+    const test = `${testName}element-card-address-${id}`;
+    return (
+      <style.OrderInfoDown data-testid={ test }>
+        {`${street}, ${number}`}
+      </style.OrderInfoDown>
+    );
   };
 
   return (
-    <style.OrderCardBody>
+    <style.OrderCardBody
+      onClick={ () => navigate(`/${type}/orders/${id}`) }
+    >
       { order(id) }
       <style.OrderInfoDiv>
-        <div>
+        <style.OrderInfoUp>
           { statusDisplay(status) }
-          { dateDisplay(date) }
-          { prices(totalPrice) }
-        </div>
+          <style.OrderSubInfo2>
+            { dateDisplay(saleDate) }
+            { prices(totalPrice) }
+          </style.OrderSubInfo2>
+        </style.OrderInfoUp>
+        { type === 'seller' && addressData(deliveryAddress, deliveryNumber) }
       </style.OrderInfoDiv>
     </style.OrderCardBody>
   );
