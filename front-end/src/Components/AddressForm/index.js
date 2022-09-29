@@ -8,6 +8,7 @@ function AddressForm() {
   const navigate = useNavigate();
   const [sellers, setSellers] = useState([]);
   const {
+    setCartProducts,
     cartProducts,
     cartTotalValue } = useContext(MyContext);
 
@@ -27,6 +28,7 @@ function AddressForm() {
     };
 
     const res = await createOrders(obj.userId, obj, user.token);
+    setCartProducts([]);
     navigate(`/customer/orders/${res.data.id}`);
   };
 
