@@ -3,7 +3,6 @@ import { changeOrderStatus } from '../../services/api';
 import { SaleDetailsDiv } from './styles';
 import Status from '../../utils/httpStatus';
 import deliveryStatusCatalog from '../../utils/deliveryStatus';
-// import routes from '../../utils/routesPath';
 
 function OrderDetails({
   sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
@@ -54,7 +53,18 @@ function OrderDetails({
   };
 
   const btnEntregue = () => {
-    const btnDisabled = () => true;
+    const btnDisabled = (trigger, btn) => {
+      // refatorar essa logica depois...
+      const transit = 'Em Trânsito';
+      if (btn === 'Preparando') {
+        return trigger === transit
+        || trigger === 'Preparando' || trigger === 'Entregue';
+      }
+      if (btn === transit) {
+        return trigger === 'Pendente' || trigger === 'Entregue' || trigger === transit;
+      }
+      return trigger === 'Pendente' || trigger === 'Preparando' || trigger === 'Entregue';
+    };
     const t = `${testName}button-delivery-check`;
     return deliveryStatusCatalog.map((delivery) => {
       if (delivery.userType === userType) {
@@ -64,7 +74,7 @@ function OrderDetails({
             onClick={ () => handleClick(delivery.statusUpdate) }
             data-testid={ t }
             type="button"
-            disabled={ btnDisabled() }
+            disabled={ btnDisabled(status, delivery.statusUpdate) }
           >
             { delivery.btnText }
 
