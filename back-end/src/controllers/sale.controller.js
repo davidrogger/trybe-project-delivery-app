@@ -27,6 +27,12 @@ const saleController = {
     await saleService.changeOrderStatus(status, Number(id));
     res.status(200).json({ message: 'success updated!' });
   },
+
+  async getOrdersBySellerId(req, res) {
+    const { id } = req.params;
+    const orders = await saleService.getOrdersBySellerId(Number(id));
+    res.status(200).json(orders);
+  },
 };
 
 module.exports = saleController;
