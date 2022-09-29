@@ -5,7 +5,6 @@ export const FinalOrderDiv = styled.div`
   flex-direction: column;
   position: relative;
   width: 90%;
-  height: 50%;
 `;
 
 export const TableOrder = styled.table`

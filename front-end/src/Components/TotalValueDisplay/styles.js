@@ -9,7 +9,7 @@ export const TotalValueField = styled.div`
   color: white;
   padding: 15px;
   right: 10px;
-  bottom: 10px;
+  bottom: -60px;
   border-radius: 10px;
 `;
 

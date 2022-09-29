@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import { changeOrderStatus } from '../../services/api';
-import { SaleDetailsDiv } from './styles';
+import * as Style from './styles';
 import Status from '../../utils/httpStatus';
 import deliveryStatusCatalog from '../../utils/deliveryStatus';
-// import routes from '../../utils/routesPath';
 
 function OrderDetails({
   sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
@@ -21,18 +20,18 @@ function OrderDetails({
     const sellerNameTest = `${testName}element-order-details-label-seller-name`;
     const orderTest = `${testName}element-order-details-label-order-id`;
     return (
-      <div>
+      <Style.DivPedido>
         <div>
           PEDIDO:
           <span data-testid={ orderTest }>{num}</span>
         </div>
         { userType === 'customer' && (
-          <div>
-            P.Vend:
+          <Style.SellerNameDiv>
+            P. Vend:
             <span data-testid={ sellerNameTest }>{pessoa}</span>
-          </div>
+          </Style.SellerNameDiv>
         ) }
-      </div>
+      </Style.DivPedido>
     );
   };
 
@@ -42,15 +41,23 @@ function OrderDetails({
     const today = [
       formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
     return (
-      <div data-testid={ t }>
-        { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
-      </div>
+      <Style.DivData>
+        Data:
+        <span data-testid={ t }>
+          { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
+        </span>
+      </Style.DivData>
     );
   };
 
   const statusDisplay = (p) => {
     const t = `${testName}element-order-details-label-delivery-status`;
-    return (<div data-testid={ t }>{ p }</div>);
+    return (
+      <Style.DivStatus data-testid={ t }>
+        Status:
+        { p }
+      </Style.DivStatus>
+    );
   };
 
   const btnEntregue = () => {
@@ -59,7 +66,7 @@ function OrderDetails({
     return deliveryStatusCatalog.map((delivery) => {
       if (delivery.userType === userType) {
         return (
-          <button
+          <Style.Button
             key={ delivery.id }
             onClick={ () => handleClick(delivery.statusUpdate) }
             data-testid={ t }
@@ -68,7 +75,7 @@ function OrderDetails({
           >
             { delivery.btnText }
 
-          </button>
+          </Style.Button>
         );
       }
       return null;
@@ -76,14 +83,12 @@ function OrderDetails({
   };
 
   return (
-
-    <SaleDetailsDiv>
+    <Style.SaleDetailsDiv>
       { pedido(sellerName, saleId) }
       { dateDisplay(date) }
       { statusDisplay(status) }
       { btnEntregue() }
-    </SaleDetailsDiv>
-
+    </Style.SaleDetailsDiv>
   );
 }
 
