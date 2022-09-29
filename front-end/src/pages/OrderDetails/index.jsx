@@ -13,20 +13,20 @@ function SaleDetails() {
   const [saleDetailsLoading, setsaleDetailsLoading] = useState(true);
   const [reloading, setReloading] = useState(false);
   const [seller, setSeller] = useState();
-  const order = useParams();
+  const route = useParams();
 
   useEffect(() => {
     async function requestOrder() {
-      const orderFound = await getOrderById(order.id);
+      const orderFound = await getOrderById(route.id);
       setOrderData(orderFound.data);
       const sellerData = await getUserById(orderFound.data.sellerId);
       setSeller(sellerData.data);
       setsaleDetailsLoading(false);
     }
     requestOrder();
-  }, [order, reloading]);
+  }, [route, reloading]);
 
-  const testType = 'order_details';
+  const tableType = 'order_details';
   return (
     <>
       <Navbar />
@@ -44,14 +44,17 @@ function SaleDetails() {
                 setsaleDetailsLoading={ setsaleDetailsLoading }
                 setReloading={ setReloading }
                 reloading={ reloading }
+                userType={ route.type }
               />
               <OrderList
                 removeBtn={ false }
-                testType={ testType }
+                tableType={ tableType }
+                userType={ route.type }
                 productsList={ orderData.products }
               />
               <TotalValueDisplay
-                testType={ testType }
+                tableType={ tableType }
+                userType={ route.type }
                 value={ formatPrice(Number(orderData.totalPrice)) }
               />
             </div>

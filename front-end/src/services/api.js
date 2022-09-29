@@ -59,10 +59,10 @@ export async function getOrderById(id) {
   return response;
 }
 
-export async function getCustomerOrders(userId) {
+export async function getOrdersCustomer(id) {
   let response;
   try {
-    response = await url.get(`sales/${userId}`);
+    response = await url.get(`sales/${id}`);
   } catch (error) {
     response = error.response;
   }
@@ -83,6 +83,17 @@ export async function getUserById(id) {
   let response;
   try {
     response = await url.get(`/users/${id}`);
+  } catch (error) {
+    response = error.response;
+  }
+
+  return response;
+}
+
+export async function getOrdersSeller(id) {
+  let response;
+  try {
+    response = await url.get(`/sales/seller/${id}`);
   } catch (error) {
     response = error.response;
   }
