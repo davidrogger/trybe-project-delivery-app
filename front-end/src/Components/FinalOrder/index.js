@@ -3,25 +3,29 @@ import MyContext from '../../context/MyContext';
 import OrderList from '../OrderList';
 
 import * as style from './styles';
+import TotalValueDisplay from '../TotalValueDisplay';
+import formatPrice from '../../utils/formatPrice';
 
 function FinalOrder() {
-  const { cartTotalValue } = useContext(MyContext);
+  const { cartProducts, cartTotalValue } = useContext(MyContext);
+  const tableType = 'checkout';
+  const userType = 'customer';
 
   return (
 
     <style.FinalOrderDiv>
       <style.Title>Finalizar Pedido</style.Title>
       <style.ContentDiv>
-        <OrderList />
-        <style.TotalValueField>
-          Total: R$:
-          {' '}
-          <span
-            data-testid="customer_checkout__element-order-total-price"
-          >
-            {cartTotalValue}
-          </span>
-        </style.TotalValueField>
+        <OrderList
+          productsList={ cartProducts }
+          tableType={ tableType }
+          userType={ userType }
+        />
+        <TotalValueDisplay
+          tableType={ tableType }
+          userType={ userType }
+          value={ formatPrice(cartTotalValue) }
+        />
       </style.ContentDiv>
     </style.FinalOrderDiv>
 

@@ -1,74 +1,107 @@
-import { useContext } from 'react';
-import MyContext from '../../context/MyContext';
+import PropTypes from 'prop-types';
+import { changeOrderStatus } from '../../services/api';
+import { SaleDetailsDiv } from './styles';
+import Status from '../../utils/httpStatus';
+import deliveryStatusCatalog from '../../utils/deliveryStatus';
 
-import { Up, Down } from './styles';
+function OrderDetails({
+  sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
+  userType }) {
+  async function handleClick(statusUpdate) {
+    const data = await changeOrderStatus(saleId, { status: statusUpdate });
+    if (Status[data.status] === 'OK') {
+      setsaleDetailsLoading(true);
+      setReloading(!reloading);
+    }
+  }
 
-function OrderDetails() {
-  const { cartTotalValue } = useContext(MyContext);
-
+  const testName = `${userType}_order_details__`;
   const pedido = (pessoa, num) => {
-    const t = 'customer_order_details__element-order-details-label-seller-name';
-    return (<div data-testid={ t }>{`PEDIDO ${num}; P.Vend: ${pessoa}`}</div>);
+    const sellerNameTest = `${testName}element-order-details-label-seller-name`;
+    const orderTest = `${testName}element-order-details-label-order-id`;
+    return (
+      <div>
+        <div>
+          PEDIDO:
+          <span data-testid={ orderTest }>{num}</span>
+        </div>
+        { userType === 'customer' && (
+          <div>
+            P.Vend:
+            <span data-testid={ sellerNameTest }>{pessoa}</span>
+          </div>
+        ) }
+      </div>
+    );
   };
 
-  const data = () => {
-    const t = 'customer_order_details__element-order-details-label-order-date';
-    const d = new Date();
-    const today = [d.getDate(), d.getMonth() + 1, d.getFullYear()];
-    return (<div data-testid={ t }>{ `${today[0]}/${today[1]}/${today[2]}` }</div>);
+  const dateDisplay = (d) => {
+    const t = `${testName}element-order-details-label-order-date`;
+    const formatDate = new Date(d);
+    const today = [
+      formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
+    return (
+      <div data-testid={ t }>
+        { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
+      </div>
+    );
   };
 
-  const status = (p) => {
-    const t = `customer_order_details__element-order-details-label-delivery-status${p}`;
+  const statusDisplay = (p) => {
+    const t = `${testName}element-order-details-label-delivery-status`;
     return (<div data-testid={ t }>{ p }</div>);
   };
 
-  const btnEntregue = (f) => {
-    const t = 'customer_order_details__button-delivery-check';
-    const txt = 'MARCAR COMO ENTREGUE';
-    return (<button onClick={ () => f } data-testid={ t } type="button">{ txt }</button>);
-  };
+  const btnEntregue = () => {
+    const btnDisabled = (trigger, btn) => {
+      // refatorar essa logica depois...
+      const transit = 'Em Trânsito';
+      if (btn === 'Preparando') {
+        return trigger === transit
+        || trigger === 'Preparando' || trigger === 'Entregue';
+      }
+      if (btn === transit) {
+        return trigger === 'Pendente' || trigger === 'Entregue' || trigger === transit;
+      }
+      return trigger === 'Pendente' || trigger === 'Preparando' || trigger === 'Entregue';
+    };
+    return deliveryStatusCatalog.map((delivery) => {
+      const btnTestName = `${testName}button-${delivery.testTag}-check`;
+      if (delivery.userType === userType) {
+        return (
+          <button
+            key={ delivery.id }
+            onClick={ () => handleClick(delivery.statusUpdate) }
+            data-testid={ btnTestName }
+            type="button"
+            disabled={ btnDisabled(status, delivery.statusUpdate) }
+          >
+            { delivery.btnText }
 
-  const total = () => {
-    const t = 'customer_order_details__element-order-total-price';
-    return (<div data-testid={ t }>{ cartTotalValue }</div>);
+          </button>
+        );
+      }
+      return null;
+    });
   };
 
   return (
-    <div>
-      <div>
-        <h2>Detalhe do Pedido</h2>
-      </div>
 
-      <div data-testid="customer_order_details__element-order-details-label-order-id">
-        <Up>
-          { pedido('Fulana Pereira', '0003') }
-          { data() }
-          { status('Entregue') }
-          { btnEntregue() }
-        </Up>
+    <SaleDetailsDiv>
+      { pedido(sellerName, saleId) }
+      { dateDisplay(date) }
+      { statusDisplay(status) }
+      { btnEntregue() }
+    </SaleDetailsDiv>
 
-        <Down>
-          { total() }
-        </Down>
-      </div>
-
-      {/* tabela
-      header
-      itens
-      <div data-testid="customer_order_details__element-order-total-price">
-        Total:
-        { cartTotalValue }
-      </div>
-
-      <div>
-        Select de Vendedores
-        input endereço
-        input número
-        botão para finalizar o pedido
-      </div> */}
-    </div>
   );
 }
+
+OrderDetails.propTypes = {
+  sellerName: PropTypes.string,
+  saleId: PropTypes.number,
+  date: PropTypes.string,
+  status: PropTypes.string,
+}.isRequired;
 
 export default OrderDetails;

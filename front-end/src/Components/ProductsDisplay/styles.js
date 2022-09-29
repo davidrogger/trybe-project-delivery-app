@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
   flex-flow: row wrap;
   justify-content: space-around;
   margin-top: 30px;
-  width: 100%
+  width: 90%
 `;
 
 export const FooterContainer = styled.div`

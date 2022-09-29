@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 import { getProducts } from '../services/api';
-import formatPrice from '../utils/formatPrice';
 import MyContext from './MyContext';
 
 function MyProvider({ children }) {
-  // const [user, setUser] = useState({}); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
+  const [logged, setLogin] = useState(false); // vamos desenvolver um direcionamento melhor de usuários, para quando um usuário tentar acessar uma rota sem permissão ser redirecionado automagicamente.
   const [cartProducts, setCartProducts] = useState([]);
-  const [cartSubTotalProductPrice, setSubTotalProductPrice] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [cartTotalValue, setCartTotalValue] = useState(0);
 
   useEffect(() => {
     async function requestedProducts() {
+      setProductsLoading(true);
       const response = await getProducts();
       setProducts(response.data);
+      setProductsLoading(false);
     }
     requestedProducts();
   }, []);
@@ -26,12 +27,11 @@ function MyProvider({ children }) {
           .find((product) => targetProduct.id === product.id); // Encontrando o produto para usar o preço para o calculo
         return (targetProduct.quantity * (Number(productFound.price) * 100)) / 100; // Para evitar float number multiplicando por 100
       });
-    setSubTotalProductPrice(subTotal);
     const cartTotalPrice = subTotal
       .reduce((total, productTotal) => total + productTotal, 0); // soma todos produtos do carrinho ja multiplicados por seu preço
 
-    setCartTotalValue(formatPrice(cartTotalPrice));
-  }, [products, cartProducts, setCartTotalValue, setSubTotalProductPrice]);
+    setCartTotalValue(cartTotalPrice);
+  }, [products, cartProducts, setCartTotalValue]);
 
   const session = useMemo(() => ({
     getProductQuantity(id) {
@@ -55,15 +55,18 @@ function MyProvider({ children }) {
         });
       });
     },
+    logged,
+    setLogin,
     cartProducts,
     setCartProducts,
     products,
     setProducts,
     cartTotalValue,
     setCartTotalValue,
-    cartSubTotalProductPrice,
-    setSubTotalProductPrice,
-  }), [cartProducts, products, cartTotalValue, cartSubTotalProductPrice]);
+    productsLoading,
+  }), [
+    cartProducts, products, cartTotalValue, productsLoading, logged, setLogin,
+  ]);
 
   return (
     <MyContext.Provider value={ session }>

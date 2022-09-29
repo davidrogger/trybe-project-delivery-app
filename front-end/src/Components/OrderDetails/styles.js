@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Up = styled.div`
+export const SaleDetailsDiv = styled.div`
   background: gray;
   display: flex;
   justify-content: space-evenly;
