@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import {
   NavBody,
@@ -10,10 +10,10 @@ import {
 } from './styles';
 
 function Navbar() {
+  const route = useParams();
   const { setLogin } = useContext(MyContext);
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
-
   const handleClick = () => {
     localStorage.clear();
     setLogin(false);
@@ -24,7 +24,6 @@ function Navbar() {
     const userData = JSON.parse(localStorage.getItem('user'));
     setUserName(userData.name);
   }, []);
-
   return (
     <NavBody>
       <NavProductsButtom
@@ -36,7 +35,7 @@ function Navbar() {
 
       <NavOrdersButtom
         data-testid="customer_products__element-navbar-link-orders"
-        onClick={ () => navigate('/customer/orders') }
+        onClick={ () => navigate(`/${route.type}/orders`) }
       >
         MEUS PEDIDOS
       </NavOrdersButtom>
