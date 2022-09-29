@@ -8,7 +8,8 @@ import formatPrice from '../../utils/formatPrice';
 
 function FinalOrder() {
   const { cartProducts, cartTotalValue } = useContext(MyContext);
-  const testType = 'checkout';
+  const tableType = 'checkout';
+  const userType = 'customer';
 
   return (
 
@@ -17,10 +18,12 @@ function FinalOrder() {
       <style.ContentDiv>
         <OrderList
           productsList={ cartProducts }
-          testType={ testType }
+          tableType={ tableType }
+          userType={ userType }
         />
         <TotalValueDisplay
-          testType={ testType }
+          tableType={ tableType }
+          userType={ userType }
           value={ formatPrice(cartTotalValue) }
         />
       </style.ContentDiv>

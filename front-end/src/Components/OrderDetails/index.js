@@ -61,17 +61,28 @@ function OrderDetails({
   };
 
   const btnEntregue = () => {
-    const btnDisabled = () => true;
-    const t = `${testName}button-delivery-check`;
+    const btnDisabled = (trigger, btn) => {
+      // refatorar essa logica depois...
+      const transit = 'Em Trânsito';
+      if (btn === 'Preparando') {
+        return trigger === transit
+        || trigger === 'Preparando' || trigger === 'Entregue';
+      }
+      if (btn === transit) {
+        return trigger === 'Pendente' || trigger === 'Entregue' || trigger === transit;
+      }
+      return trigger === 'Pendente' || trigger === 'Preparando' || trigger === 'Entregue';
+    };
     return deliveryStatusCatalog.map((delivery) => {
+      const btnTestName = `${testName}button-${delivery.testTag}-check`;
       if (delivery.userType === userType) {
         return (
           <Style.Button
             key={ delivery.id }
             onClick={ () => handleClick(delivery.statusUpdate) }
-            data-testid={ t }
+            data-testid={ btnTestName }
             type="button"
-            disabled={ btnDisabled() }
+            disabled={ btnDisabled(status, delivery.statusUpdate) }
           >
             { delivery.btnText }
 
