@@ -38,14 +38,14 @@ module.exports = {
     type: DataTypes.STRING(50),
     allowNull: false,
   },
-  saleData: {
-    field: 'sale_data',
+  saleDate: {
+    field: 'sale_date',
     type: DataTypes.DATE,
     defaultValue: fn('now'),
   },
   status: {
     type: DataTypes.STRING(50),
     allowNull: false,
-    defaultValue: 'PREPARANDO',
+    defaultValue: 'Pendente',
   },
 }

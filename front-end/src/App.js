@@ -7,6 +7,9 @@ import RegisterPage from './pages/Register';
 import ProductsPage from './pages/Products';
 import CheckoutPage from './pages/Checkout';
 import AdminPage from './pages/Admin';
+import OrderDetailsPage from './pages/OrderDetails';
+import Orders from './pages/Orders';
+
 
 function App() {
   return (
@@ -15,9 +18,9 @@ function App() {
         <Route exact path="/" element={ <Navigate to="/login" /> } />
         <Route exact path="/login" element={ <LoginPage /> } />
         <Route exact path="/register" element={ <RegisterPage /> } />
-        <Route exact path="/customer/products" element={ <ProductsPage /> } />
-        <Route exact path="/customer/checkout" element={ <CheckoutPage /> } />
+        <Route exact path="/:type/products" element={ <ProductsPage /> } />
         <Route exact path="/admin/manage" element={ <AdminPage /> } />
+        <Route exact path="/:type/orders/:id" element={ <OrderDetailsPage /> } />
       </Routes>
     </MyProvider>
   );

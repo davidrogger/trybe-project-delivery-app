@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const url = axios.create({ baseURL: 'http://localhost:3001' });
 
-async function login(user) {
+export async function login(user) {
   let response;
   try {
     response = await url.post('/login', user);
@@ -14,7 +14,7 @@ async function login(user) {
   return response;
 }
 
-async function registerUser(newUser) {
+export async function registerUser(newUser) {
   let response;
   try {
     response = await url.post('/users', newUser);
@@ -26,14 +26,79 @@ async function registerUser(newUser) {
   return response;
 }
 
-async function getProducts() {
+export async function getProducts() {
   return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
 }
 
-async function getAllSellers() {
+export async function getAllSellers() {
   return url.get('/users/sellers');
 }
 
-export { login, registerUser, getProducts, getAllSellers };
+export async function createOrders(userId, newOrders, token) {
+  let response;
+  try {
+    response = await url.post(`/sales/${userId}`, newOrders, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
+export async function getOrderById(id) {
+  let response;
+  try {
+    response = await url.get(`/sales/order/${id}`);
+  } catch (error) {
+    response = error.response;
+  }
+
+  return response;
+}
+
+export async function getOrdersCustomer(id) {
+  let response;
+  try {
+    response = await url.get(`sales/${id}`);
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
+export async function changeOrderStatus(id, payload) {
+  let response;
+  try {
+    response = await url.put(`sales/order/${id}`, payload);
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
+export async function getUserById(id) {
+  let response;
+  try {
+    response = await url.get(`/users/${id}`);
+  } catch (error) {
+    response = error.response;
+  }
+
+  return response;
+}
+
+export async function getOrdersSeller(id) {
+  let response;
+  try {
+    response = await url.get(`/sales/seller/${id}`);
+  } catch (error) {
+    response = error.response;
+  }
+
+  return response;
+}
 
 export default url;
