@@ -20,9 +20,9 @@ function OrderDetails({
     return (
       <div>
         PEDIDO:
-        <span data-testid={ sellerNameTest }>{num}</span>
+        <span data-testid={ orderTest }>{num}</span>
         P.Vend:
-        <span data-testid={ orderTest }>{pessoa}</span>
+        <span data-testid={ sellerNameTest }>{pessoa}</span>
       </div>
     );
   };
@@ -52,7 +52,7 @@ function OrderDetails({
         onClick={ handleClick }
         data-testid={ t }
         type="button"
-        disabled={ status === 'Entregue' }
+        disabled
       >
         { txt }
 
