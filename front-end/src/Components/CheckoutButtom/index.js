@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
-import { CartButtom } from './styles';
+import * as style from './styles';
 import formatPrice from '../../utils/formatPrice';
 
 function CheckoutButtom() {
@@ -11,16 +11,19 @@ function CheckoutButtom() {
     cartTotalValue } = useContext(MyContext);
 
   return (
-    <CartButtom
+    <style.CartButton
       data-testid="customer_products__button-cart"
       disabled={ cartProducts.length === 0 }
       onClick={ () => navigate('/customer/checkout') }
     >
-      Ver Carrinho: R$:
-      <span data-testid="customer_products__checkout-bottom-value">
-        { formatPrice(cartTotalValue) }
-      </span>
-    </CartButtom>
+      Ver Carrinho
+      <style.CartButtonContent>
+        { 'R$: ' }
+        <span data-testid="customer_products__checkout-bottom-value">
+          { formatPrice(cartTotalValue) }
+        </span>
+      </style.CartButtonContent>
+    </style.CartButton>
   );
 }
 
