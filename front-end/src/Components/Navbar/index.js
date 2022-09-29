@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import MyContext from '../../context/MyContext';
 import {
   NavBody,
   NavLeaveButtom,
@@ -9,11 +10,13 @@ import {
 } from './styles';
 
 function Navbar() {
+  const { setLogin } = useContext(MyContext);
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
 
   const handleClick = () => {
     localStorage.clear();
+    setLogin(false);
     navigate('/login');
   };
 
