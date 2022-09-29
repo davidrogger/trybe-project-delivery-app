@@ -59,7 +59,7 @@ export async function getOrderById(id) {
   return response;
 }
 
-export async function getSalesByUser(userId) {
+export async function getCustomerOrders(userId) {
   let response;
   try {
     response = await url.get(`sales/${userId}`);
