@@ -11,8 +11,10 @@ import formatPrice from '../../utils/formatPrice';
 function SaleDetails() {
   const [orderData, setOrderData] = useState();
   const [saleDetailsLoading, setsaleDetailsLoading] = useState(true);
+  const [reloading, setReloading] = useState(false);
   const [seller, setSeller] = useState();
   const order = useParams();
+
   useEffect(() => {
     async function requestOrder() {
       const orderFound = await getOrderById(order.id);
@@ -22,7 +24,7 @@ function SaleDetails() {
       setsaleDetailsLoading(false);
     }
     requestOrder();
-  }, [order]);
+  }, [order, reloading]);
 
   const testType = 'order_details';
   return (
@@ -39,6 +41,9 @@ function SaleDetails() {
                 date={ orderData.saleDate }
                 status={ orderData.status }
                 sellerName={ seller.name }
+                setsaleDetailsLoading={ setsaleDetailsLoading }
+                setReloading={ setReloading }
+                reloading={ reloading }
               />
               <OrderList
                 removeBtn={ false }

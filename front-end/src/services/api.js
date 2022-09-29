@@ -59,6 +59,26 @@ export async function getOrderById(id) {
   return response;
 }
 
+export async function getSalesByUser(userId) {
+  let response;
+  try {
+    response = await url.get(`sales/${userId}`);
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
+export async function changeOrderStatus(id, payload) {
+  let response;
+  try {
+    response = await url.put(`sales/order/${id}`, payload);
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
 export async function getUserById(id) {
   let response;
   try {

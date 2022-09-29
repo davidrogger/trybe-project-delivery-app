@@ -1,29 +1,63 @@
 import PropTypes from 'prop-types';
+import { changeOrderStatus } from '../../services/api';
 import { SaleDetailsDiv } from './styles';
+import Status from '../../utils/httpStatus';
 
-function OrderDetails({ sellerName, saleId, date, status }) {
+function OrderDetails({
+  sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading }) {
+  async function handleClick() {
+    const data = await changeOrderStatus(saleId, { status: 'Entregue' });
+    if (Status[data.status] === 'OK') {
+      setsaleDetailsLoading(true);
+      setReloading(!reloading);
+    }
+  }
+
+  const testName = 'customer_order_details__';
   const pedido = (pessoa, num) => {
-    const t = 'customer_order_details__element-order-details-label-seller-name';
-    return (<div data-testid={ t }>{`PEDIDO ${num}; P.Vend: ${pessoa}`}</div>);
+    const sellerNameTest = `${testName}element-order-details-label-seller-name`;
+    const orderTest = `${testName}element-order-details-label-order-id`;
+    return (
+      <div>
+        PEDIDO:
+        <span data-testid={ orderTest }>{num}</span>
+        P.Vend:
+        <span data-testid={ sellerNameTest }>{pessoa}</span>
+      </div>
+    );
   };
 
   const dateDisplay = (d) => {
-    const t = 'customer_order_details__element-order-details-label-order-date';
+    const t = `${testName}element-order-details-label-order-date`;
     const formatDate = new Date(d);
     const today = [
       formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
-    return (<div data-testid={ t }>{ `${today[0]}/${today[1]}/${today[2]}` }</div>);
+    return (
+      <div data-testid={ t }>
+        { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
+      </div>
+    );
   };
 
   const statusDisplay = (p) => {
-    const t = `customer_order_details__element-order-details-label-delivery-status${p}`;
+    const t = `${testName}element-order-details-label-delivery-status`;
     return (<div data-testid={ t }>{ p }</div>);
   };
 
-  const btnEntregue = (f) => {
-    const t = 'customer_order_details__button-delivery-check';
+  const btnEntregue = () => {
+    const t = `${testName}button-delivery-check`;
     const txt = 'MARCAR COMO ENTREGUE';
-    return (<button onClick={ () => f } data-testid={ t } type="button">{ txt }</button>);
+    return (
+      <button
+        onClick={ handleClick }
+        data-testid={ t }
+        type="button"
+        disabled
+      >
+        { txt }
+
+      </button>
+    );
   };
 
   return (
