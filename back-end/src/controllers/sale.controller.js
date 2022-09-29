@@ -25,7 +25,7 @@ const saleController = {
     const { id } = req.params;
     const { status } = req.body;
     await saleService.changeOrderStatus(status, Number(id));
-    res.status(201).json({ message: 'success updated!' });
+    res.status(200).json({ message: 'success updated!' });
   },
 };
 
