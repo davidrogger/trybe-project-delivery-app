@@ -2,27 +2,35 @@ import PropTypes from 'prop-types';
 import { changeOrderStatus } from '../../services/api';
 import { SaleDetailsDiv } from './styles';
 import Status from '../../utils/httpStatus';
+import deliveryStatusCatalog from '../../utils/deliveryStatus';
 
 function OrderDetails({
-  sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading }) {
-  async function handleClick() {
-    const data = await changeOrderStatus(saleId, { status: 'Entregue' });
+  sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
+  userType }) {
+  async function handleClick(statusUpdate) {
+    const data = await changeOrderStatus(saleId, { status: statusUpdate });
     if (Status[data.status] === 'OK') {
       setsaleDetailsLoading(true);
       setReloading(!reloading);
     }
   }
 
-  const testName = 'customer_order_details__';
+  const testName = `${userType}_order_details__`;
   const pedido = (pessoa, num) => {
     const sellerNameTest = `${testName}element-order-details-label-seller-name`;
     const orderTest = `${testName}element-order-details-label-order-id`;
     return (
       <div>
-        PEDIDO:
-        <span data-testid={ orderTest }>{num}</span>
-        P.Vend:
-        <span data-testid={ sellerNameTest }>{pessoa}</span>
+        <div>
+          PEDIDO:
+          <span data-testid={ orderTest }>{num}</span>
+        </div>
+        { userType === 'customer' && (
+          <div>
+            P.Vend:
+            <span data-testid={ sellerNameTest }>{pessoa}</span>
+          </div>
+        ) }
       </div>
     );
   };
@@ -45,19 +53,36 @@ function OrderDetails({
   };
 
   const btnEntregue = () => {
-    const t = `${testName}button-delivery-check`;
-    const txt = 'MARCAR COMO ENTREGUE';
-    return (
-      <button
-        onClick={ handleClick }
-        data-testid={ t }
-        type="button"
-        disabled
-      >
-        { txt }
+    const btnDisabled = (trigger, btn) => {
+      // refatorar essa logica depois...
+      const transit = 'Em Trânsito';
+      if (btn === 'Preparando') {
+        return trigger === transit
+        || trigger === 'Preparando' || trigger === 'Entregue';
+      }
+      if (btn === transit) {
+        return trigger === 'Pendente' || trigger === 'Entregue' || trigger === transit;
+      }
+      return trigger === 'Pendente' || trigger === 'Preparando' || trigger === 'Entregue';
+    };
+    return deliveryStatusCatalog.map((delivery) => {
+      const btnTestName = `${testName}button-${delivery.testTag}-check`;
+      if (delivery.userType === userType) {
+        return (
+          <button
+            key={ delivery.id }
+            onClick={ () => handleClick(delivery.statusUpdate) }
+            data-testid={ btnTestName }
+            type="button"
+            disabled={ btnDisabled(status, delivery.statusUpdate) }
+          >
+            { delivery.btnText }
 
-      </button>
-    );
+          </button>
+        );
+      }
+      return null;
+    });
   };
 
   return (

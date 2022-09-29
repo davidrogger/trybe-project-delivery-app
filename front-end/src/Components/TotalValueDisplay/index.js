@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import * as style from './styles';
 
-function TotalValueDisplay({ testType, value }) {
+function TotalValueDisplay({ tableType, value, userType }) {
   return (
     <style.TotalValueField>
       Total: R$:
       {' '}
       <span
-        data-testid={ `customer_${testType}__element-order-total-price` }
+        data-testid={ `${userType}_${tableType}__element-order-total-price` }
       >
         {value}
       </span>

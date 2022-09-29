@@ -37,6 +37,13 @@ const saleService = {
       { where: { id } },
     );
   },
+
+  async getOrdersBySellerId(id) {
+    return model.Sale.findAll({
+      where: { sellerId: id },
+      attributes: { exclude: ['seller_id', 'user_id'] },
+    });
+  },
 };
 
 module.exports = saleService;

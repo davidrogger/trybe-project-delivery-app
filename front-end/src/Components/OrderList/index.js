@@ -8,7 +8,7 @@ import formatPrice from '../../utils/formatPrice';
 const tableHeads = [
   'Item', 'Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total', 'Remover Item'];
 
-function OrderList({ removeBtn = true, productsList, testType }) {
+function OrderList({ removeBtn = true, productsList, tableType, userType }) {
   const {
     products,
     productsLoading,
@@ -35,7 +35,7 @@ function OrderList({ removeBtn = true, productsList, testType }) {
             {productsList.map((cartProduct, cartProductIndex) => {
               const productFound = products
                 .find((product) => product.id === cartProduct.id);
-              const testName = `customer_${testType}__element-order-table`;
+              const testName = `${userType}_${tableType}__element-order-table`;
               const productUnitPrice = Number(productFound.price);
               const subTotalPrice = cartProduct.quantity * productUnitPrice;
               return (
