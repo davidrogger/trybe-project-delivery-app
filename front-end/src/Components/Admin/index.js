@@ -39,10 +39,10 @@ function AddNewUser() {
   }, [name, email, password, role]);
 
   return (
-    <main>
+    <style.Main>
       <style.Title>Cadastrar Novo Usuário</style.Title>
-      <form>
-        <style.Label htmlFor="name">
+      <style.Inputs>
+        <style.Label htmlFor="user-name">
           Nome
           <input
             type="text"
@@ -54,7 +54,7 @@ function AddNewUser() {
             onChange={ (e) => handleChange(e.target) }
           />
         </style.Label>
-        <style.Label htmlFor="email">
+        <style.Label htmlFor="user-email">
           Email
           <input
             type="email"
@@ -66,7 +66,7 @@ function AddNewUser() {
             onChange={ (e) => handleChange(e.target) }
           />
         </style.Label>
-        <style.Label htmlFor="password">
+        <style.Label htmlFor="user-password">
           Senha
           <input
             type="password"
@@ -78,19 +78,23 @@ function AddNewUser() {
             onChange={ (e) => handleChange(e.target) }
           />
         </style.Label>
-        Tipo
-        <select
-          value={ role }
-          id="select-role"
-          data-testid="admin_manage__select-role"
-          onChange={ (e) => handleChange(e.target) }
-        >
-          <option value="">Selecione</option>
-          <option value="seller">Vendedor</option>
-          <option value="customer">Cliente</option>
-          <option value="administrator">Administrador</option>
-        </select>
-        <button
+
+        <style.Label htmlFor="elect-role">
+          Tipo
+          <select
+            value={ role }
+            id="select-role"
+            data-testid="admin_manage__select-role"
+            onChange={ (e) => handleChange(e.target) }
+          >
+            <option value="">Selecione</option>
+            <option value="seller">Vendedor</option>
+            <option value="customer">Cliente</option>
+            <option value="administrator">Administrador</option>
+          </select>
+        </style.Label>
+
+        <style.Btn
           type="button"
           id="register-button"
           data-testid="admin_manage__button-register"
@@ -98,9 +102,9 @@ function AddNewUser() {
           disabled={ !disableButton }
         >
           CADASTRAR
-        </button>
-      </form>
-    </main>
+        </style.Btn>
+      </style.Inputs>
+    </style.Main>
   );
 }
 export default AddNewUser;

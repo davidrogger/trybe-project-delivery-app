@@ -74,7 +74,6 @@ export const Title = styled.div`
   font-size: 14px;
   color: #001813;
   text-align: center;
-  
 `;
 
 export const Counter = styled.div`
