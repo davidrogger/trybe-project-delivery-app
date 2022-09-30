@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PRIMARY_COLOR } from '../../Styles/Color';
 
 export const PageProducts = styled.div`
   display: flex;
@@ -93,7 +94,7 @@ const btnSideRadius = {
 };
 
 export const Btn = styled.button`
-background: #036B52;
+background: ${PRIMARY_COLOR};
 font-size: 1.5rem;
 color: white;
 width: 40px;
