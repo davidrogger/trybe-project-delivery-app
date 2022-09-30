@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllSellers, createOrders } from '../../services/api';
+import { getAllSellers, createOrder } from '../../services/api';
 import MyContext from '../../context/MyContext';
 import * as style from './styles';
 
@@ -27,7 +27,7 @@ function AddressForm() {
       products: cartProducts.map(({ id, quantity }) => ({ productId: id, quantity })),
     };
 
-    const res = await createOrders(obj.userId, obj, user.token);
+    const res = await createOrder(obj.userId, obj, user.token);
     setCartProducts([]);
     navigate(`/customer/orders/${res.data.id}`);
   };

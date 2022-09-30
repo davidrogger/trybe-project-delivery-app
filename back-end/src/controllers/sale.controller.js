@@ -8,7 +8,7 @@ const saleController = {
   },
   async create(req, res) {
     const { sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = req.body;
-    const userId = Number(req.params.userId);
+    const userId = Number(req.params.id);
 
     const payload = { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products };
     const sale = await saleService.create(payload);

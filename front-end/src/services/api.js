@@ -32,10 +32,10 @@ export async function getAllSellers() {
   return url.get('/users/sellers');
 }
 
-export async function createOrders(userId, newOrders, token) {
+export async function createOrder(userId, newOrders, token) {
   let response;
   try {
-    response = await url.post(`/orders/${userId}`, newOrders, {
+    response = await url.post(`/orders/user/${userId}`, newOrders, {
       headers: {
         Authorization: `${token}`,
       },
