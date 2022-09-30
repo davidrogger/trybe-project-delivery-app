@@ -16,7 +16,7 @@ export async function login(user) {
 export async function registerUser(newUser) {
   let response;
   try {
-    response = await url.post('/users', newUser);
+    response = await url.post('/users/register', newUser);
   } catch (error) {
     response = error.response;
   }
