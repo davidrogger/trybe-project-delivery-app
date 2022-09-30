@@ -3,14 +3,10 @@ import axios from 'axios';
 const url = axios.create({ baseURL: 'http://localhost:3001' });
 
 export async function login(user) {
-  let response;
-  try {
-    response = await url.post('/login', user);
-  } catch (error) {
-    response = error.response;
-  }
-
-  return response;
+  return url
+    .post('/login', user)
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export async function registerUser(newUser) {
