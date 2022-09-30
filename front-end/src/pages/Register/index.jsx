@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Login from '../../Components/Forms/Login';
+import Register from '../../Components/Forms/Register';
 import MyContext from '../../context/MyContext';
 import routes from '../../utils/routesPath';
 
-function LoginPage() {
+function RegisterPage() {
   const { logged, setLogin } = useContext(MyContext);
   const user = JSON.parse(localStorage.getItem('user'), '{}');
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function LoginPage() {
 
   if (logged) navigate(`/${routes[user.role]}`);
 
-  return (<Login />);
+  return (<Register />);
 }
 
-export default LoginPage;
+export default RegisterPage;

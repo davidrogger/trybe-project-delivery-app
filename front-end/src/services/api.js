@@ -10,14 +10,10 @@ export async function login(user) {
 }
 
 export async function registerUser(newUser) {
-  let response;
-  try {
-    response = await url.post('/users/register', newUser);
-  } catch (error) {
-    response = error.response;
-  }
-
-  return response;
+  return url
+    .post('/users/register', newUser)
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export async function getProducts() {

@@ -23,9 +23,9 @@ const userService = {
   },
   async create(newUser) {
     const passwordHash = md5(newUser.password);
-    const { role } = await model.User.create({ ...newUser, password: passwordHash });
+    const { role, id } = await model.User.create({ ...newUser, password: passwordHash });
     const { password, ...user } = newUser;
-    return { ...user, role };
+    return { id, ...user, role };
   },
   async getAllSellers() {
     return model.User.findAll({
