@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { statusBgColor } from '../../Styles/Color';
 
 export const OrderCardBody = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ export const OrderSubInfo = styled.div`
 export const OrderSubInfo1 = styled(OrderSubInfo)`
   justify-content: center;
   height: 100% - margin;
-  background: white;
+  background: ${(props) => (statusBgColor[props.children])};
   border-radius: 10px;
 `;
 

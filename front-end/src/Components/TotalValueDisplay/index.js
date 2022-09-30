@@ -4,8 +4,7 @@ import * as style from './styles';
 function TotalValueDisplay({ tableType, value, userType }) {
   return (
     <style.TotalValueField>
-      Total: R$:
-      {' '}
+      { 'Total: R$: ' }
       <span
         data-testid={ `${userType}_${tableType}__element-order-total-price` }
       >

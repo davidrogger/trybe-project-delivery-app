@@ -7,6 +7,7 @@ import OrderList from '../../Components/OrderList';
 import TotalValueDisplay from '../../Components/TotalValueDisplay';
 import { getOrderById, getUserById } from '../../services/api';
 import formatPrice from '../../utils/formatPrice';
+import * as Style from './styles';
 
 function SaleDetails() {
   const [orderData, setOrderData] = useState();
@@ -33,9 +34,9 @@ function SaleDetails() {
       { saleDetailsLoading
         ? <Loading />
         : (
-          <>
-            Detalhe do Pedido
-            <div>
+          <Style.OrderDetails>
+            <span>Detalhe do Pedido</span>
+            <Style.ContentDiv>
               <OrderDetails
                 saleId={ orderData.id }
                 date={ orderData.saleDate }
@@ -57,8 +58,8 @@ function SaleDetails() {
                 userType={ route.type }
                 value={ formatPrice(Number(orderData.totalPrice)) }
               />
-            </div>
-          </>
+            </Style.ContentDiv>
+          </Style.OrderDetails>
         ) }
     </>
   );
