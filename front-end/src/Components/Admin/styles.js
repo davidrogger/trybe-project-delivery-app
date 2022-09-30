@@ -24,7 +24,7 @@ export const Inputs = styled.form`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-itens: center;
+  align-items: center;
 
   padding: 5px;
 `;
@@ -34,7 +34,7 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-itens: left;
+  align-items: left;
 
 
   input {
