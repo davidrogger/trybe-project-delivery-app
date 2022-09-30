@@ -62,18 +62,18 @@ function OrderDetails({
 
       return trigger !== btnAbleList[btn];
     };
-    return deliveryStatusCatalog.map((delivery) => {
-      const btnTestName = `${testName}button-${delivery.label}-check`;
-      if (delivery.userType === userType) {
+    return deliveryStatusCatalog.map((button) => {
+      const btnTestName = `${testName}button-${button.label}-check`;
+      if (button.userType === userType) {
         return (
           <button
-            key={ delivery.id }
-            onClick={ () => handleClick(delivery.statusUpdate) }
+            key={ button.id }
+            onClick={ () => handleClick(button.statusUpdate) }
             data-testid={ btnTestName }
             type="button"
-            disabled={ btnDisabled(status, delivery.label) }
+            disabled={ btnDisabled(status, button.label) }
           >
-            { delivery.btnText }
+            { button.btnText }
 
           </button>
         );
