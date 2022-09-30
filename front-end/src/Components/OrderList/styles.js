@@ -1,21 +1,33 @@
 import styled from 'styled-components';
+import { PRIMARY_COLOR } from '../../Styles/Color';
 
-export const OrderTable = styled.table`
-  display: flex;
-  flex-direction: column;
+export const Table = styled.table`
+  padding-bottom: 10px;
   width: 100%;
-  justify-content: center;
 `;
 
-export const TableHeader = styled.th`
-  flex-grow: 1;
+export const THead = styled.thead`
+  & tr {
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+  margin-bottom: 20px;
 `;
 
-export const TableRow = styled.tr`
-  display: flex;
-  width: 100%
+export const TBody = styled.tbody`
+  & tr {
+   text-align: center;
+   margin-top: 5px;
+  }
+  width: 100%;
 `;
 
-export const RowItem = styled.td`
-  flex-grow: 1;
+export const Button = styled.button`
+  background: ${PRIMARY_COLOR};
+  color: white;
+  padding: 6px;
+  right: 5px;
+  bottom: 5px;
+  border: none;
+  border-radius: 10px;
 `;

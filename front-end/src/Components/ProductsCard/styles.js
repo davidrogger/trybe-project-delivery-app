@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PRIMARY_COLOR } from '../../Styles/Color';
 
 export const PageProducts = styled.div`
   display: flex;
@@ -84,14 +85,29 @@ export const Counter = styled.div`
   align-itens: center;
 `;
 
+const btnRadius = '8px';
+
+const btnSideRadius = {
+  '-': `${btnRadius} 0px 0px ${btnRadius};`,
+  '+': `0px ${btnRadius} ${btnRadius} 0px;`,
+};
+
 export const Btn = styled.button`
-  background: #036B52;
-  width: 35px;
-  border-radius: 4px;
+background: ${PRIMARY_COLOR};
+font-size: 1.5rem;
+color: white;
+width: 40px;
+border: none;
+:hover {
+  opacity: 0.8;
+}
+cursor: pointer;
+border-radius: ${(props) => btnSideRadius[props.children]}
 `;
 
 export const Display = styled.input`
   width: 40px;
-  border-radius: 5px;
   text-align: center;
+  border:none;
+  color: ${(props) => (props.value === 0 ? '#828282' : 'none')};
 `;

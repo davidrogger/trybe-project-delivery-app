@@ -44,7 +44,7 @@ function AddressForm() {
     <style.AddressForm onSubmit={ handleSubmit }>
       <style.FormLineDiv>
         <style.FormInputDiv>
-          P.Vendedora Responsável
+          P. Vendedora Responsável
 
           <select
             id="seller_name"

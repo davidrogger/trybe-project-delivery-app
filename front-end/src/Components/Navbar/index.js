@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import {
   NavBody,
   NavLeaveButtom,
   NavProductsButtom,
   NavUserNameButtom,
-  NavOrdersButtom,
+  NavSpacing,
 } from './styles';
 
 function Navbar() {
   const route = useParams();
+  const { pathname } = useLocation();
+  const endPoint = pathname.split('/')[2];
+
   const { setLogin } = useContext(MyContext);
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
@@ -26,19 +29,27 @@ function Navbar() {
   }, []);
   return (
     <NavBody>
-      <NavProductsButtom
-        data-testid="customer_products__element-navbar-link-products"
-        onClick={ () => navigate('/customer/products') }
-      >
-        PRODUTOS
-      </NavProductsButtom>
+      { route.type === 'customer' && (
+        <NavProductsButtom
+          endPoint={ endPoint }
+          btn="products"
+          data-testid="customer_products__element-navbar-link-products"
+          onClick={ () => navigate('/customer/products') }
+        >
+          PRODUTOS
+        </NavProductsButtom>
+      ) }
 
-      <NavOrdersButtom
+      <NavProductsButtom
+        endPoint={ endPoint }
+        btn="orders"
         data-testid="customer_products__element-navbar-link-orders"
         onClick={ () => navigate(`/${route.type}/orders`) }
       >
-        MEUS PEDIDOS
-      </NavOrdersButtom>
+        { route.type === 'customer' ? 'MEUS PEDIDOS' : 'PEDIDOS' }
+      </NavProductsButtom>
+
+      <NavSpacing />
 
       <NavUserNameButtom
         data-testid="customer_products__element-navbar-user-full-name"
