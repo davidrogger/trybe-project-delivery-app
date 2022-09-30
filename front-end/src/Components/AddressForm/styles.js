@@ -10,15 +10,17 @@ export const AddressForm = styled.form`
 
 export const FormLineDiv = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 export const FormInputDiv = styled.div`
+  width: 100%;
+  flex-grow: 1;
   & select {
     margin: 10px;
     border: 1px solid ${LIGHT_GREY};
     border-radius: 2%;
     height: 40px;
-    width: 300px;
   }
 
   & select:focus {
@@ -31,7 +33,6 @@ export const FormInputDiv = styled.div`
     border: 1px solid ${LIGHT_GREY};
     border-radius: 2%;
     height: 40px;
-    width: 300px;
   }
 
   & input:focus {
