@@ -17,14 +17,15 @@ function OrderDetails({
 
   const testName = `${userType}_order_details__`;
   const pedido = (pessoa, num) => {
+    const MIN_DIG = 4;
     const sellerNameTest = `${testName}element-order-details-label-seller-name`;
     const orderTest = `${testName}element-order-details-label-order-id`;
     return (
       <Style.DivPedido>
-        <div>
-          PEDIDO:
-          <span data-testid={ orderTest }>{num}</span>
-        </div>
+        <Style.OrderId>
+          { 'PEDIDO: ' }
+          <span data-testid={ orderTest }>{num.toString().padStart(MIN_DIG, '0')}</span>
+        </Style.OrderId>
         { userType === 'customer' && (
           <Style.SellerNameDiv>
             P. Vend:
@@ -42,10 +43,9 @@ function OrderDetails({
       formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
     return (
       <Style.DivData>
-        Data:
-        <span data-testid={ t }>
+        <Style.SpanData data-testid={ t }>
           { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
-        </span>
+        </Style.SpanData>
       </Style.DivData>
     );
   };
@@ -54,7 +54,6 @@ function OrderDetails({
     const t = `${testName}element-order-details-label-delivery-status`;
     return (
       <Style.DivStatus data-testid={ t }>
-        Status:
         { p }
       </Style.DivStatus>
     );
