@@ -35,7 +35,7 @@ export async function getAllSellers() {
 export async function createOrders(userId, newOrders, token) {
   let response;
   try {
-    response = await url.post(`/sales/${userId}`, newOrders, {
+    response = await url.post(`/orders/${userId}`, newOrders, {
       headers: {
         Authorization: `${token}`,
       },
@@ -49,7 +49,7 @@ export async function createOrders(userId, newOrders, token) {
 export async function getOrderById(id) {
   let response;
   try {
-    response = await url.get(`/sales/order/${id}`);
+    response = await url.get(`/orders/${id}`);
   } catch (error) {
     response = error.response;
   }
@@ -60,7 +60,7 @@ export async function getOrderById(id) {
 export async function getOrdersCustomer(id) {
   let response;
   try {
-    response = await url.get(`sales/${id}`);
+    response = await url.get(`orders/customer/${id}`);
   } catch (error) {
     response = error.response;
   }
@@ -70,7 +70,7 @@ export async function getOrdersCustomer(id) {
 export async function changeOrderStatus(id, payload) {
   let response;
   try {
-    response = await url.put(`sales/order/${id}`, payload);
+    response = await url.put(`orders/${id}`, payload);
   } catch (error) {
     response = error.response;
   }
@@ -91,7 +91,7 @@ export async function getUserById(id) {
 export async function getOrdersSeller(id) {
   let response;
   try {
-    response = await url.get(`/sales/seller/${id}`);
+    response = await url.get(`/orders/seller/${id}`);
   } catch (error) {
     response = error.response;
   }

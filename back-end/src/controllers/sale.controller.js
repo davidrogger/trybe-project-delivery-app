@@ -1,9 +1,9 @@
 const saleService = require('../services/sale.service');
 
 const saleController = {
-  async getSalesByUser(req, res) {
-    const userId = Number(req.params.userId);
-    const products = await saleService.getSalesByUserId(userId);
+  async getOrdersByUserId(req, res) {
+    const userId = Number(req.params.id);
+    const products = await saleService.getOrdersByUserId(userId);
     res.status(200).json(products);
   },
   async create(req, res) {

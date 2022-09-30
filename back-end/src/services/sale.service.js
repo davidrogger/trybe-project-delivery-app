@@ -1,7 +1,7 @@
 const model = require('../database/models');
 
 const saleService = {
-  async getSalesByUserId(userId) {
+  async getOrdersByUserId(userId) {
     return model.Sale.findAll({
       where: { userId },
       attributes: { exclude: ['seller_id', 'user_id'] }, // tentando descobrir pq esses campos vem junto com userId e sellerId
