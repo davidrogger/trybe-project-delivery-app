@@ -54,19 +54,16 @@ function OrderDetails({
 
   const btnEntregue = () => {
     const btnDisabled = (trigger, btn) => {
-      // refatorar essa logica depois...
-      const transit = 'Em Trânsito';
-      if (btn === 'Preparando') {
-        return trigger === transit
-        || trigger === 'Preparando' || trigger === 'Entregue';
-      }
-      if (btn === transit) {
-        return trigger === 'Pendente' || trigger === 'Entregue' || trigger === transit;
-      }
-      return trigger === 'Pendente' || trigger === 'Preparando' || trigger === 'Entregue';
+      const btnAbleList = {
+        preparing: 'Pendente',
+        dispatch: 'Preparando',
+        delivery: 'Em Trânsito',
+      };
+
+      return trigger !== btnAbleList[btn];
     };
     return deliveryStatusCatalog.map((delivery) => {
-      const btnTestName = `${testName}button-${delivery.testTag}-check`;
+      const btnTestName = `${testName}button-${delivery.label}-check`;
       if (delivery.userType === userType) {
         return (
           <button
@@ -74,7 +71,7 @@ function OrderDetails({
             onClick={ () => handleClick(delivery.statusUpdate) }
             data-testid={ btnTestName }
             type="button"
-            disabled={ btnDisabled(status, delivery.statusUpdate) }
+            disabled={ btnDisabled(status, delivery.label) }
           >
             { delivery.btnText }
 
