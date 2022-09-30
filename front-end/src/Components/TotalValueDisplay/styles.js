@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { PRIMARY_COLOR } from '../../Styles/Color';
 
 export const TotalValueField = styled.div`
-  display: flex;
   position: absolute;
   background: ${PRIMARY_COLOR};
   color: white;

@@ -11,6 +11,7 @@ export const OrderDetails = styled.div`
 `;
 
 export const ContentDiv = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   border: 1px solid rgba(0,0,0,0.10);
