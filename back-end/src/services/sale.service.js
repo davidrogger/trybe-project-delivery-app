@@ -15,7 +15,7 @@ const saleService = {
     return sale;
   },
 
-  async getSalesByOrderId(id) {
+  async getOrderById(id) {
     const sale = await model.Sale.findOne({
       where: { id },
       attributes: { exclude: ['seller_id', 'user_id'] },

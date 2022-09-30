@@ -15,9 +15,9 @@ const saleController = {
     res.status(201).json(sale);
   },
 
-  async getSalesByOrderId(req, res) {
+  async getOrderById(req, res) {
     const { id } = req.params;
-    const sale = await saleService.getSalesByOrderId(Number(id));
+    const sale = await saleService.getOrderById(Number(id));
     res.status(200).json(sale);
   },
 
