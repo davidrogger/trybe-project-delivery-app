@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { registerUser } from '../../services/api';
 import * as style from './styles';
 
 function AddNewUser() {
@@ -15,8 +16,8 @@ function AddNewUser() {
     if (id === 'user-password') setPassword(value);
     if (id === 'select-role') setRole(value);
   };
-  const registerUser = async () => {
-    const result = await register({ name, email, password, role, token });
+  const register = async () => {
+    const result = await registerUser({ name, email, password, role });
     if (result) {
       setName('');
       setEmail('');
@@ -98,7 +99,7 @@ function AddNewUser() {
           type="button"
           id="register-button"
           data-testid="admin_manage__button-register"
-          onClick={ registerUser }
+          onClick={ register }
           disabled={ !disableButton }
         >
           CADASTRAR
