@@ -8,7 +8,7 @@ import ProductsPage from './pages/Products';
 import CheckoutPage from './pages/Checkout';
 import OrderDetailsPage from './pages/OrderDetails';
 import OrdersPage from './pages/Orders';
-import AdminPage from './pages/Admin';
+import AdminPage from './pages/Admin/Admin';
 
 function App() {
   return (

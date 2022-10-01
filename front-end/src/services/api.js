@@ -16,6 +16,34 @@ export async function registerUser(newUser) {
     .catch(console.error);
 }
 
+export async function registerByAdmin(newUser, token) {
+  let response;
+  try {
+    response = await url.post('/users/admin/register', newUser, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
+export async function getAllUsers(token) {
+  let response;
+  try {
+    response = await url.get('/users/admin', {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
 export async function getProducts() {
   return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
 }

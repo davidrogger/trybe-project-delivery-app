@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { registerUser } from '../../services/api';
+import { registerByAdmin } from '../../services/api';
 import * as style from './styles';
 
 function AddNewUser() {
@@ -17,8 +17,9 @@ function AddNewUser() {
     if (id === 'select-role') setRole(value);
   };
   const register = async () => {
-    const result = await registerUser({ name, email, password, role });
-    if (result) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const response = await registerByAdmin({ name, email, password, role }, user.token);
+    if (response) {
       setName('');
       setEmail('');
       setPassword('');
