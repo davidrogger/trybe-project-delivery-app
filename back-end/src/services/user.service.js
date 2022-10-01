@@ -27,6 +27,10 @@ const userService = {
     const { password, ...user } = newUser;
     return { id, ...user, role };
   },
+  async getAllUsers() {
+    const users = await model.User.findAll();
+    return users;
+  },
   async getAllSellers() {
     return model.User.findAll({
       where: { role: 'seller' },
