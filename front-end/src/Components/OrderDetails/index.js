@@ -3,6 +3,7 @@ import { changeOrderStatus } from '../../services/api';
 import * as Style from './styles';
 import Status from '../../utils/httpStatus';
 import deliveryStatusCatalog from '../../utils/deliveryStatus';
+import formatDate from '../../utils/formatDate';
 
 function OrderDetails({
   sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
@@ -38,13 +39,10 @@ function OrderDetails({
 
   const dateDisplay = (d) => {
     const t = `${testName}element-order-details-label-order-date`;
-    const formatDate = new Date(d);
-    const today = [
-      formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
     return (
       <Style.DivData>
         <Style.SpanData data-testid={ t }>
-          { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
+          { formatDate(d) }
         </Style.SpanData>
       </Style.DivData>
     );
