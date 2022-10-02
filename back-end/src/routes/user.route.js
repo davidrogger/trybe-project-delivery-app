@@ -8,5 +8,6 @@ route.post('/admin/register', userController.verify, userController.createByAdmi
 route.get('/sellers', userController.getAllSellers);
 route.get('/admin', userController.verify, userController.getAllUsers);
 route.get('/:id', userController.getUserById);
+route.delete('/admin/:id', userController.verify, userController.deleteUsersById);
 
 module.exports = route;

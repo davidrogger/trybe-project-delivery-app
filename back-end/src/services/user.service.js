@@ -44,6 +44,11 @@ const userService = {
       attributes: ['id', 'name', 'email'],
     });
   },
+  async deleteUsersById(id) {
+    return model.User.delete({
+      where: { id },
+    });
+  },
 };
 
 module.exports = userService;

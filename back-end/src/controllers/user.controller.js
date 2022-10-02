@@ -73,6 +73,12 @@ const userController = {
     const user = await userService.getUserById(Number(id));
     res.status(200).json(user);
   },
+
+  async deleteUsersById(req, res) {
+    const { id } = req.params;
+    await userService.deleteUsersById(Number(id));
+    res.status(204).end();
+  },
 };
 
 module.exports = userController;
