@@ -3,6 +3,7 @@ import { changeOrderStatus } from '../../services/api';
 import * as Style from './styles';
 import Status from '../../utils/httpStatus';
 import deliveryStatusCatalog from '../../utils/deliveryStatus';
+import formatDate from '../../utils/formatDate';
 
 function OrderDetails({
   sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
@@ -38,13 +39,10 @@ function OrderDetails({
 
   const dateDisplay = (d) => {
     const t = `${testName}element-order-details-label-order-date`;
-    const formatDate = new Date(d);
-    const today = [
-      formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
     return (
       <Style.DivData>
         <Style.SpanData data-testid={ t }>
-          { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
+          { formatDate(d) }
         </Style.SpanData>
       </Style.DivData>
     );
@@ -61,29 +59,26 @@ function OrderDetails({
 
   const btnEntregue = () => {
     const btnDisabled = (trigger, btn) => {
-      // refatorar essa logica depois...
-      const transit = 'Em Trânsito';
-      if (btn === 'Preparando') {
-        return trigger === transit
-        || trigger === 'Preparando' || trigger === 'Entregue';
-      }
-      if (btn === transit) {
-        return trigger === 'Pendente' || trigger === 'Entregue' || trigger === transit;
-      }
-      return trigger === 'Pendente' || trigger === 'Preparando' || trigger === 'Entregue';
+      const btnAbleList = {
+        preparing: 'Pendente',
+        dispatch: 'Preparando',
+        delivery: 'Em Trânsito',
+      };
+
+      return trigger !== btnAbleList[btn];
     };
-    return deliveryStatusCatalog.map((delivery) => {
-      const btnTestName = `${testName}button-${delivery.testTag}-check`;
-      if (delivery.userType === userType) {
+    return deliveryStatusCatalog.map((button) => {
+      const btnTestName = `${testName}button-${button.label}-check`;
+      if (button.userType === userType) {
         return (
           <Style.Button
-            key={ delivery.id }
-            onClick={ () => handleClick(delivery.statusUpdate) }
+            key={ button.id }
+            onClick={ () => handleClick(button.statusUpdate) }
             data-testid={ btnTestName }
             type="button"
-            disabled={ btnDisabled(status, delivery.statusUpdate) }
+            disabled={ btnDisabled(status, button.label) }
           >
-            { delivery.btnText }
+            { button.btnText }
 
           </Style.Button>
         );

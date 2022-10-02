@@ -7,7 +7,8 @@ import RegisterPage from './pages/Register';
 import ProductsPage from './pages/Products';
 import CheckoutPage from './pages/Checkout';
 import OrderDetailsPage from './pages/OrderDetails';
-import Orders from './pages/Orders';
+import OrdersPage from './pages/Orders';
+import AdminPage from './pages/Admin';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route exact path="/:type/products" element={ <ProductsPage /> } />
         <Route exact path="/:type/checkout" element={ <CheckoutPage /> } />
         <Route exact path="/:type/orders/:id" element={ <OrderDetailsPage /> } />
-        <Route exact path="/:type/orders" element={ <Orders /> } />
+        <Route exact path="/:type/orders" element={ <OrdersPage /> } />
+        <Route exact path="/admin/manage" element={ <AdminPage /> } />
       </Routes>
     </MyProvider>
   );

@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Label, Input, Button, Error } from './styles';
 import { login } from '../../../services/api';
-import status from '../../../utils/httpStatus';
 import MyContext from '../../../context/MyContext';
 
 const MIN_PASS = 6;
@@ -27,10 +26,9 @@ function Login() {
 
   const onSubmit = async (payload) => {
     const response = await login(payload);
-
-    if (status[response.status] === 'OK') {
+    if (response) {
       localStorage.setItem('user', JSON.stringify(response.data));
-      setLogin(!!response.data);
+      setLogin(true);
     } else {
       const waitTime = 3000;
       setHasError(true);

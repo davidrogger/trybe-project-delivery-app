@@ -1,11 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Form, Label, Input, Button, Error } from '../Login/styles';
 import { registerUser } from '../../../services/api';
-import status from '../../../utils/httpStatus';
+import MyContext from '../../../context/MyContext';
 
 const MIN_PASS = 6;
 const MIN_NAME = 12;
@@ -17,7 +16,7 @@ const schema = yup.object({
 }).required();
 
 function Register() {
-  const navigate = useNavigate();
+  const { setLogin } = useContext(MyContext);
   const [hasError, setHasError] = useState(false);
   const { register, handleSubmit, formState } = useForm({
     defaultValues: { name: '', email: '', password: '' },
@@ -27,10 +26,9 @@ function Register() {
 
   const onSubmit = async (payload) => {
     const response = await registerUser(payload);
-    console.log(response);
-    if (status[response.status] === 'CREATED') {
+    if (response) {
       localStorage.setItem('user', JSON.stringify(response.data));
-      navigate('/customer/products'); // todos usuários criados aqui serão customers
+      setLogin(true);
     } else {
       const waitTime = 3000;
       setHasError(true);
