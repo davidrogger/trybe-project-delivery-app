@@ -7,9 +7,9 @@ function UserList({ usersList }) {
   const tableHead = ['ID', 'Nome', 'Email', 'Tipo', 'Excluir'];
   const data = usersList.filter((el) => el.role !== 'administrador');
 
-  async function handleClick() {
+  const handleClick = async (userId) => {
     const user = JSON.parse(localStorage.getItem('user'));
-    await deleteUsersById(data.id, user.token);
+    await deleteUsersById(userId, user.token);
   }
 
   return (
@@ -44,7 +44,7 @@ function UserList({ usersList }) {
                   <Style.Button
                     data-testid={ `admin_manage__element-user-table-remove-${el}` }
                     type="button"
-                    onClick={ handleClick }
+                    onClick={ () => handleClick(el.id) }
                   >
                     Excluir
                   </Style.Button>
