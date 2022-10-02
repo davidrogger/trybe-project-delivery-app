@@ -10,7 +10,7 @@ function UserList({ usersList }) {
   const handleClick = async (userId) => {
     const user = JSON.parse(localStorage.getItem('user'));
     await deleteUsersById(userId, user.token);
-  }
+  };
 
   return (
     <div>
