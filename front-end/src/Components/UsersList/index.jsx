@@ -1,37 +1,37 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import * as Style from '../OrderList/styles';
+import * as Style from './styles';
 
 function UserList({ usersList }) {
   const tableHead = ['ID', 'Nome', 'Email', 'Tipo', 'Excluir'];
   return (
     <div>
-      <Style.OrderTable>
-        <thead>
-          <Style.TableRow>
+      <Style.Table>
+        <Style.THead>
+          <tr>
             {
               tableHead.map((title, index) => (
-                <Style.TableHeader key={ index }>{title}</Style.TableHeader>
+                <th key={ index }>{title}</th>
               ))
             }
-          </Style.TableRow>
-        </thead>
-        <tbody>
+          </tr>
+        </Style.THead>
+        <Style.TBody>
           {
             !usersList ? null : usersList.map((el, index) => (
-              <Style.TableRow key={ index }>
-                <Style.RowItem>{el.id}</Style.RowItem>
-                <Style.RowItem>{el.name}</Style.RowItem>
-                <Style.RowItem>{el.email}</Style.RowItem>
-                <Style.RowItem>{el.role}</Style.RowItem>
-                <Style.RowItem>
-                  <button type="button">Excluir</button>
-                </Style.RowItem>
-              </Style.TableRow>
+              <tr key={ index }>
+                <td>{el.id}</td>
+                <td>{el.name}</td>
+                <td>{el.email}</td>
+                <td>{el.role}</td>
+                <td>
+                  <Style.Button type="button">Excluir</Style.Button>
+                </td>
+              </tr>
             ))
           }
-        </tbody>
-      </Style.OrderTable>
+        </Style.TBody>
+      </Style.Table>
     </div>
   );
 }
