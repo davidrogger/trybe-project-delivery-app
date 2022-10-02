@@ -4,7 +4,7 @@ import * as Style from './styles';
 
 function UserList({ usersList }) {
   const tableHead = ['ID', 'Nome', 'Email', 'Tipo', 'Excluir'];
-  const data = usersList.filter((el) => el.role !== 'administrador')
+  const data = usersList.filter((el) => el.role !== 'administrador');
   return (
     <div>
       <Style.Table>
@@ -34,8 +34,8 @@ function UserList({ usersList }) {
                   {el.role}
                 </td>
                 <td>
-                  <Style.Button 
-                    data-testid={ `admin_manage__element-user-table-remove-${el}` } 
+                  <Style.Button
+                    data-testid={ `admin_manage__element-user-table-remove-${el}` }
                     type="button"
                   >
                     Excluir
