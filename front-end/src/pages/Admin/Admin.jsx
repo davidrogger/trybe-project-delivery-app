@@ -17,7 +17,6 @@ function AdminPage() {
         setHasList(true);
       };
       getList();
-      console.log(usersList);
     }
   }, []);
 
