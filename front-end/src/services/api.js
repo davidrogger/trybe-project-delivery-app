@@ -44,6 +44,20 @@ export async function getAllUsers(token) {
   return response;
 }
 
+export async function deleteUsersById(userId, token) {
+  let response;
+  try {
+    response = await url.delete(`/users/admin/${userId}`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+  } catch (error) {
+    response = error.response;
+  }
+  return response;
+}
+
 export async function getProducts() {
   return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
 }
