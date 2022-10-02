@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { registerByAdmin } from '../../services/api';
+import { registerByAdmin, getAllUsers } from '../../services/api';
 import * as style from './styles';
 
 function AddNewUser() {
   const [disableButton, setDisableButton] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [data, setData] = useState([]);
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
 
@@ -19,11 +20,23 @@ function AddNewUser() {
   const register = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const response = await registerByAdmin({ name, email, password, role }, user.token);
+    const users = await getAllUsers(user.token);
+    setData(users.data);
     if (response) {
       setName('');
       setEmail('');
       setPassword('');
       setRole('');
+    }
+  };
+  const errorUserExist = () => {
+    const dataEmail = data.filter((el) => el.email === email);
+    if (dataEmail) {
+      return (
+        <span data-testid="admin_manage__element-invalid-register">
+          Usuário já cadastrado
+        </span>
+      );
     }
   };
   useEffect(() => {
@@ -106,7 +119,9 @@ function AddNewUser() {
           CADASTRAR
         </style.Btn>
       </style.Inputs>
+      { data.length === 0 ? null : errorUserExist() }
     </style.Main>
   );
 }
+
 export default AddNewUser;
