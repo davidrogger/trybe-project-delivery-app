@@ -20,12 +20,12 @@ function UserList({ usersList }) {
           {
             !usersList ? null : usersList.map((el, index) => (
               <tr key={ index }>
-                <td>{el.id}</td>
-                <td>{el.name}</td>
-                <td>{el.email}</td>
-                <td>{el.role}</td>
+                <td data-testid={`admin_manage__element-user-table-item-number-${el}`}>{el.id}</td>
+                <td data-testid={`admin_manage__element-user-table-name-${el}`}>{el.name}</td>
+                <td data-testid={`admin_manage__element-user-table-email-${el}`}>{el.email}</td>
+                <td data-testid={`admin_manage__element-user-table-role-${el}`}>{el.role}</td>
                 <td>
-                  <Style.Button type="button">Excluir</Style.Button>
+                  <Style.Button data-testid={`admin_manage__element-user-table-remove-${el}`} type="button">Excluir</Style.Button>
                 </td>
               </tr>
             ))
