@@ -4,6 +4,7 @@ import * as Style from './styles';
 
 function UserList({ usersList }) {
   const tableHead = ['ID', 'Nome', 'Email', 'Tipo', 'Excluir'];
+  const data = usersList.filter((el) => el.role !== 'administrador')
   return (
     <div>
       <Style.Table>
@@ -18,7 +19,7 @@ function UserList({ usersList }) {
         </Style.THead>
         <Style.TBody>
           {
-            !usersList ? null : usersList.map((el, index) => (
+            !data ? null : data.map((el, index) => (
               <tr key={ index }>
                 <td data-testid={ `admin_manage__element-user-table-item-number-${el}` }>
                   {el.id}
