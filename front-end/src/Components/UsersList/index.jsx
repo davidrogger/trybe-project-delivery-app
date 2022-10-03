@@ -34,13 +34,13 @@ function UserList({ usersList, setHasList }) {
                 <td data-testid={ `${testName}item-number-${index}` }>
                   {index + 1}
                 </td>
-                <td data-testid={ `${testName}user-table-name-${index}` }>
+                <td data-testid={ `${testName}name-${index}` }>
                   {el.name}
                 </td>
                 <td data-testid={ `${testName}email-${index}` }>
                   {el.email}
                 </td>
-                <td data-testid={ `${testName}user-table-role-${index}` }>
+                <td data-testid={ `${testName}role-${index}` }>
                   {el.role}
                 </td>
                 <td>
