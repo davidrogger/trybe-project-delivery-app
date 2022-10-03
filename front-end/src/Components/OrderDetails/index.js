@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import { changeOrderStatus } from '../../services/api';
-import { SaleDetailsDiv } from './styles';
+import * as Style from './styles';
 import Status from '../../utils/httpStatus';
 import deliveryStatusCatalog from '../../utils/deliveryStatus';
+import formatDate from '../../utils/formatDate';
 
 function OrderDetails({
   sellerName, saleId, date, status, setsaleDetailsLoading, setReloading, reloading,
@@ -17,39 +18,43 @@ function OrderDetails({
 
   const testName = `${userType}_order_details__`;
   const pedido = (pessoa, num) => {
+    const MIN_DIG = 4;
     const sellerNameTest = `${testName}element-order-details-label-seller-name`;
     const orderTest = `${testName}element-order-details-label-order-id`;
     return (
-      <div>
-        <div>
-          PEDIDO:
-          <span data-testid={ orderTest }>{num}</span>
-        </div>
+      <Style.DivPedido>
+        <Style.OrderId>
+          { 'PEDIDO: ' }
+          <span data-testid={ orderTest }>{num.toString().padStart(MIN_DIG, '0')}</span>
+        </Style.OrderId>
         { userType === 'customer' && (
-          <div>
-            P.Vend:
+          <Style.SellerNameDiv>
+            P. Vend:
             <span data-testid={ sellerNameTest }>{pessoa}</span>
-          </div>
+          </Style.SellerNameDiv>
         ) }
-      </div>
+      </Style.DivPedido>
     );
   };
 
   const dateDisplay = (d) => {
     const t = `${testName}element-order-details-label-order-date`;
-    const formatDate = new Date(d);
-    const today = [
-      formatDate.getDate(), formatDate.getMonth() + 1, formatDate.getFullYear()];
     return (
-      <div data-testid={ t }>
-        { `${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}` }
-      </div>
+      <Style.DivData>
+        <Style.SpanData data-testid={ t }>
+          { formatDate(d) }
+        </Style.SpanData>
+      </Style.DivData>
     );
   };
 
   const statusDisplay = (p) => {
     const t = `${testName}element-order-details-label-delivery-status`;
-    return (<div data-testid={ t }>{ p }</div>);
+    return (
+      <Style.DivStatus data-testid={ t }>
+        { p }
+      </Style.DivStatus>
+    );
   };
 
   const btnEntregue = () => {
@@ -66,7 +71,7 @@ function OrderDetails({
       const btnTestName = `${testName}button-${button.label}-check`;
       if (button.userType === userType) {
         return (
-          <button
+          <Style.Button
             key={ button.id }
             onClick={ () => handleClick(button.statusUpdate) }
             data-testid={ btnTestName }
@@ -75,7 +80,7 @@ function OrderDetails({
           >
             { button.btnText }
 
-          </button>
+          </Style.Button>
         );
       }
       return null;
@@ -83,14 +88,12 @@ function OrderDetails({
   };
 
   return (
-
-    <SaleDetailsDiv>
+    <Style.SaleDetailsDiv>
       { pedido(sellerName, saleId) }
       { dateDisplay(date) }
       { statusDisplay(status) }
       { btnEntregue() }
-    </SaleDetailsDiv>
-
+    </Style.SaleDetailsDiv>
   );
 }
 

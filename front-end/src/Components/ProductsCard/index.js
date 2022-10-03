@@ -2,18 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from '../../context/MyContext';
 
-import {
-  Card,
-  Up,
-  PriceContainer,
-  Price,
-  Img,
-  Down,
-  Title,
-  Counter,
-  Btn,
-  Display,
-} from './styles';
+import * as Styles from './styles';
+
 import formatPrice from '../../utils/formatPrice';
 
 function ProductCard({ id, name, price, urlImage }) {
@@ -32,18 +22,20 @@ function ProductCard({ id, name, price, urlImage }) {
   const productPrice = () => {
     const test = `customer_products__element-card-price-${id}`;
     return (
-      <Price>
+      <Styles.Price>
         R$
         <span data-testid={ test }>
           {formatPrice(Number(price))}
         </span>
-      </Price>
+      </Styles.Price>
     );
   };
 
   const img = () => {
     const test = `customer_products__img-card-bg-image-${id}`;
-    return (<Img data-testid={ test } src={ urlImage } alt={ `Imagem ${name}` } />);
+    return (
+      <Styles.Img data-testid={ test } src={ urlImage } alt={ `Imagem ${name}` } />
+    );
   };
 
   const btn = (p) => {
@@ -59,7 +51,11 @@ function ProductCard({ id, name, price, urlImage }) {
       setQuantity(quantityUpdate);
       handlerCartProducts(id, quantityUpdate);
     };
-    return (<Btn onClick={ click } data-testid={ test } type="button">{ p }</Btn>);
+    return (
+      <Styles.Btn onClick={ click } data-testid={ test } type="button">
+        { p }
+      </Styles.Btn>
+    );
   };
 
   const productQuantityDisplay = () => {
@@ -69,7 +65,7 @@ function ProductCard({ id, name, price, urlImage }) {
       handlerCartProducts(id, Number(target.value));
     };
     return (
-      <Display
+      <Styles.Display
         data-testid={ test }
         onChange={ change }
         type="text"
@@ -79,24 +75,24 @@ function ProductCard({ id, name, price, urlImage }) {
   };
 
   return (
-    <Card>
-      <Up>
-        <PriceContainer>
+    <Styles.Card>
+      <Styles.Up>
+        <Styles.PriceContainer>
           { productPrice() }
-        </PriceContainer>
+        </Styles.PriceContainer>
         { img() }
-      </Up>
-      <Down>
-        <Title data-testid={ `customer_products__element-card-title-${id}` }>
+      </Styles.Up>
+      <Styles.Down>
+        <Styles.Title data-testid={ `customer_products__element-card-title-${id}` }>
           <h4>{ name }</h4>
-        </Title>
-        <Counter>
+        </Styles.Title>
+        <Styles.Counter>
           { btn('-') }
           { productQuantityDisplay() }
           { btn('+') }
-        </Counter>
-      </Down>
-    </Card>
+        </Styles.Counter>
+      </Styles.Down>
+    </Styles.Card>
   );
 }
 

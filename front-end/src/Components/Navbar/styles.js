@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PRIMARY_COLOR, SECOND_COLOR } from '../../Styles/Color';
+import { PRIMARY_COLOR } from '../../Styles/Color';
 
 export const NavBody = styled.div`
   display: flex;
@@ -14,12 +14,12 @@ const NavDefaultButtom = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
-`;
-
-export const NavOrdersButtom = styled(NavDefaultButtom)`
-   &:hover {
+  :hover {
     cursor: pointer;
   }
+`;
+
+export const NavSpacing = styled.div`
   flex-grow: 10;
   background: ${PRIMARY_COLOR};
   padding-left: 25px;
@@ -27,13 +27,10 @@ export const NavOrdersButtom = styled(NavDefaultButtom)`
 `;
 
 export const NavProductsButtom = styled(NavDefaultButtom)`
-    &:hover {
-    cursor: pointer;
-  }
   flex-grow: 2;
   align-items: center;
-  background: ${SECOND_COLOR};
-  color: black;
+  background: ${(props) => (props.endPoint !== props.btn ? PRIMARY_COLOR : 'white')};
+  color: ${(props) => (props.endPoint !== props.btn ? 'white' : 'black')};
 `;
 
 export const NavUserNameButtom = styled(NavProductsButtom)`
@@ -44,9 +41,6 @@ export const NavUserNameButtom = styled(NavProductsButtom)`
 `;
 
 export const NavLeaveButtom = styled(NavDefaultButtom)`
-    &:hover {
-    cursor: pointer;
-  }
   flex-grow: 1;
   background: #056cf9;
 `;

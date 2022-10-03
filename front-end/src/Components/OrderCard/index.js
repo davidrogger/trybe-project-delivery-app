@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import * as style from './styles';
 import formatPrice from '../../utils/formatPrice';
+import formatDate from '../../utils/formatDate';
 
 function OrderCard(
   { id, status, saleDate, totalPrice, type, deliveryAddress, deliveryNumber },
@@ -29,15 +30,10 @@ function OrderCard(
   };
 
   const dateDisplay = (d) => {
-    const formatDate = new Date(d);
-    const today = [
-      formatDate.getDate(),
-      formatDate.getMonth() + 1, formatDate.getFullYear(),
-    ];
     const test = `${testName}element-order-date-${id}`;
     return (
       <style.HighlightInfo data-testid={ test }>
-        {`${today[0]}/${today[1].toString().padStart(2, '0')}/${today[2]}`}
+        { formatDate(d) }
       </style.HighlightInfo>
     );
   };
