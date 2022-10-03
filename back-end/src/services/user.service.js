@@ -45,7 +45,7 @@ const userService = {
     });
   },
   async deleteUsersById(id) {
-    return model.User.delete({
+    return model.User.destroy({
       where: { id },
     });
   },
