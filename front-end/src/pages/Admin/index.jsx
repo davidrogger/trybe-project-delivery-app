@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
 import Navbar from '../../Components/Navbar';
 import Admin from '../../Components/Admin';
 import UserList from '../../Components/UsersList';
+import Loading from '../../Components/Loading';
+
 import { getAllUsers } from '../../services/api';
 
 function AdminPage() {
@@ -18,18 +21,21 @@ function AdminPage() {
       };
       getList();
     }
-  }, []);
+  }, [hasList]);
 
   return (
     <>
       <Navbar />
-      <Admin />
+      <Admin
+        setHasList={ setHasList }
+      />
       {
         hasList ? (
           <UserList
+            setHasList={ setHasList }
             usersList={ usersList }
           />
-        ) : <div>Loading...</div>
+        ) : <Loading />
       }
     </>
   );
