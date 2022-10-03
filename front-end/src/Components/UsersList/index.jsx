@@ -3,13 +3,16 @@ import React from 'react';
 import { deleteUsersById } from '../../services/api';
 import * as Style from './styles';
 
-function UserList({ usersList }) {
-  const tableHead = ['ID', 'Nome', 'Email', 'Tipo', 'Excluir'];
+function UserList({ usersList, setHasList }) {
+  const tableHead = ['Item', 'Nome', 'Email', 'Tipo', 'Excluir'];
   const data = usersList.filter((el) => el.role !== 'administrador');
+  const testName = 'admin_manage__element-user-table-';
 
   const handleClick = async (userId) => {
+    setHasList(false);
     const user = JSON.parse(localStorage.getItem('user'));
     await deleteUsersById(userId, user.token);
+    setHasList(true);
   };
 
   return (
@@ -27,22 +30,22 @@ function UserList({ usersList }) {
         <Style.TBody>
           {
             !data ? null : data.map((el, index) => (
-              <tr key={ index }>
-                <td data-testid={ `admin_manage__element-user-table-item-number-${el}` }>
-                  {el.id}
+              <tr key={ el.id }>
+                <td data-testid={ `${testName}item-number-${index}` }>
+                  {index + 1}
                 </td>
-                <td data-testid={ `admin_manage__element-user-table-name-${el}` }>
+                <td data-testid={ `${testName}user-table-name-${index}` }>
                   {el.name}
                 </td>
-                <td data-testid={ `admin_manage__element-user-table-email-${el}` }>
+                <td data-testid={ `${testName}email-${index}` }>
                   {el.email}
                 </td>
-                <td data-testid={ `admin_manage__element-user-table-role-${el}` }>
+                <td data-testid={ `${testName}user-table-role-${index}` }>
                   {el.role}
                 </td>
                 <td>
                   <Style.Button
-                    data-testid={ `admin_manage__element-user-table-remove-${el}` }
+                    data-testid={ `${testName}remove-${index}` }
                     type="button"
                     onClick={ () => handleClick(el.id) }
                   >
