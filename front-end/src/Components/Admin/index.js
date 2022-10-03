@@ -1,11 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { registerUser } from '../../services/api';
+import { registerByAdmin } from '../../services/api';
 import * as style from './styles';
 
-function AddNewUser() {
+function AddNewUser({ setHasList }) {
   const [disableButton, setDisableButton] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [userAlreadyTaken, setUserAlreadyTaken] = useState(false);
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
 
@@ -17,14 +19,26 @@ function AddNewUser() {
     if (id === 'select-role') setRole(value);
   };
   const register = async () => {
-    const result = await registerUser({ name, email, password, role });
-    if (result) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const response = await registerByAdmin({ name, email, password, role }, user.token);
+
+    if (!response) {
+      setUserAlreadyTaken(true);
+    }
+
+    if (response) {
+      setHasList(false);
       setName('');
       setEmail('');
       setPassword('');
       setRole('');
     }
   };
+  const errorUserExist = () => (
+    <span data-testid="admin_manage__element-invalid-register">
+      Usuário já cadastrado
+    </span>
+  );
   useEffect(() => {
     const validate = () => {
       const charactersName = 12;
@@ -105,7 +119,13 @@ function AddNewUser() {
           CADASTRAR
         </style.Btn>
       </style.Inputs>
+      { userAlreadyTaken && errorUserExist() }
     </style.Main>
   );
 }
+
+AddNewUser.propTypes = {
+  setHasList: PropTypes.func,
+}.isRequired;
+
 export default AddNewUser;

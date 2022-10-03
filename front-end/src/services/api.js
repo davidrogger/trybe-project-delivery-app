@@ -16,6 +16,39 @@ export async function registerUser(newUser) {
     .catch(console.error);
 }
 
+export async function registerByAdmin(newUser, token) {
+  return url
+    .post('/users/admin/register', newUser, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+    .then((response) => response)
+    .catch(console.error);
+}
+
+export async function getAllUsers(token) {
+  return url
+    .get('/users/admin', {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+    .then((response) => response)
+    .catch(console.error);
+}
+
+export async function deleteUsersById(userId, token) {
+  return url
+    .delete(`/users/admin/${userId}`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+    .then((response) => response)
+    .catch(console.error);
+}
+
 export async function getProducts() {
   return url.get('/products'); // precisamos criar um tratamento caso ocorra algum erro de comunicação.
 }
@@ -25,70 +58,49 @@ export async function getAllSellers() {
 }
 
 export async function createOrder(userId, newOrders, token) {
-  let response;
-  try {
-    response = await url.post(`/orders/user/${userId}`, newOrders, {
+  return url
+    .post(`/orders/user/${userId}`, newOrders, {
       headers: {
         Authorization: `${token}`,
       },
-    });
-  } catch (error) {
-    response = error.response;
-  }
-  return response;
+    })
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export async function getOrderById(id) {
-  let response;
-  try {
-    response = await url.get(`/orders/${id}`);
-  } catch (error) {
-    response = error.response;
-  }
-
-  return response;
+  return url
+    .get(`/orders/${id}`)
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export async function getOrdersCustomer(id) {
-  let response;
-  try {
-    response = await url.get(`orders/customer/${id}`);
-  } catch (error) {
-    response = error.response;
-  }
-  return response;
+  return url
+    .get(`orders/customer/${id}`)
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export async function changeOrderStatus(id, payload) {
-  let response;
-  try {
-    response = await url.put(`orders/${id}`, payload);
-  } catch (error) {
-    response = error.response;
-  }
-  return response;
+  return url
+    .put(`orders/${id}`, payload)
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export async function getUserById(id) {
-  let response;
-  try {
-    response = await url.get(`/users/${id}`);
-  } catch (error) {
-    response = error.response;
-  }
-
-  return response;
+  return url
+    .get(`/users/${id}`)
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export async function getOrdersSeller(id) {
-  let response;
-  try {
-    response = await url.get(`/orders/seller/${id}`);
-  } catch (error) {
-    response = error.response;
-  }
-
-  return response;
+  return url
+    .get(`/orders/seller/${id}`)
+    .then((response) => response)
+    .catch(console.error);
 }
 
 export default url;
