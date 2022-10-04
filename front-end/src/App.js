@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
+
 import { Route, Routes, Navigate } from 'react-router-dom';
 import MyProvider from './context/MyProvider';
-import LoginPage from './pages/Login';
-import RegisterPage from './pages/Register';
+import LoginPage from './pages/Authentication/Login';
+import RegisterPage from './pages/Authentication/Register';
 import ProductsPage from './pages/Products';
 import CheckoutPage from './pages/Checkout';
 import OrderDetailsPage from './pages/OrderDetails';

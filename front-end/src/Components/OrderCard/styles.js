@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { statusBgColor } from '../../Styles/Color';
+import { statusBgColor } from '../../Styles';
 
 export const OrderCardBody = styled.div`
   display: flex;
