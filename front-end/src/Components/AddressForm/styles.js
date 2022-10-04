@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PRIMARY_COLOR, LIGHT_GREY } from '../../Styles/Color';
+import { PRIMARY_COLOR, LIGHT_GREY } from '../../Styles';
 
 export const AddressForm = styled.form`
   display: flex;

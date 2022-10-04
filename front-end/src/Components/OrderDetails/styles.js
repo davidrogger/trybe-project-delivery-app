@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LIGHT_GREY, PRIMARY_COLOR, statusBgColor } from '../../Styles/Color';
+import { LIGHT_GREY, PRIMARY_COLOR, statusBgColor } from '../../Styles';
 
 export const SaleDetailsDiv = styled.div`
   background: ${LIGHT_GREY};

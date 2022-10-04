@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-import { PRIMARY_COLOR } from '../../Styles/Color';
+import { PRIMARY_COLOR } from '../../Styles';
 
 export const LoadingDiv = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { PRIMARY_COLOR } from '../../Styles/Color';
+import { PRIMARY_COLOR } from '../../Styles';
 
 export const TotalValueField = styled.div`
   position: absolute;
