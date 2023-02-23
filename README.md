@@ -20,7 +20,16 @@
 - lore
 # Tecnologias e ferramentas usadas 🛠
 
+![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1C?style=flat-square&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A)
 ![React.js](https://img.shields.io/badge/-React.js-61DAFB?style=flat-square&logo=react&logoColor=ffffff)
+![Axios](https://img.shields.io/badge/-Axios-fff?style=flat-square&logo=axios&logoColor=671DDF)
+![React Hook Form](https://img.shields.io/badge/-React_Hook_Form-081229?style=flat-square&logo=ReactHookForm)
+![Styled Components](https://img.shields.io/badge/-Styled_Components-3d3d3d?style=flat-square&logo=StyledComponents)
+![Nodejs](https://img.shields.io/badge/-Nodejs-339933?style=flat-square&logo=Node.js&logoColor=ffffff)
+![Express](https://img.shields.io/badge/-Express-339999?style=flat-square&logo=express&logoColor=ffffff)
+![MySQL](https://img.shields.io/badge/-MySQL-EAA221?style=flat-square&logo=mysql&logoColor=1e4c68)
+![Sequelize](https://img.shields.io/badge/-Sequelize-02afef?style=flat-square&logo=sequelize&logoColor=ffffff)
+![JWToken](https://img.shields.io/badge/-JWToken-000?style=flat-square&logo=jsonwebtokens&logoColor=d63aff)
 
 
 # Desafios
