@@ -143,6 +143,21 @@
         }
       }
     },
+    "/users/sellers": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Endpoint para mostrar todos usuários vendedores cadastrados.",
+        "description": "Rotação responsável por mostrar vendedores cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com servidor."
+          }
+        }
+      }
+    },
     "/users/admin/register": {
       "post": {
         "tags": ["Users"],
