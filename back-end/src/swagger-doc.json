@@ -5,6 +5,54 @@
     "version": "1.0.0",
     "description": "Projeto final do modulo de backend prático para requisições de uma aplicação de entregas de cerveja."
   },
-  "paths": {},
-  "components": {}
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Endpoint para autenticação de usuário.",
+        "description": "Rota responsável por identificar o usuário e gerar token de acesso.",
+        "requestBody": {
+          "required": true,
+          "description": "Recebe do formulário um json com email e password existentes no banco de dados.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticação realizada com sucesso."
+          },
+          "404": {
+            "description": "Falha na autenticação, usuário não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Deve ser um email cadastrado.",
+            "example": "zebirita@email.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Deve ser a senha correspondente ao email cadastrado.",
+            "example": "$#zebirita#$"
+          }
+        }
+      }
+    }
+  }
 }
