@@ -4,7 +4,7 @@ const userController = require('../controllers/user.controller');
 const route = Router();
 
 route.post('/register', userController.create);
-route.post('/admin/register', userController.verify, userController.createByAdmin);
+route.post('/admin/register', [userController.verify, userController.create]);
 route.get('/sellers', userController.getAllSellers);
 route.get('/admin', userController.verify, userController.getAllUsers);
 route.get('/:id', userController.getUserById);

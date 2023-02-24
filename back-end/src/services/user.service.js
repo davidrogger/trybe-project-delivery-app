@@ -3,10 +3,12 @@ const model = require('../database/models');
 
 const userService = {
   async emailExists(email) {
-    return model.User.count({ where: { email } });
+    const emailFound = await model.User.count({ where: { email } });
+    if (emailFound === 1) throw new Error('Conflict');
   },
   async nameExists(name) {
-    return model.User.count({ where: { name } });
+    const nameFound = await model.User.count({ where: { name } });
+    if (nameFound === 1) throw new Error('Conflict');
   },
   async authentication(login) {
     const password = md5(login.password);
