@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const userController = require('../controllers/user.controller');
-const adminRoute = require('./admin.route');
 
 const route = Router();
 
@@ -11,7 +10,6 @@ route.get('/:id', userController.getUserById);
 route.use(userController.verify);
 route.get('/', userController.getAllUsers);
 route.delete('/:id', userController.deleteUsersById);
-
-route.use('/admin', adminRoute);
+route.post('/admin/register', userController.create);
 
 module.exports = route;
