@@ -29,7 +29,7 @@ export async function registerByAdmin(newUser, token) {
 
 export async function getAllUsers(token) {
   return url
-    .get('/users/admin', {
+    .get('/users', {
       headers: {
         Authorization: `${token}`,
       },

@@ -30,7 +30,9 @@ const userService = {
     return { id, ...user, role };
   },
   async getAllUsers() {
-    const users = await model.User.findAll();
+    const users = await model.User.findAll({
+      attributes: ['id', 'name', 'email', 'role'],
+    });
     return users;
   },
   async getAllSellers() {
