@@ -9,8 +9,35 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
-    restart: 'always'
+    restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
       retries: 5
+
+  backend:
+    build: ./back-end
+    container_name: app_backend
+    tty: true
+    stdin_open: true
+    ports:
+      - 3001:3001
+    working_dir: /app-backend
+    command: npm run dev
+    restart: always
+    volumes:
+      - ./back-end:/app-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 3001
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      DATABASE_NAME: delivery-app
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+
+networks:
+  default:
+    name: appDelivery_net
