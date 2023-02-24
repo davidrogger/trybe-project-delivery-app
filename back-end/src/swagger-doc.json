@@ -38,7 +38,7 @@
     "/users/register": {
       "post": {
         "tags": ["Users"],
-        "summary": "Endpoint para cadastro público.",
+        "summary": "Endpoint para cadastro de novos usuários.",
         "description": "Rota responsável para cadastro de novos usuário, sem definição de cargo(usuário comum).",
         "requestBody": {
           "required": true,
@@ -51,7 +51,46 @@
             }
           }
         },
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Cadastro realizado com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/users/admin/register": {
+      "post": {
+        "tags": ["Admin"],
+        "security": [
+          {"token": []}
+        ],
+        "summary": "Endpoint para cadastro de usuário pelo administrador.",
+        "description": "Rota responsável para cadastro de novos usuário, onde o administrador, pode definir funções personalizadas.",
+        "requestBody": {
+          "required": true,
+          "description": "Recebe de um formulário um json com `name`, `email`, `role` e `password`.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserRoleBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cadastro realizado com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
       }
     }
   },
@@ -91,6 +130,30 @@
             "example": "Birita Juninho"
           }
         }
+      },
+      "NewUserRoleBody": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewUserBody"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Uma das roles apresentadas no formulário apresentado para o administrador.",
+                "example": "Vendedor"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "securitySchemes": {
+      "token": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
       }
     }
   }
