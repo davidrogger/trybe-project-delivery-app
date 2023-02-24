@@ -34,6 +34,25 @@
           }
         }
       }
+    },
+    "/users/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Endpoint para cadastro público.",
+        "description": "Rota responsável para cadastro de novos usuário, sem definição de cargo(usuário comum).",
+        "requestBody": {
+          "required": true,
+          "description": "Recebe de um formulário um json com `name`, `email` e `password`.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserBody"
+              }
+            }
+          }
+        },
+        "responses": {}
+      }
     }
   },
   "components": {
@@ -50,6 +69,26 @@
             "type": "string",
             "description": "Deve ser a senha correspondente ao email cadastrado.",
             "example": "$#zebirita#$"
+          }
+        }
+      },
+      "NewUserBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Deve ser um e-mail validado pelo formulário que não esteja cadastrado.",
+            "example": "biritajr@email.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Sequencia de letras validado pelo formulário.",
+            "example": "novasenha123"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do usuário da conta.",
+            "example": "Birita Juninho"
           }
         }
       }
