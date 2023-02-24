@@ -6,7 +6,7 @@ const userController = {
     const { email, password } = req.body;
     const login = { email, password };
     
-    const user = await userService.checkData(login);
+    const user = await userService.authentication(login);
     const token = jwtService.generateToken(user);
     res.status(200).json({ ...user, token });
   },

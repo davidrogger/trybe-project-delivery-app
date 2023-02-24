@@ -8,7 +8,7 @@ const userService = {
   async nameExists(name) {
     return model.User.count({ where: { name } });
   },
-  async checkData(login) {
+  async authentication(login) {
     const password = md5(login.password);
     const user = await model.User
       .findOne({
@@ -17,7 +17,7 @@ const userService = {
         attributes: { exclude: ['password'] },
       });
     
-    if (!user) throw new Error('NotFound');
+    if (!user) throw new Error('Unauthorized');
 
     return user;
   },
