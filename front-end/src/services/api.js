@@ -40,7 +40,7 @@ export async function getAllUsers(token) {
 
 export async function deleteUsersById(userId, token) {
   return url
-    .delete(`/users/admin/${userId}`, {
+    .delete(`/users/${userId}`, {
       headers: {
         Authorization: `${token}`,
       },

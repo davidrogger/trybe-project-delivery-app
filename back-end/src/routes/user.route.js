@@ -10,6 +10,8 @@ route.get('/:id', userController.getUserById);
 
 route.use(userController.verify);
 route.get('/', userController.getAllUsers);
+route.delete('/:id', userController.deleteUsersById);
+
 route.use('/admin', adminRoute);
 
 module.exports = route;
