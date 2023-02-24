@@ -112,6 +112,35 @@
           }
         }
 
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "Endpoint para buscar usuário pelo ID.",
+        "description": "Rota responsável buscar detalhes de usuário por seu ID.",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "404": {
+            "description": "ID Não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
       }
     },
     "/users/admin/register": {
