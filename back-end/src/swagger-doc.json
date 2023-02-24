@@ -1,0 +1,10 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Project Delivery App",
+    "version": "1.0.0",
+    "description": "Projeto final do modulo de backend prático para requisições de uma aplicação de entregas de cerveja."
+  },
+  "paths": {},
+  "components": {}
+}
