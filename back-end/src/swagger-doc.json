@@ -79,6 +79,41 @@
         }
       }
     },
+    "/users/{id}": {
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Endpoint para deleter usuário pelo ID.",
+        "description": "Rota responsável por deletar cadastro de usuário por seu ID.",
+        "security": [
+          { "token": [] }
+        ],
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cadastro deletado com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "404": {
+            "description": "ID Não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+
+      }
+    },
     "/users/admin/register": {
       "post": {
         "tags": ["Users"],
