@@ -204,6 +204,32 @@
           }
         }
       }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para buscar pedido pelo ID.",
+        "description": "Rota responsável por buscar e mostrar detalhes de um pedido por seu ID.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID com o número do pedido para ser fornicido no endpoint.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {
