@@ -189,6 +189,21 @@
           }
         }
       }
+    },
+    "/products" :{
+      "get": {
+        "tags": ["Products"],
+        "summary": "Endpoint mostra todos productos cadastrados.",
+        "description": "Rota responsável por mostrar todos produtos cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falaha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {
