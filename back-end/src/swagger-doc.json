@@ -73,6 +73,9 @@
           "200": {
             "description": "Busca realizada com sucesso."
           },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
           "500": {
             "description": "Falha interna com servidor."
           }
