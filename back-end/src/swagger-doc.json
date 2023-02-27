@@ -310,6 +310,30 @@
           }
         }
 
+      },
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Endpoint mostra pedidos por id do usuário.",
+        "description": "Rota responsável por buscar e mostrar todos pedidos referentes ao id do usuário.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID do usuário que está buscando o pedido.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
       }
     }
   },
