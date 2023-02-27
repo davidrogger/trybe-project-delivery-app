@@ -265,6 +265,52 @@
           }
         }
       }
+    },
+    "/orders/user/{id}": {
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para cadastrar novo pedido.",
+        "description": "Rota responsável por cadastrar um novo pedido de usuário.",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID do usuário que está gerando o novo pedido.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Deve enviar um corpo válido com os campos `sellerId`, `totalPrice`, `deliveryAddres`, `deliveryNumber` e `products`.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrderBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pedido criado com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+
+      }
     }
   },
   "components": {
@@ -328,6 +374,58 @@
             "type": "string",
             "description": "Deve ser um dos 3 tipos de estados de entrega do produtos.",
             "example": "Preparando"
+          }
+        }
+      },
+      "NewOrderBody": {
+        "type": "object",
+        "properties": {
+          "sellerId": {
+            "type": "number",
+            "description": "ID de um vendedor cadastrado.",
+            "example": "2"
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "Valor total para pagamento do pedido.",
+            "example": "119"
+          },
+          "deliveryAddress": {
+            "type": "string",
+            "description": "Endereço de entrega do pedido.",
+            "example": "Rua Birita"
+          },
+          "deliveryNumber": {
+            "type": "number",
+            "description": "Número referente ao endereço.",
+            "example": "51"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "number",
+                  "description": "ID do produto."
+
+                },
+                "quantity": {
+                  "type": "string",
+                  "description": "Quantidade comprada do produto no pedido."
+                }
+              }
+            },
+            "example": [
+              {
+                "productId": "2",
+                "quantity": "20"
+              },
+              {
+                "productId": "3",
+                "quantity": "10"
+              }
+            ]
           }
         }
       }
