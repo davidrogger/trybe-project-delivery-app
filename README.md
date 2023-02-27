@@ -2,7 +2,7 @@
 
 ## Seção: `Metodologias Ágeis`
 
-- lore
+- Seção dedica total ao projeto em grupo, para consolidar as prática em grupo com softskills e hardskills, usando todo conhecimento adiquirido ao longo de todo o curso.
 
 #
 <div align="center">
@@ -56,11 +56,16 @@
 
 # Desafios
 
-- lore
+- Atender especificações realizadas pelos testes automatizados da trybe;
+- Organizar o código e arquitetura geral da aplicação;
+- Padronização REST na API;
+- Integração entre frontend e backend
 
 # Conclusão
 
-- lore
+- Foi o projeto que eu mais estava ancioso para iniciar, onde coloquei em prática todo conhecimento absorvido na trybe, e em grupo, onde conheci pessoas que assim como eu queria práticar e entender o funcionamento onde o frontend se comunicava com o backend.
+- Abordamos reuniões diárias e divisão de tarefas durante o projeto todo, onde tentamos espor o que fizemos durante o dia anterior, se havia algum problema impedindo a resolução de algo e o que estamos planejando realizar na sequencia.
+- Foi muito gratificante e desafiador o desenvolvimento dessa aplicação, como havia focado totalmente no backend, muitas funcionalidades do frontend haviam se perdido, mas foi muito bom ver que com apenas alguns minutos de pesquisa, rápidamente recuperava o que era necessário e aplicava de forma efetiva, muito obrigado pela [Gabriela](https://www.linkedin.com/in/gabrielapapin) por sempre estar presente, a gente participou diariamente juntos o desenvolvendo ao longo do projeto, e também a [Andressa](https://www.linkedin.com/in/andressa-ponzo) mesmo com sua agenda apertada, ela sempre estava ajudando e realizou uma apresentação incrível no final do projeto!
 
 </details>
 
@@ -128,9 +133,6 @@
   </summary>
 
   - [x] - ~~Criar aplicação com base nos requisitos da trybe.~~ ![data](https://badgen.net/badge/delivery/04-10-2022/green)
-  - [ ] - Revisar Estilo dos elementos da página.
-  - [ ] - Desenvolver testes automatizados.
-  - [ ] - Adaptar elementos da aplicação para mobile.
 
 </details>
 
