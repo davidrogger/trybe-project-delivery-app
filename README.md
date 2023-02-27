@@ -136,6 +136,68 @@
 
 </details>
 
+<details>
+  <summary>
+    <strong>
+      :computer: Instruções do  Projeto
+    </strong>
+  </summary>
+
+> ### Importante seguir a ordem apresentada a baixo, para o funcionamento.
+
+<details>
+<summary>
+  <strong>
+    ⚠️ Configurações mínimas para execução do projeto
+  </strong>
+</summary>
+
+  > - Sistema Operacional Distribuição Unix
+  > - Node versão >= 16
+  > - Docker
+  > - Docker-compose versão >=1.29.2
+  > - API Client ([Thunder Client](https://www.thunderclient.com/), [Insomnia](https://insomnia.rest/), [POSTMAN](https://www.postman.com/), ou algum outro de sua preferência)
+
+  </details>
+
+  <details>
+  <summary>
+    <strong>
+      ⚠️ Inicie o docker-compose
+    </strong>
+  </summary>
+
+  >Após clonar o respositório para iniciar o docker compose, você deve dentro da pasta raiz do projeto usar o comando: `docker-compose up -d`
+  >Verifique os containers, usando o comando `docker ps` no terminal. Deve aparecer três containers com o nome de *app_frontend*, *app_backend* e *db*.
+  </details>
+
+  <details>
+  <summary>
+    <strong>
+      :family_man_woman_girl_boy: Usuários cadastrados
+    </strong>
+  </summary>
+
+  >Usuário administrador:
+  >```
+  >email: adm@deliveryapp.com
+  >password: --adm2@21!!--
+  >```
+  >Usuário vendedor:
+  >```
+  >email: fulana@deliveryapp.com
+  >password: fulana@123
+  >```
+  >Usuário cliente:
+  >```
+  >email: zebirita@email.com
+  >password: $#zebirita#$
+  >```
+
+  </details>
+</details>
+
+
 #
 ## Membros:
 
@@ -150,5 +212,5 @@
 
 #
 <div align="right">
-  <img src="https://badgen.net/badge/last%20update/23-02-2023/blue">
+  <img src="https://badgen.net/badge/last%20update/27-02-2023/blue">
 </div>
