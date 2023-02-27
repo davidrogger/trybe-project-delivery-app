@@ -213,7 +213,7 @@
         "parameters": [
           {
             "required": true,
-            "description": "ID com o número do pedido para ser fornicido no endpoint.",
+            "description": "ID com o número do pedido deve ser fornicido no endpoint.",
             "name": "id",
             "in": "path",
             "schema": {
@@ -224,6 +224,41 @@
         "responses": {
           "200": {
             "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para atualizar produtos pelo ID.",
+        "description": "Rota responsável por realizar atualizações de status do produto pelo ID.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID com o número do pedido deve ser fornicido no endpoint.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Deve ser fornecido qual novo estado de entrega do produto, `Preparando`, `Em Trânsito` ou `Entregue`. ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Atualização realizada com sucesso."
           },
           "500": {
             "description": "Falha interna com o servidor."
@@ -285,6 +320,16 @@
             }
           }
         ]
+      },
+      "StatusBody": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Deve ser um dos 3 tipos de estados de entrega do produtos.",
+            "example": "Preparando"
+          }
+        }
       }
     },
     "securitySchemes": {
