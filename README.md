@@ -36,7 +36,8 @@
 #
 ## Projeto: `Delivery App`
 
-- Aplicação de gerenciamento de compras, vendas e entrega, onde uma pessoa com o papel de 1. Cliente, pode realizar um cadastro pessoal, e realizar compra de bebidas que está disponíveis  pela aplicação, abrindo um pedido, fornecendo endereço e concluindo o pedido de compra para realizar rastreio de andamento de entrega do pedido.
+- Aplicação de gerenciamento de compras, vendas e entrega, onde uma pessoa com o papel de:
+1. Cliente, pode realizar um cadastro pessoal, e realizar compra de bebidas que está disponíveis  pela aplicação, abrindo um pedido, fornecendo endereço e concluindo o pedido de compra para realizar rastreio de andamento de entrega do pedido.
 2. Vendedor, pode visualizar os pedidos realizados por seus clientes, e movimentar o andamento de cada pedido e seu estado de entrega.
 3. Administrador, pode criar ou apagar usuário e determinar suas funções.
 
