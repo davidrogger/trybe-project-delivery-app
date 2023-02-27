@@ -2,7 +2,7 @@
 
 ## Seção: `Metodologias Ágeis`
 
-- Seção dedica total ao projeto em grupo, para consolidar as prática em grupo com softskills e hardskills, usando todo conhecimento adiquirido ao longo de todo o curso.
+- Seção dedicada total ao projeto em grupo, para consolidar a prática em grupo com softskills e hardskills, usando todo conhecimento adquirido ao longo de todo o curso.
 
 #
 <div align="center">
@@ -36,8 +36,8 @@
 #
 ## Projeto: `Delivery App`
 
-- Aplicação de gerenciamento de compras, vendas e entrega, onde uma pessoa com o papel de 1. Cliente, pode realizar um cadastro pessoal, e realizar compra de bebidas que está disponiveis pela aplicação, abrindo um pedido, fornecendo endereço e concluindo o pedido de compra para realizar rastreio de andamento de entrega do pedido.
-2. Vendedor, pode visualizar os pedidos realizado por seus clientes, e movimentar o andamento de cada pedido e seu estado de entrega.
+- Aplicação de gerenciamento de compras, vendas e entrega, onde uma pessoa com o papel de 1. Cliente, pode realizar um cadastro pessoal, e realizar compra de bebidas que está disponíveis  pela aplicação, abrindo um pedido, fornecendo endereço e concluindo o pedido de compra para realizar rastreio de andamento de entrega do pedido.
+2. Vendedor, pode visualizar os pedidos realizados por seus clientes, e movimentar o andamento de cada pedido e seu estado de entrega.
 3. Administrador, pode criar ou apagar usuário e determinar suas funções.
 
 # Tecnologias e ferramentas usadas 🛠
@@ -63,9 +63,9 @@
 
 # Conclusão
 
-- Foi o projeto que eu mais estava ancioso para iniciar, onde coloquei em prática todo conhecimento absorvido na trybe, e em grupo, onde conheci pessoas que assim como eu queria práticar e entender o funcionamento onde o frontend se comunicava com o backend.
-- Abordamos reuniões diárias e divisão de tarefas durante o projeto todo, onde tentamos espor o que fizemos durante o dia anterior, se havia algum problema impedindo a resolução de algo e o que estamos planejando realizar na sequencia.
-- Foi muito gratificante e desafiador o desenvolvimento dessa aplicação, como havia focado totalmente no backend, muitas funcionalidades do frontend haviam se perdido, mas foi muito bom ver que com apenas alguns minutos de pesquisa, rápidamente recuperava o que era necessário e aplicava de forma efetiva, muito obrigado pela [Gabriela](https://www.linkedin.com/in/gabrielapapin) por sempre estar presente, a gente participou diariamente juntos o desenvolvendo ao longo do projeto, e também a [Andressa](https://www.linkedin.com/in/andressa-ponzo) mesmo com sua agenda apertada, ela sempre estava ajudando e realizou uma apresentação incrível no final do projeto!
+- Foi o projeto que eu mais estava ansioso para iniciar, onde coloquei em prática todo conhecimento absorvido na trybe, e em grupo, onde conheci pessoas que assim como eu, queriam praticar e entender o funcionamento onde o frontend se comunicava com o backend.
+- Abordamos reuniões diárias e divisão de tarefas durante o projeto todo, onde tentamos expor o que fizemos durante o dia anterior, se havia algum problema impedindo a resolução de algo e o que estamos planejando realizar na sequência.
+- Foi muito gratificante e desafiador o desenvolvimento dessa aplicação, como havia focado totalmente no backend, muitas funcionalidades do frontend haviam se perdido, mas foi ótimo ver que com apenas alguns minutos de pesquisa, rapidamente recuperava o que era necessário e aplicava de forma efetiva, muito obrigado pela [Gabriela](https://www.linkedin.com/in/gabrielapapin) por sempre estar presente, a gente participou diariamente juntos o desenvolvendo ao longo do projeto, e também a [Andressa](https://www.linkedin.com/in/andressa-ponzo) mesmo com sua agenda apertada, ela sempre estava ajudando e realizou uma apresentação incrível no final do projeto!
 
 </details>
 
