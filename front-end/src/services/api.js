@@ -59,7 +59,7 @@ export async function getAllSellers() {
 
 export async function createOrder(userId, newOrders, token) {
   return url
-    .post(`/orders/user/${userId}`, newOrders, {
+    .post(`/orders/customer/${userId}`, newOrders, {
       headers: {
         Authorization: `${token}`,
       },

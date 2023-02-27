@@ -266,7 +266,7 @@
         }
       }
     },
-    "/orders/user/{id}": {
+    "/orders/customer/{id}": {
       "post": {
         "tags": ["Orders"],
         "summary": "Endpoint para cadastrar novo pedido.",
