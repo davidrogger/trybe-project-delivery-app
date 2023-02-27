@@ -3,12 +3,14 @@ const model = require('../database/models');
 
 const userService = {
   async emailExists(email) {
-    return model.User.count({ where: { email } });
+    const emailFound = await model.User.count({ where: { email } });
+    if (emailFound === 1) throw new Error('Conflict');
   },
   async nameExists(name) {
-    return model.User.count({ where: { name } });
+    const nameFound = await model.User.count({ where: { name } });
+    if (nameFound === 1) throw new Error('Conflict');
   },
-  async checkData(login) {
+  async authentication(login) {
     const password = md5(login.password);
     const user = await model.User
       .findOne({
@@ -17,7 +19,7 @@ const userService = {
         attributes: { exclude: ['password'] },
       });
     
-    if (!user) throw new Error('NotFound');
+    if (!user) throw new Error('Unauthorized');
 
     return user;
   },
@@ -28,7 +30,9 @@ const userService = {
     return { id, ...user, role };
   },
   async getAllUsers() {
-    const users = await model.User.findAll();
+    const users = await model.User.findAll({
+      attributes: ['id', 'name', 'email', 'role'],
+    });
     return users;
   },
   async getAllSellers() {

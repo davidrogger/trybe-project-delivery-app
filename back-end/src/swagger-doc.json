@@ -1,0 +1,494 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Project Delivery App",
+    "version": "1.0.0",
+    "description": "Projeto final do modulo de backend prático para requisições de uma aplicação de entregas de cerveja."
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Endpoint para autenticação de usuário.",
+        "description": "Rota responsável por identificar o usuário e gerar token de acesso.",
+        "requestBody": {
+          "required": true,
+          "description": "Recebe do formulário um json com email e password existentes no banco de dados.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticação realizada com sucesso."
+          },
+          "404": {
+            "description": "Falha na autenticação, usuário não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/users/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Endpoint para cadastro de novos usuários.",
+        "description": "Rota responsável para cadastro de novos usuário, sem definição de cargo(usuário comum).",
+        "requestBody": {
+          "required": true,
+          "description": "Recebe de um formulário um json com `name`, `email` e `password`.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cadastro realizado com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Endpoint para mostrar todos usuários cadastrados.",
+        "description": "Rotação responsável por mostrar todos usuários cadastrados.",
+        "security": [
+          { "token": [] }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "500": {
+            "description": "Falha interna com servidor."
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Endpoint para deleter usuário pelo ID.",
+        "description": "Rota responsável por deletar cadastro de usuário por seu ID.",
+        "security": [
+          { "token": [] }
+        ],
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cadastro deletado com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "404": {
+            "description": "ID Não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "Endpoint para buscar usuário pelo ID.",
+        "description": "Rota responsável buscar detalhes de usuário por seu ID.",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "404": {
+            "description": "ID Não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/users/sellers": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Endpoint para mostrar todos usuários vendedores cadastrados.",
+        "description": "Rotação responsável por mostrar vendedores cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com servidor."
+          }
+        }
+      }
+    },
+    "/users/admin/register": {
+      "post": {
+        "tags": ["Users"],
+        "security": [
+          {"token": []}
+        ],
+        "summary": "Endpoint para cadastro de usuário pelo administrador.",
+        "description": "Rota responsável para cadastro de novos usuário, onde o administrador, pode definir funções personalizadas.",
+        "requestBody": {
+          "required": true,
+          "description": "Recebe de um formulário um json com `name`, `email`, `role` e `password`.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserRoleBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cadastro realizado com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/products" :{
+      "get": {
+        "tags": ["Products"],
+        "summary": "Endpoint mostra todos productos cadastrados.",
+        "description": "Rota responsável por mostrar todos produtos cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falaha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para buscar pedido pelo ID.",
+        "description": "Rota responsável por buscar e mostrar detalhes de um pedido por seu ID.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID com o número do pedido deve ser fornicido no endpoint.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para atualizar produtos pelo ID.",
+        "description": "Rota responsável por realizar atualizações de status do produto pelo ID.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID com o número do pedido deve ser fornicido no endpoint.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Deve ser fornecido qual novo estado de entrega do produto, `Preparando`, `Em Trânsito` ou `Entregue`. ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/orders/customer/{id}": {
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para cadastrar novo pedido.",
+        "description": "Rota responsável por cadastrar um novo pedido de usuário.",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID do usuário que está gerando o novo pedido.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Deve enviar um corpo válido com os campos `sellerId`, `totalPrice`, `deliveryAddres`, `deliveryNumber` e `products`.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrderBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pedido criado com sucesso."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+
+      },
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Endpoint mostra pedidos por id do usuário.",
+        "description": "Rota responsável por buscar e mostrar todos pedidos referentes ao id do usuário.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID do usuário que está buscando o pedido.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/orders/seller/{id}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para mostrar pedidos do vendedor pelo id.",
+        "description": "Rota responsável por buscar e mostrar pedidos relacionados ao vendedor pelo id.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID do vendedor que está buscando o pedido.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Deve ser um email cadastrado.",
+            "example": "zebirita@email.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Deve ser a senha correspondente ao email cadastrado.",
+            "example": "$#zebirita#$"
+          }
+        }
+      },
+      "NewUserBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Deve ser um e-mail validado pelo formulário que não esteja cadastrado.",
+            "example": "biritajr@email.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Sequencia de letras validado pelo formulário.",
+            "example": "novasenha123"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do usuário da conta.",
+            "example": "Birita Juninho"
+          }
+        }
+      },
+      "NewUserRoleBody": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewUserBody"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Uma das roles apresentadas no formulário apresentado para o administrador.",
+                "example": "Vendedor"
+              }
+            }
+          }
+        ]
+      },
+      "StatusBody": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Deve ser um dos 3 tipos de estados de entrega do produtos.",
+            "example": "Preparando"
+          }
+        }
+      },
+      "NewOrderBody": {
+        "type": "object",
+        "properties": {
+          "sellerId": {
+            "type": "number",
+            "description": "ID de um vendedor cadastrado.",
+            "example": "2"
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "Valor total para pagamento do pedido.",
+            "example": "119"
+          },
+          "deliveryAddress": {
+            "type": "string",
+            "description": "Endereço de entrega do pedido.",
+            "example": "Rua Birita"
+          },
+          "deliveryNumber": {
+            "type": "number",
+            "description": "Número referente ao endereço.",
+            "example": "51"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "number",
+                  "description": "ID do produto."
+
+                },
+                "quantity": {
+                  "type": "string",
+                  "description": "Quantidade comprada do produto no pedido."
+                }
+              }
+            },
+            "example": [
+              {
+                "productId": "2",
+                "quantity": "20"
+              },
+              {
+                "productId": "3",
+                "quantity": "10"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "token": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}

@@ -56,7 +56,7 @@ function Login() {
         <Styles.Input
           data-testid="common_login__input-password"
           id="senha"
-          type="text"
+          type="password"
           { ...register('password') }
         />
 

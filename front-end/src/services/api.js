@@ -29,7 +29,7 @@ export async function registerByAdmin(newUser, token) {
 
 export async function getAllUsers(token) {
   return url
-    .get('/users/admin', {
+    .get('/users', {
       headers: {
         Authorization: `${token}`,
       },
@@ -40,7 +40,7 @@ export async function getAllUsers(token) {
 
 export async function deleteUsersById(userId, token) {
   return url
-    .delete(`/users/admin/${userId}`, {
+    .delete(`/users/${userId}`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -59,7 +59,7 @@ export async function getAllSellers() {
 
 export async function createOrder(userId, newOrders, token) {
   return url
-    .post(`/orders/user/${userId}`, newOrders, {
+    .post(`/orders/customer/${userId}`, newOrders, {
       headers: {
         Authorization: `${token}`,
       },
