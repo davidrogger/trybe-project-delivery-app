@@ -7,15 +7,34 @@
 #
 <div align="center">
   <a href="https://davidrogger.github.io/trybe-project-delivery-app">
-    <img width="30%" src="./readme-imgs/project_top.webp">
-    <img width="30%" src="./readme-imgs/project_mid.webp">
-    <img width="30%" src="./readme-imgs/project_bot.webp">
+    <img width="30%" src="./readme-imgs/project_fe_top.webp">
+  </a>
+  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+    <img width="30%" src="./readme-imgs/project_fe_mid.webp">
+  </a>
+  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+    <img width="30%" src="./readme-imgs/project_fe_bot.webp">
   </a>
 </div>
 
->*clique na imagem para acesso online do projeto*
+>*Amostra do frontend*
+
+<div align="center">
+  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+    <img width="30%" src="./readme-imgs/project_be_top.webp">
+  </a>
+  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+    <img width="30%" src="./readme-imgs/project_be_mid.webp">
+  </a>
+  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+    <img width="30%" src="./readme-imgs/project_be_bot.webp">
+  </a>
+</div>
+
+>*Amostra da documentação do backend*
+
 #
-## Projeto: ``
+## Projeto: `Delivery App`
 
 - lore
 # Tecnologias e ferramentas usadas 🛠
