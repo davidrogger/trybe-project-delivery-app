@@ -335,6 +335,32 @@
           }
         }
       }
+    },
+    "/orders/seller/{id}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Endpoint para mostrar pedidos do vendedor pelo id.",
+        "description": "Rota responsável por buscar e mostrar pedidos relacionados ao vendedor pelo id.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID do vendedor que está buscando o pedido.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {
