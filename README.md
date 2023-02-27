@@ -36,7 +36,10 @@
 #
 ## Projeto: `Delivery App`
 
-- lore
+- Aplicação de gerenciamento de compras, vendas e entrega, onde uma pessoa com o papel de 1. Cliente, pode realizar um cadastro pessoal, e realizar compra de bebidas que está disponiveis pela aplicação, abrindo um pedido, fornecendo endereço e concluindo o pedido de compra para realizar rastreio de andamento de entrega do pedido.
+2. Vendedor, pode visualizar os pedidos realizado por seus clientes, e movimentar o andamento de cada pedido e seu estado de entrega.
+3. Administrador, pode criar ou apagar usuário e determinar suas funções.
+
 # Tecnologias e ferramentas usadas 🛠
 
 ![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1C?style=flat-square&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A)
