@@ -6,13 +6,13 @@
 
 #
 <div align="center">
-  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+  <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-delivery-app/readme-update/readme-imgs/project_fe_top.webp">
     <img width="30%" src="./readme-imgs/project_fe_top.webp">
   </a>
-  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+  <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-delivery-app/readme-update/readme-imgs/project_fe_mid.webp">
     <img width="30%" src="./readme-imgs/project_fe_mid.webp">
   </a>
-  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+  <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-delivery-app/readme-update/readme-imgs/project_fe_bot.webp">
     <img width="30%" src="./readme-imgs/project_fe_bot.webp">
   </a>
 </div>
@@ -20,13 +20,13 @@
 >*Amostra do frontend*
 
 <div align="center">
-  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+  <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-delivery-app/readme-update/readme-imgs/project_be_top.webp">
     <img width="30%" src="./readme-imgs/project_be_top.webp">
   </a>
-  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+  <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-delivery-app/readme-update/readme-imgs/project_be_mid.webp">
     <img width="30%" src="./readme-imgs/project_be_mid.webp">
   </a>
-  <a href="https://davidrogger.github.io/trybe-project-delivery-app">
+  <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-delivery-app/readme-update/readme-imgs/project_be_bot.webp">
     <img width="30%" src="./readme-imgs/project_be_bot.webp">
   </a>
 </div>
